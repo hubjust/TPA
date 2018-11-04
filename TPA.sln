@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflection", "Reflection\Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracer", "Tracer\Tracer.csproj", "{32F8D03F-1CE9-41B7-873E-A4D6157DB651}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{59467EBF-787F-434C-8132-B0B47A9A7940}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{32F8D03F-1CE9-41B7-873E-A4D6157DB651}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32F8D03F-1CE9-41B7-873E-A4D6157DB651}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32F8D03F-1CE9-41B7-873E-A4D6157DB651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59467EBF-787F-434C-8132-B0B47A9A7940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59467EBF-787F-434C-8132-B0B47A9A7940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59467EBF-787F-434C-8132-B0B47A9A7940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59467EBF-787F-434C-8132-B0B47A9A7940}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
