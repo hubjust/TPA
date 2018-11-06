@@ -1,6 +1,6 @@
 ﻿namespace Model
 {
-    public enum AbstractENum
+    public enum AbstractEnum
     {
         Abstract, NotAbstract
     }

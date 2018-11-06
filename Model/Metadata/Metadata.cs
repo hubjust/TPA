@@ -8,13 +8,13 @@ namespace Model
 {
     public abstract class Metadata
     {
-        public string m_Name { get; set; }
+        public string Name { get; set; }
 
         public Metadata() { }
 
-        public Metadata(string m_name)
+        public Metadata(string name)
         {
-            m_Name = m_name;
+            Name = name;
         }
     }
 }

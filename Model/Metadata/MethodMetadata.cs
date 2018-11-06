@@ -9,11 +9,11 @@ namespace Model
 {
   public class MethodMetadata : Metadata
   {
-        public List<TypeMetadata> m_GenericArguments { get; set; }
-        public TupleFour<AccessLevel, AbstractENum, StaticEnum, VirtualEnum> m_Modifiers { get; set; }
-        public TypeMetadata m_ReturnType { get; set; }
-        public bool m_Extension { get; set; }
-        public List<ParameterMetadata> m_Parameters { get; set; }
+        public List<TypeMetadata> GenericArguments { get; set; }
+        public TupleFour<AccessLevel, AbstractEnum, StaticEnum, VirtualEnum> Modifiers { get; set; }
+        public TypeMetadata ReturnType { get; set; }
+        public bool Extension { get; set; }
+        public List<ParameterMetadata> Parameters { get; set; }
 
         public MethodMetadata() { }
 
@@ -22,17 +22,17 @@ namespace Model
             //sprawdzic czy to na pewno jest dobrze
             if(!method.IsGenericMethodDefinition)
             {
-                m_GenericArguments = null;
+                GenericArguments = null;
             }
             else 
             {
-                m_GenericArguments = TypeMetadata.EmitGenericArguments(method.GetGenericArguments()).ToList();
+                GenericArguments = TypeMetadata.EmitGenericArguments(method.GetGenericArguments()).ToList();
             }
 
-            m_ReturnType = EmitReturnType(method);
-            m_Parameters = EmitParameters(method.GetParameters()).ToList();
-            m_Modifiers = EmitModifiers(method);
-            m_Extension = EmitExtension(method);
+            ReturnType = EmitReturnType(method);
+            Parameters = EmitParameters(method.GetParameters()).ToList();
+            Modifiers = EmitModifiers(method);
+            Extension = EmitExtension(method);
         }
 
         public static IEnumerable<MethodMetadata> EmitMethods(IEnumerable<MethodBase> methods)
@@ -62,7 +62,7 @@ namespace Model
             return method.IsDefined(typeof(ExtensionAttribute), true);
         }
 
-        private static TupleFour<AccessLevel, AbstractENum, StaticEnum, VirtualEnum> EmitModifiers(MethodBase method)
+        private static TupleFour<AccessLevel, AbstractEnum, StaticEnum, VirtualEnum> EmitModifiers(MethodBase method)
         {
             AccessLevel _access = AccessLevel.IsPrivate;
             if (method.IsPublic)
@@ -71,16 +71,16 @@ namespace Model
                 _access = AccessLevel.IsProtected;
             else if (method.IsFamilyAndAssembly)
                 _access = AccessLevel.IsProtectedInternal;
-            AbstractENum _abstract = AbstractENum.NotAbstract;
+            AbstractEnum _abstract = AbstractEnum.NotAbstract;
             if (method.IsAbstract)
-                _abstract = AbstractENum.Abstract;
+                _abstract = AbstractEnum.Abstract;
             StaticEnum _static = StaticEnum.NotStatic;
             if (method.IsStatic)
                 _static = StaticEnum.Static;
             VirtualEnum _virtual = VirtualEnum.NotVirtual;
             if (method.IsVirtual)
                 _virtual = VirtualEnum.Virtual;
-            return new Tuple<AccessLevel, AbstractENum, StaticEnum, VirtualEnum>(_access, _abstract, _static, _virtual);
+            return new Tuple<AccessLevel, AbstractEnum, StaticEnum, VirtualEnum>(_access, _abstract, _static, _virtual);
         }
     }
 }

@@ -40,10 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ITreeViewItem.cs" />
+    <Compile Include="ITreeViewItemBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelMetadata\ViewModelMethodMetadata.cs" />
+    <Compile Include="ViewModelMetadata\ViewModelTypeMetadata.cs" />
+    <Compile Include="ViewModelMetadata\ViewModelAssemblyMetadata.cs" />
+    <Compile Include="ViewModelMetadata\ViewModelMetadata.cs" />
+    <Compile Include="ViewModelMetadata\ViewModelNamespaceMetadata.cs" />
+    <Compile Include="ViewModelMetadata\ViewModelParameterMetadata.cs" />
+    <Compile Include="ViewModelMetadata\ViewModelPropertyMetadata.cs" />
     <Compile Include="XML\XMLDeserialize.cs" />
     <Compile Include="XML\XMLSerialize.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{1b92160d-5854-463d-8211-c8d530efb975}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

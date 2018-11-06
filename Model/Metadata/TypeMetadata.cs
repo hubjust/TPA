@@ -11,55 +11,54 @@ namespace Model
   public class TypeMetadata : Metadata
   {
 
-    public static Dictionary<string, TypeMetadata> m_dictionarType = new Dictionary<string, TypeMetadata>();
-    public TypeMetadata m_BaseType { get; set; }
-    public List<TypeMetadata> m_GenericArguments { get; set; }
-    public string m_NamespaceName { get; set; }
-    public TupleThree<AccessLevel, SealedEnum, AbstractENum> m_Modifiers { get; set; }
-    public TypeKind m_Type { get; set; }
+    public static Dictionary<string, TypeMetadata> DictionaryType = new Dictionary<string, TypeMetadata>();
+    public TypeMetadata BaseType { get; set; }
+    public List<TypeMetadata> GenericArguments { get; set; }
+    public string NamespaceName { get; set; }
+    public TupleThree<AccessLevel, SealedEnum, AbstractEnum> Modifiers { get; set; }
+    public TypeKind Type { get; set; }
 
-    public TypeMetadata m_DeclaringType { get; set; }
+    public TypeMetadata DeclaringType { get; set; }
 
-    public List<TypeMetadata> m_ImplementedInterfaces { get; set; }
-    public List<TypeMetadata> m_NestedTypes { get; set; }
-    public List<MethodMetadata> m_Methods { get; set; }
-    public List<MethodMetadata> m_Constructors { get; set; }
-    public List<ParameterMetadata> m_Fields { get; set; }
-    public List<PropertyMetadata> m_Properties { get; set; }
+    public List<TypeMetadata> ImplementedInterfaces { get; set; }
+    public List<TypeMetadata> NestedTypes { get; set; }
+    public List<MethodMetadata> Methods { get; set; }
+    public List<MethodMetadata> Constructors { get; set; }
+    public List<ParameterMetadata> Fields { get; set; }
+    public List<PropertyMetadata> Properties { get; set; }
 
     public TypeMetadata() { }
 
     public TypeMetadata(Type type) : base(type.Name)
     {
-        if (!m_dictionarType.ContainsKey(m_Name))
+        if (!DictionaryType.ContainsKey(Name))
         {
-            m_dictionarType.Add(m_Name, this);
+            DictionaryType.Add(Name, this);
         }
 
         if (!type.IsGenericTypeDefinition)
         {
-            m_GenericArguments = null;
+            GenericArguments = null;
         }
          
         else
         {
-            m_GenericArguments = TypeMetadata.EmitGenericArguments(type.GetGenericArguments()).ToList();
+            GenericArguments = TypeMetadata.EmitGenericArguments(type.GetGenericArguments()).ToList();
         }
 
-        
-        m_Constructors = MethodMetadata.EmitMethods(type.GetConstructors()).ToList();
-        m_Methods = MethodMetadata.EmitMethods(type.GetMethods()).ToList();
-        m_DeclaringType = EmitDeclaringType(type.DeclaringType);
-        m_NestedTypes = EmitNestedTypes(type.GetNestedTypes()).ToList();
-        m_ImplementedInterfaces = EmitImplements(type.GetInterfaces()).ToList();
-        m_Modifiers = EmitModifiers(type);
-        m_BaseType = EmitExtends(type.BaseType);
-        m_Properties = PropertyMetadata.EmitProperties(type.GetProperties()).ToList();
-        m_Fields = EmitFields(type.GetFields()).ToList();
-        m_Type = GetTypeKind(type);
+        Constructors = MethodMetadata.EmitMethods(type.GetConstructors()).ToList();
+        Methods = MethodMetadata.EmitMethods(type.GetMethods()).ToList();
+        DeclaringType = EmitDeclaringType(type.DeclaringType);
+        NestedTypes = EmitNestedTypes(type.GetNestedTypes()).ToList();
+        ImplementedInterfaces = EmitImplements(type.GetInterfaces()).ToList();
+        Modifiers = EmitModifiers(type);
+        BaseType = EmitExtends(type.BaseType);
+        Properties = PropertyMetadata.EmitProperties(type.GetProperties()).ToList();
+        Fields = EmitFields(type.GetFields()).ToList();
+        Type = GetTypeKind(type);
     }
 
-    static TupleThree<AccessLevel, SealedEnum, AbstractENum> EmitModifiers(Type type)
+    static TupleThree<AccessLevel, SealedEnum, AbstractEnum> EmitModifiers(Type type)
     {
         AccessLevel _access = AccessLevel.IsPrivate;
         if (type.IsPublic)
@@ -72,20 +71,20 @@ namespace Model
             _access = AccessLevel.IsProtectedInternal;
         SealedEnum _sealed = SealedEnum.NotSealed;
         if (type.IsSealed) _sealed = SealedEnum.Sealed;
-        AbstractENum _abstract = AbstractENum.NotAbstract;
+        AbstractEnum _abstract = AbstractEnum.NotAbstract;
         if (type.IsAbstract)
-            _abstract = AbstractENum.Abstract;
-        return new Tuple<AccessLevel, SealedEnum, AbstractENum>(_access, _sealed, _abstract);
+            _abstract = AbstractEnum.Abstract;
+        return new Tuple<AccessLevel, SealedEnum, AbstractEnum>(_access, _sealed, _abstract);
     }
 
     private TypeMetadata(string typeName, string namespaceName) : base(typeName)
     {
-        this.m_NamespaceName = namespaceName;
+        this.NamespaceName = namespaceName;
     }
 
     private TypeMetadata(string typeName, string namespaceName, IEnumerable<TypeMetadata> genericArguments) : this(typeName, namespaceName)
     {
-        this.m_GenericArguments = genericArguments.ToList();
+        this.GenericArguments = genericArguments.ToList();
     }
 
     public enum TypeKind
@@ -112,7 +111,7 @@ namespace Model
 
     public static void StoreType(Type type)
     {
-        if (!m_dictionarType.ContainsKey(type.Name))
+        if (!DictionaryType.ContainsKey(type.Name))
         {
             new TypeMetadata(type);
         }
