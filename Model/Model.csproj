@@ -48,13 +48,15 @@
     <Compile Include="Enum\VirtualEnum.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Metadata\AssemblyMetadata.cs" />
+    <Compile Include="Metadata\Metadata.cs" />
     <Compile Include="Metadata\MethodMetadata.cs" />
     <Compile Include="Metadata\NamespaceMetadata.cs" />
     <Compile Include="Metadata\ParameterMetadata.cs" />
     <Compile Include="Metadata\PropertyMetadata.cs" />
     <Compile Include="Metadata\TypeMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tupl.cs" />
+    <Compile Include="TupleFour.cs" />
+    <Compile Include="TupleThree.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

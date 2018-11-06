@@ -1,18 +1,16 @@
 ﻿
 namespace Model
 {
-  internal class ParameterMetadata
-  {
-
-    public ParameterMetadata(string name, TypeMetadata typeMetadata)
+    public class ParameterMetadata : Metadata
     {
-      this.m_Name = name;
-      this.m_TypeMetadata = typeMetadata;
-    }
-    
-    //private vars
-    private string m_Name;
-    private TypeMetadata m_TypeMetadata;
 
-  }
+        public TypeMetadata m_Type { get; set; }
+
+        public ParameterMetadata() { }
+
+        public ParameterMetadata(string name, TypeMetadata typeMetadata) : base(name)
+        {
+            m_Type = typeMetadata;
+        }
+    }
 }

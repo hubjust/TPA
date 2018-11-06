@@ -6,21 +6,21 @@ using System.Reflection;
 
 namespace Model
 {
-  public class AssemblyMetadata
+  public class AssemblyMetadata : Metadata
   {
+    public List<NamespaceMetadata> m_Namespaces { get; set; }
 
-    internal AssemblyMetadata(Assembly assembly)
+    public AssemblyMetadata() { }
+
+    public AssemblyMetadata(Assembly assembly) : base(assembly.ManifestModule.Name)
     {
-      m_Name = assembly.ManifestModule.Name;
-      m_Namespaces = from Type _type in assembly.GetTypes()
+
+      m_Namespaces = (from Type _type in assembly.GetTypes()
                      where _type.GetVisible()
                      group _type by _type.GetNamespace() into _group
                      orderby _group.Key
-                     select new NamespaceMetadata(_group.Key, _group);
+                     select new NamespaceMetadata(_group.Key, _group.ToList())).ToList();
+
+        }
     }
-
-    private string m_Name;
-    private IEnumerable<NamespaceMetadata> m_Namespaces;
-
-  }
 }

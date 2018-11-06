@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Model
 {
-  internal static class ExtensionMethods
+  public static class ExtensionMethods
   {
 
     internal static bool GetVisible(this Type type)

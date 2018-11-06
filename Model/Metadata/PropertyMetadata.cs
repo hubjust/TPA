@@ -5,25 +5,22 @@ using System.Linq;
 
 namespace Model
 {
-  internal class PropertyMetadata
+  public class PropertyMetadata : Metadata
   {
+        public TypeMetadata Type { get; set; }
 
-    internal static IEnumerable<PropertyMetadata> EmitProperties(IEnumerable<PropertyInfo> props)
-    {
-      return from prop in props
-             where prop.GetGetMethod().GetVisible() || prop.GetSetMethod().GetVisible()
-             select new PropertyMetadata(prop.Name, TypeMetadata.EmitReference(prop.PropertyType));
-    }
+        public PropertyMetadata()   { }
 
-    #region private
-    private string m_Name;
-    private TypeMetadata m_TypeMetadata;
-    private PropertyMetadata(string propertyName, TypeMetadata propertyType)
-    {
-      m_Name = propertyName;
-      m_TypeMetadata = propertyType;
-    }
-    #endregion
+        public PropertyMetadata(string propertyName, TypeMetadata propertyType) : base(propertyName)
+        {
+            Type = propertyType;
+        }
 
+        public static IEnumerable<PropertyMetadata> EmitProperties(IEnumerable<PropertyInfo> props)
+        {
+            return from prop in props
+                   where prop.GetGetMethod().GetVisible() || prop.GetSetMethod().GetVisible()
+                   select new PropertyMetadata(prop.Name, TypeMetadata.EmitReference(prop.PropertyType));
+        }
   }
 }
