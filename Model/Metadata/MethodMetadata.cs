@@ -21,9 +21,13 @@ namespace Model
         {
             //sprawdzic czy to na pewno jest dobrze
             if(!method.IsGenericMethodDefinition)
+            {
                 m_GenericArguments = null;
+            }
             else 
+            {
                 m_GenericArguments = TypeMetadata.EmitGenericArguments(method.GetGenericArguments()).ToList();
+            }
 
             m_ReturnType = EmitReturnType(method);
             m_Parameters = EmitParameters(method.GetParameters()).ToList();
@@ -33,9 +37,9 @@ namespace Model
 
         public static IEnumerable<MethodMetadata> EmitMethods(IEnumerable<MethodBase> methods)
         {
-                 return from MethodBase _currentMethod in methods
-                         where _currentMethod.GetVisible()
-                        select new MethodMetadata(_currentMethod);
+            return from MethodBase _currentMethod in methods
+                    where _currentMethod.GetVisible()
+                    select new MethodMetadata(_currentMethod);
         }
 
         private static IEnumerable<ParameterMetadata> EmitParameters(IEnumerable<ParameterInfo> parms)

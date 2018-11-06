@@ -1,9 +1,7 @@
-﻿
-namespace Model
+﻿namespace Model
 {
     public class ParameterMetadata : Metadata
     {
-
         public TypeMetadata m_Type { get; set; }
 
         public ParameterMetadata() { }
