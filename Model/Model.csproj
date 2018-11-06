@@ -54,6 +54,7 @@
     <Compile Include="Metadata\PropertyMetadata.cs" />
     <Compile Include="Metadata\TypeMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tupl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
