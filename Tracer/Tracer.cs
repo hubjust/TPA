@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
+
 namespace Tracer
 {
     public class Tracer : ITracer
@@ -14,13 +15,16 @@ namespace Tracer
         public Tracer(TraceListener listener, TraceLevel level = TraceLevel.Error)
         {
             traceSwitch.Level = level;
-            Trace.Listeners.Add(listener);
-            Trace.AutoFlush = true;
+            System.Diagnostics.Trace.Listeners.Add(listener);
+            System.Diagnostics.Trace.AutoFlush = true;
         }
 
         public void TracerLog(TraceLevel level, Object obj)
         {
-            Trace.WriteLine(traceSwitch.Level, "  " + level + "  " +DateTime.Now + "  ");
+            if (level <= traceSwitch.Level)
+            {
+                Trace.WriteLine(level + "\t" + DateTime.Now + "\t" + obj);
+            }
         }
     }
 }
