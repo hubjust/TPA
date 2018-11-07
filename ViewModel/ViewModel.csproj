@@ -46,6 +46,7 @@
     <Compile Include="ITreeViewItem.cs" />
     <Compile Include="ITreeViewItemBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelMetadata\ConsoleViewMode.cs" />
     <Compile Include="VMViewModel.cs" />
     <Compile Include="ViewModelMetadata\ViewModelMethodMetadata.cs" />
     <Compile Include="ViewModelMetadata\ViewModelTypeMetadata.cs" />
