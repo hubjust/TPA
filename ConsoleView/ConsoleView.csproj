@@ -53,6 +53,10 @@
       <Project>{1b92160d-5854-463d-8211-c8d530efb975}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tracer\Tracer.csproj">
+      <Project>{bac71bf1-1ab9-4e3f-b060-a01729aee4c3}</Project>
+      <Name>Tracer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
       <Project>{b3fea98b-5406-4500-bb50-113253356e37}</Project>
       <Name>ViewModel</Name>

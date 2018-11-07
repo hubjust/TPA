@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using ViewModel.ViewModelMetadata;
 using Model;
+using Tracer;
+using System.Diagnostics;
 
 namespace ConsoleView
 {
@@ -14,12 +16,16 @@ namespace ConsoleView
         private static Stack<TypeMetadata> stack = new Stack<TypeMetadata>();
         private static Dictionary<string, TypeMetadata> expandableTypes = new Dictionary<string, TypeMetadata>();
         private static Dictionary<string, NamespaceMetadata> namespaces = new Dictionary<string, NamespaceMetadata>();
+        private static ITracer tracer = new FileTracer("TextUserInterface.log", TraceLevel.Verbose);
 
         static void Main(string[] args)
         {
+            tracer.TracerLog(TraceLevel.Info, "Tracer started");
+            tracer.TracerLog(TraceLevel.Verbose, "Loading dll");
             string path = @"..\..\..\View\bin\Debug\ViewModel.dll";
             Assembly assembly = Assembly.LoadFrom(path);
             assemblyMetadata = new AssemblyMetadata(assembly);
+            tracer.TracerLog(TraceLevel.Verbose, "Succesful Loading dll");
 
             Console.WriteLine(":: CHOOSE NAMESPACE ::\n");
             foreach (NamespaceMetadata namespac in assemblyMetadata.Namespaces)
@@ -33,10 +39,17 @@ namespace ConsoleView
             string input = Console.ReadLine();
 
             if (input == null)
+            {
                 Console.WriteLine("No input from user!");
+                tracer.TracerLog(TraceLevel.Warning, "No input from user");
+            }
 
             else
+            {
                 selectedNamespace = input;
+                tracer.TracerLog(TraceLevel.Info, selectedNamespace.ToString());
+
+            }
 
             ListTypes(input);
 
@@ -49,6 +62,7 @@ namespace ConsoleView
                 if (input == null)
                 {
                     Console.WriteLine("Input empty!");
+                    tracer.TracerLog(TraceLevel.Warning, "Input empty!");
                     continue;
                 }
 
@@ -64,7 +78,10 @@ namespace ConsoleView
                             if (expandableTypes.ContainsKey(selectedType))
                                 ExpandType(selectedType);
                             else
+                            {
                                 Console.WriteLine("Invalid type name");
+                                tracer.TracerLog(TraceLevel.Warning, "Invalid type name");
+                            }
                         }
                         else
                             Console.WriteLine("Specify type.");
@@ -79,6 +96,7 @@ namespace ConsoleView
 
                     default:
                         Console.WriteLine("Invalid command");
+                        tracer.TracerLog(TraceLevel.Warning, "Invalid command");
                         break;
                 }
             }

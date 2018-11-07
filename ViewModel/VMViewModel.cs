@@ -6,6 +6,8 @@ using System.Reflection;
 
 using Model;
 using ViewModel.ViewModelMetadata;
+using Tracer;
+using System.Diagnostics;
 
 namespace ViewModel
 {
@@ -16,14 +18,16 @@ namespace ViewModel
         public ICommand Click_Open { get; }
         public string pathVariable { get; set; }
 
+        private static ITracer tracer = new FileTracer("GraphicalUserInterface.log", TraceLevel.Info);
+
         private AssemblyMetadata assemblyMetadata;
         private ViewModelAssemblyMetadata viewModelAssemblyMetadata;
 
         public ObservableCollection<ITreeViewItem> HierarchicalAreas { get; set; }
 
-
         public VMViewModel()
         {
+            tracer.TracerLog(TraceLevel.Verbose, "Initialization started");
             HierarchicalAreas = new ObservableCollection<ITreeViewItem>();
             Click_Open = new Command(Open);
         }
@@ -35,6 +39,7 @@ namespace ViewModel
 
         private void Open()
         {
+            tracer.TracerLog(TraceLevel.Info, "Opening");
             OpenFileDialog fileDialog = new OpenFileDialog
             {
                 Filter = "Dynamic Library File(*.dll) | *.dll|"
@@ -43,8 +48,11 @@ namespace ViewModel
 
             fileDialog.ShowDialog();
 
-            if (fileDialog.FileName.Length == 0)     
+            if (fileDialog.FileName.Length == 0)
+            {
                 MessageBox.Show("No files selected");
+                tracer.TracerLog(TraceLevel.Warning, "No file selected");
+            }
             
             else
             {
@@ -67,6 +75,8 @@ namespace ViewModel
 
         private void LoadTreeView()
         {
+            tracer.TracerLog(TraceLevel.Info, "TreeView");
+
             HierarchicalAreas.Add(new ITreeViewItem
             {
                 Name = viewModelAssemblyMetadata.Name,

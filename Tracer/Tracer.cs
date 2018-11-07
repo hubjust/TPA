@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-
 namespace Tracer
 {
     public class Tracer : ITracer
@@ -21,10 +20,8 @@ namespace Tracer
 
         public void TracerLog(TraceLevel level, Object obj)
         {
-            if (level <= traceSwitch.Level)
-            {
-                Trace.WriteLine(level + "\t" + DateTime.Now + "\t" + obj);
-            }
+            Trace.WriteLineIf(level <= traceSwitch.Level, "" + level + ":\t" + DateTime.Now + "\t" + obj);
+
         }
     }
 }
