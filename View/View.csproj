@@ -93,5 +93,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{b3fea98b-5406-4500-bb50-113253356e37}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
