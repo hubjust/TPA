@@ -6,36 +6,26 @@
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
         Title="TPA" Height="500" Width="500">
-    
-    
+
+
     <Border Padding="10">
         <StackPanel>
-            <!-- Buttons -->
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width = "*"/>
-                    <ColumnDefinition Width = "*"/>
-                    <ColumnDefinition Width = "*"/>
-                </Grid.ColumnDefinitions>
-
-                <Button x:Name="Open" Grid.Column="0" Padding="0 3" Margin="10 0 10 0" Content="Open" Command="{Binding Click_Open}"/>
-                <Button x:Name="Save" Grid.Column="1" Padding="0 3" Margin="10 0 10 0" Content="Save" Command="{Binding Click_Save}"/>
-                <Button x:Name="Show" Grid.Column="2" Padding="0 3" Margin="10 0 10 0" Content="Show" Command="{Binding Click_Show}"
-                        Visibility="{Binding ChangeControlVisibility,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="PathToDll" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,0,80,0" Text="{Binding Path=PathVariable, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button x:Name="Open" Content="Open" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding Click_Open}" />
             </Grid>
 
-            <!-- Label -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="Tree View" FontWeight="Bold" FontSize="13" Margin="206 20 206 0" />
-                <TextBlock Grid.Column="1" Text="{Binding Mode=OneWay,Path=PathVariable,UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            </Grid>
-
-            <!-- Tree View -->
-            <TreeView x:Name="TreeView" Margin="0 5 0 0" Height="375">
+            <TreeView x:Name="TreeView" Margin="0 5 0 0" Height="420">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}">
+                        <TextBlock Text="{Binding Path=Name}" Margin="0 0 4 0"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
             </TreeView>
 
 
