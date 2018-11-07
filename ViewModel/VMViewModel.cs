@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 using Model;
 using ViewModel.ViewModelMetadata;
@@ -13,7 +14,7 @@ namespace ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand Click_Open { get; }
-        public string PathVariable { get; set; }
+        public string pathVariable { get; set; }
 
         private AssemblyMetadata assemblyMetadata;
         private ViewModelAssemblyMetadata viewModelAssemblyMetadata;
@@ -25,6 +26,11 @@ namespace ViewModel
         {
             HierarchicalAreas = new ObservableCollection<ITreeViewItem>();
             Click_Open = new Command(Open);
+        }
+
+        public virtual void RaisePropertyChanged(string propertyNam)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyNam));
         }
 
         private void Open()
@@ -42,14 +48,30 @@ namespace ViewModel
             
             else
             {
-                PathVariable = fileDialog.FileName;
-                RaisePropertyChanged("PathVariable");
+                pathVariable = fileDialog.FileName;
+                RaisePropertyChanged("pathVariable");
+                LoadDLL();
             }
         }
 
-        public virtual void RaisePropertyChanged(string propertyNam)
+        private void LoadDLL()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyNam));
+            if (pathVariable.Substring(pathVariable.Length - 4) == ".dll")
+            {
+                assemblyMetadata = new AssemblyMetadata(Assembly.LoadFrom(pathVariable));
+                viewModelAssemblyMetadata = new ViewModelAssemblyMetadata(assemblyMetadata);
+                LoadTreeView();
+            }
+
+        }
+
+        private void LoadTreeView()
+        {
+            HierarchicalAreas.Add(new ITreeViewItem
+            {
+                Name = viewModelAssemblyMetadata.Name,
+                Hierarchy = viewModelAssemblyMetadata
+            });
         }
     }
 }

@@ -28,17 +28,17 @@ namespace ViewModel.ViewModelMetadata
 
         public static string GetSealedString(SealedEnum sealedEnum)
         {
-            return sealedEnum == SealedEnum.Sealed ? "abstract" : "";
+            return sealedEnum == SealedEnum.Sealed ? "sealed" : "";
         }
 
         public static string GetStaticString(StaticEnum staticEnum)
         {
-            return staticEnum == StaticEnum.Static ? "abstract" : "";
+            return staticEnum == StaticEnum.Static ? "static" : "";
         }
 
         public static string GetVirtualString(VirtualEnum virtualEnum)
         {
-            return virtualEnum == VirtualEnum.Virtual ? "abstract" : "";
+            return virtualEnum == VirtualEnum.Virtual ? "virtual" : "";
         }
 
         public void Add(List<PropertyMetadata> origin, ObservableCollection<ITreeViewItem> destination)

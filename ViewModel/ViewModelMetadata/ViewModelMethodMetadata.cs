@@ -1,5 +1,7 @@
 ﻿using Model;
+using System.Linq;
 using System.Collections.ObjectModel;
+
 
 namespace ViewModel.ViewModelMetadata
 {
@@ -32,17 +34,38 @@ namespace ViewModel.ViewModelMetadata
             {
                 fullName = GetAccessLevelString(Method.Modifiers.Item1);
 
+                fullName = fullName.Trim();
                 fullName += " " + GetStaticString(Method.Modifiers.Item3);
-                fullName.Trim();
 
-                fullName += " " + GetAbstractString(Method.Modifiers.Item2);
-                fullName.Trim();
-
+                fullName = fullName.Trim();
                 fullName += " " + GetVirtualString(Method.Modifiers.Item4);
-                fullName.Trim();
+
+                fullName = fullName.Trim();
+                fullName += " " + GetAbstractString(Method.Modifiers.Item2);
             }
 
-            fullName += ((Method.ReturnType != null) ? Method.ReturnType.Name : "") + " " + Method.Name;
+            if (Method.ReturnType != null)
+            {
+                fullName = fullName.Trim();
+                fullName += " " + Method.ReturnType.Name;
+            }
+
+            fullName = fullName.Trim();
+            fullName += " " + Method.Name;
+
+            fullName += "(";
+            foreach (ParameterMetadata parameterMetadata in Method.Parameters)
+            {
+                fullName += parameterMetadata.Type.Name + " " + parameterMetadata.Name;
+
+                if (parameterMetadata != Method.Parameters.Last())
+                {
+                    fullName += ", ";
+                }
+            }
+
+            fullName = fullName.TrimEnd(new char[] { ',', ' ' });
+            fullName += ")";
 
             return fullName;
         }

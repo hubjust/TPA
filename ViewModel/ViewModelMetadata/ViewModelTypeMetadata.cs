@@ -56,16 +56,17 @@ namespace ViewModel.ViewModelMetadata
             {
                 fullName = GetAccessLevelString(TypeData.Modifiers.Item1);
 
+                fullName = fullName.Trim();
                 fullName += " " + GetAbstractString(TypeData.Modifiers.Item3);
-                fullName.Trim();
 
+                fullName = fullName.Trim();
                 fullName += " " + GetSealedString(TypeData.Modifiers.Item2);
-                fullName.Trim();
             }
 
+            fullName = fullName.Trim();
             fullName += " " + GetTypeKindString(TypeData.Type);
-            fullName.Trim();
 
+            fullName = fullName.Trim();
             fullName += " " + TypeData.Name;
 
             return fullName;

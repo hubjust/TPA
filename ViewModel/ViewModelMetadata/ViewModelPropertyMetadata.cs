@@ -23,9 +23,11 @@ namespace ViewModel.ViewModelMetadata
             string fullName = "";
 
             if (PropertyData.Type != null)
-                fullName += PropertyData.Type.Name + " ";
+                fullName += PropertyData.Type.Name;
 
-            fullName += PropertyData.Name;
+            fullName = fullName.Trim();
+            fullName += " " + PropertyData.Name;
+
             return fullName;
         }
     }
