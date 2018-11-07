@@ -10,109 +10,137 @@ namespace ConsoleView
 {
     class Program
     {
+        private static ITracer tracer = new FileTracer("TextUserInterface.log", TraceLevel.Verbose);
+
+        private static string path = @"..\..\..\View\bin\Debug\ViewModel.dll";
         private static AssemblyMetadata assemblyMetadata;
-        private static string selectedNamespace;
+        private static bool isNamespaceSelected;
 
         private static Stack<TypeMetadata> stack = new Stack<TypeMetadata>();
-        private static Dictionary<string, TypeMetadata> expandableTypes = new Dictionary<string, TypeMetadata>();
         private static Dictionary<string, NamespaceMetadata> namespaces = new Dictionary<string, NamespaceMetadata>();
-        private static ITracer tracer = new FileTracer("TextUserInterface.log", TraceLevel.Verbose);
+        private static Dictionary<string, TypeMetadata> expandableTypes = new Dictionary<string, TypeMetadata>();
 
         static void Main(string[] args)
         {
             tracer.TracerLog(TraceLevel.Info, "Tracer started");
             tracer.TracerLog(TraceLevel.Verbose, "Loading dll");
-            string path = @"..\..\..\View\bin\Debug\ViewModel.dll";
+
             Assembly assembly = Assembly.LoadFrom(path);
             assemblyMetadata = new AssemblyMetadata(assembly);
+
             tracer.TracerLog(TraceLevel.Verbose, "Succesful Loading dll");
 
-            Console.WriteLine(":: CHOOSE NAMESPACE ::\n");
-            foreach (NamespaceMetadata namespac in assemblyMetadata.Namespaces)
+            string input = "";
+            string message = "";
+
+            while (true)
             {
-                namespaces.Add(namespac.Name, namespac);
-                Console.WriteLine(namespac.Name);
-            }
+                ListNamespaces(message);
+                input = Read();
 
-            Console.Write("\n:: > ");
-
-            string input = Console.ReadLine();
-
-            if (input == null)
-            {
-                Console.WriteLine("No input from user!");
-                tracer.TracerLog(TraceLevel.Warning, "No input from user");
-            }
-
-            else
-            {
-                selectedNamespace = input;
-                tracer.TracerLog(TraceLevel.Info, selectedNamespace.ToString());
-
-            }
-
-            ListTypes(input);
-
-            while(true)
-            {
-                Console.Write("\n:: > ");
-
-                input = Console.ReadLine();
-
-                if (input == null)
+                if (namespaces.ContainsKey(input))
                 {
-                    Console.WriteLine("Input empty!");
-                    tracer.TracerLog(TraceLevel.Warning, "Input empty!");
-                    continue;
+                    message = "";
+                    isNamespaceSelected = true;
+                    ListTypes(input, message);
+                }
+                else
+                {
+                    tracer.TracerLog(TraceLevel.Warning, "Invalid namespace");
+                    message = "ERROR: Invalid namespace";
+                    isNamespaceSelected = false;
                 }
 
-                string command = input.Split(' ')[0];
-
-                switch (command)
+                while (isNamespaceSelected == true)
                 {
-                    case "1":
-                        if (input.Split(' ').Length == 2)
-                        {
-                            string selectedType = input.Split(' ')[1];
+                    string command = Read();
 
-                            if (expandableTypes.ContainsKey(selectedType))
-                                ExpandType(selectedType);
+                    switch (command)
+                    {
+                        case "exit":
+                            tracer.TracerLog(TraceLevel.Info, "User closed app");
+                            return;
+
+                        case "back":
+                            message = "";
+                            Back(input);
+                            break;
+
+                        default:
+                            if (expandableTypes.ContainsKey(command))
+                            {
+                                message = "";
+                                ExpandType(command);
+                            }
                             else
                             {
-                                Console.WriteLine("Invalid type name");
-                                tracer.TracerLog(TraceLevel.Warning, "Invalid type name");
+                                tracer.TracerLog(TraceLevel.Warning, "Invalid command or type name entered by user");
+                                Console.Write("ERROR: Invalid command / Invalid type name");
                             }
-                        }
-                        else
-                            Console.WriteLine("Specify type.");
-                        break;
-
-                    case "2":
-                        GoBack();
-                        break;
-
-                    case "3":
-                        return;
-
-                    default:
-                        Console.WriteLine("Invalid command");
-                        tracer.TracerLog(TraceLevel.Warning, "Invalid command");
-                        break;
+                            break;
+                    }
                 }
             }
         }
 
-        private static void SetUpConsole()
+        private static string Read()
+        {
+            Console.Write("\n::> ");
+            return Console.ReadLine();
+        }
+
+        private static void SetUpConsole(bool showCommands, string message)
         {
             Console.Clear();
             expandableTypes.Clear();
 
-            Console.WriteLine("AVALIABLE COMMANDS: 1 [type] - list, 2 - back, 3 - exit\n");
+            if (message != "")
+                Console.WriteLine(message + "\n");
+
+            if (showCommands == true)
+                Console.WriteLine(":: TYPE COMMAND ::\nAVALIABLE COMMANDS:\n\t[type] - specify type to expand,\n\t{back},\n\t{exit}.\n");
         }
 
-        private static void ListTypes(string namespac)
+        private static void Back(string input)
         {
-            SetUpConsole();
+            if (stack.Count == 0)
+            {
+                isNamespaceSelected = false;
+            }
+            else if (stack.Count == 1)
+            {
+                stack.Clear();
+                ListTypes(input, "");
+            }
+            else
+            {
+                stack.Pop();
+                ExpandType(stack.Pop().Name);
+            }
+        }
+
+        private static void ListNamespaces(string message)
+        {
+            tracer.TracerLog(TraceLevel.Info, "Namespace selection");
+
+            if (message != "")
+                message += "\n\n";
+
+            SetUpConsole(false, message + "::CHOOSE NAMESPACE::");
+
+            foreach (NamespaceMetadata namespac in assemblyMetadata.Namespaces)
+            {
+                if (!namespaces.ContainsKey(namespac.Name))
+                    namespaces.Add(namespac.Name, namespac);
+                Console.WriteLine(namespac.Name);
+            }
+        }
+
+        private static void ListTypes(string namespac, string message)
+        {
+            tracer.TracerLog(TraceLevel.Info, namespac);
+
+            SetUpConsole(true, message);
 
             Console.WriteLine("Stored types: " + TypeMetadata.DictionaryType.Count);
             foreach (TypeMetadata storedType in namespaces[namespac].Types)
@@ -122,29 +150,14 @@ namespace ConsoleView
             }
         }
 
-        private static void GoBack()
-        {
-            if (stack.Count > 0)
-            {
-                if (stack.Count == 1)
-                {
-                    stack.Clear();
-                    ListTypes(selectedNamespace);
-                }
-                else
-                {
-                    stack.Pop();
-                    ExpandType(stack.Pop().Name);
-                }
-            }
-        }
-
         private static void ExpandType(string typeName)
         {
+            tracer.TracerLog(TraceLevel.Info, typeName);
+
             TypeMetadata type = TypeMetadata.DictionaryType[typeName];
             stack.Push(type);
 
-            SetUpConsole();
+            SetUpConsole(true, "");
 
             foreach (ParameterMetadata field in type.Fields)
             {
@@ -163,7 +176,6 @@ namespace ConsoleView
                     expandableTypes.Add(propertyTypeName, property.Type);
                 }
             }
-
 
             foreach (MethodMetadata method in type.Methods)
             {
