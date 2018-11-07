@@ -50,8 +50,6 @@
     <Compile Include="ViewModelMetadata\ViewModelNamespaceMetadata.cs" />
     <Compile Include="ViewModelMetadata\ViewModelParameterMetadata.cs" />
     <Compile Include="ViewModelMetadata\ViewModelPropertyMetadata.cs" />
-    <Compile Include="XML\XMLDeserialize.cs" />
-    <Compile Include="XML\XMLSerialize.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
