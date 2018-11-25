@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public abstract class Metadata
+    public abstract class BaseMetadata
     {
         public string Name { get; set; }
 
-        public Metadata() { }
-
-        public Metadata(string name)
+        public BaseMetadata(string name)
         {
             Name = name;
         }
+
+        public BaseMetadata() { }
     }
 }

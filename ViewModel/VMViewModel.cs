@@ -6,7 +6,7 @@ using System.Reflection;
 
 using Model;
 using ViewModel.ViewModelMetadata;
-using Tracer;
+using Logger;
 using System.Diagnostics;
 
 namespace ViewModel
@@ -21,15 +21,15 @@ namespace ViewModel
         private static ITracer tracer = new FileTracer("GraphicalUserInterface.log", TraceLevel.Info);
 
         private AssemblyMetadata assemblyMetadata;
-        private ViewModelAssemblyMetadata viewModelAssemblyMetadata;
+        //private VMAssemblyMetadata viewModelAssemblyMetadata;
 
-        public ObservableCollection<ITreeViewItem> HierarchicalAreas { get; set; }
+        public ObservableCollection<TreeViewItem> HierarchicalAreas { get; set; }
 
         public VMViewModel()
         {
             tracer.TracerLog(TraceLevel.Verbose, "Initialization started");
-            HierarchicalAreas = new ObservableCollection<ITreeViewItem>();
-            Click_Open = new Command(Open);
+            HierarchicalAreas = new ObservableCollection<TreeViewItem>();
+            Click_Open = new RelayCommand(Open);
         }
 
         public virtual void RaisePropertyChanged(string propertyNam)
@@ -67,7 +67,7 @@ namespace ViewModel
             if (pathVariable.Substring(pathVariable.Length - 4) == ".dll")
             {
                 assemblyMetadata = new AssemblyMetadata(Assembly.LoadFrom(pathVariable));
-                viewModelAssemblyMetadata = new ViewModelAssemblyMetadata(assemblyMetadata);
+                //viewModelAssemblyMetadata = new VMAssemblyMetadata(assemblyMetadata);
                 LoadTreeView();
             }
 
@@ -77,11 +77,11 @@ namespace ViewModel
         {
             tracer.TracerLog(TraceLevel.Info, "TreeView");
 
-            HierarchicalAreas.Add(new ITreeViewItem
-            {
-                Name = viewModelAssemblyMetadata.Name,
-                Hierarchy = viewModelAssemblyMetadata
-            });
+//            HierarchicalAreas.Add(new TreeViewItem
+  //          {
+   //             Name = viewModelAssemblyMetadata.Name,
+    //            Hierarchy = viewModelAssemblyMetadata
+     //       });
         }
     }
 }

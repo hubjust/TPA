@@ -7,45 +7,45 @@ using System.Runtime.CompilerServices;
 
 namespace Model
 {
-  public class MethodMetadata : Metadata
-  {
-        public List<TypeMetadata> GenericArguments { get; set; }
-        public TupleFour<AccessLevel, AbstractEnum, StaticEnum, VirtualEnum> Modifiers { get; set; }
+    public class MethodMetadata : BaseMetadata
+    {
+        public ICollection<TypeMetadata> GenericArguments { get; set; }
+        public ICollection<ParameterMetadata> Parameters { get; set; }
+        public ICollection<TypeMetadata> AttributesMetadata { get; set; }
+
         public TypeMetadata ReturnType { get; set; }
+        public TypeMetadata ReflectedType { get; set; }
+
+        public TupleFour<AccessLevel, AbstractEnum, StaticEnum, VirtualEnum> Modifiers { get; set; }
         public bool Extension { get; set; }
-        public List<ParameterMetadata> Parameters { get; set; }
 
-        public MethodMetadata() { }
-
-        public MethodMetadata(MethodBase method) : base(method.Name)
+        public MethodMetadata(MethodBase method)
+            : base(method.IsConstructor ? method.ReflectedType.Name : method.Name)
         {
-            //sprawdzic czy to na pewno jest dobrze
-            if(!method.IsGenericMethodDefinition)
-            {
-                GenericArguments = null;
-            }
-            else 
-            {
-                GenericArguments = TypeMetadata.EmitGenericArguments(method.GetGenericArguments()).ToList();
-            }
+            GenericArguments = !method.IsGenericMethodDefinition ? null : TypeMetadata.EmitGenericArguments(method.GetGenericArguments()).ToList();
+            Parameters = EmitParameters(method.GetParameters()).ToList();
+            AttributesMetadata = TypeMetadata.EmitAttributes(method.GetCustomAttributes());
 
             ReturnType = EmitReturnType(method);
-            Parameters = EmitParameters(method.GetParameters()).ToList();
+            ReflectedType = TypeMetadata.EmitReference(method.ReflectedType);
+
             Modifiers = EmitModifiers(method);
             Extension = EmitExtension(method);
         }
 
+        public MethodMetadata() { }
+
         public static IEnumerable<MethodMetadata> EmitMethods(IEnumerable<MethodBase> methods)
         {
-            return from MethodBase _currentMethod in methods
+            return (from MethodBase _currentMethod in methods
                     where _currentMethod.GetVisible()
-                    select new MethodMetadata(_currentMethod);
+                    select new MethodMetadata(_currentMethod));
         }
 
         private static IEnumerable<ParameterMetadata> EmitParameters(IEnumerable<ParameterInfo> parms)
         {
             return from parm in parms
-                   select new ParameterMetadata(parm.Name, TypeMetadata.EmitReference(parm.ParameterType));
+                   select new ParameterMetadata(parm);
         }
 
         private static TypeMetadata EmitReturnType(MethodBase method)

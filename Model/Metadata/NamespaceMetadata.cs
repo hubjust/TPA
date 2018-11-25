@@ -5,19 +5,19 @@ using System.Linq;
 
 namespace Model
 {
-  public class NamespaceMetadata : Metadata
-  {
-    public List<TypeMetadata> Types { get; set; }
-
-    public NamespaceMetadata() { }
-    
-    // base - odwolanie do klasy bazowej
-    public NamespaceMetadata(string name, List<Type> types) : base(name) 
+    public class NamespaceMetadata : BaseMetadata
     {
-            this.Types = (from type
-                          in types
-                          orderby type.Name
-                          select new TypeMetadata(type)).ToList();
+        public List<TypeMetadata> Types { get; set; }
+
+        public NamespaceMetadata(string name, List<Type> types)
+            : base(name)
+        {
+            Types = (from type
+                     in types
+                     orderby type.Name
+                     select new TypeMetadata(type)).ToList();
+        }
+
+        public NamespaceMetadata() { }
     }
-  }
 }

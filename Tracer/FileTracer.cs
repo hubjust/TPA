@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-namespace Tracer
+namespace Logger
 {
     public class FileTracer : Tracer
     {

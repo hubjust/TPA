@@ -44,16 +44,19 @@
     <Compile Include="Enum\AccessLevel.cs" />
     <Compile Include="Enum\SealedEnum.cs" />
     <Compile Include="Enum\StaticEnum.cs" />
+    <Compile Include="Enum\TypeKind.cs" />
     <Compile Include="Enum\VirtualEnum.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Metadata\AssemblyMetadata.cs" />
-    <Compile Include="Metadata\Metadata.cs" />
+    <Compile Include="Metadata\FieldMetadata.cs" />
+    <Compile Include="Metadata\BaseMetadata.cs" />
     <Compile Include="Metadata\MethodMetadata.cs" />
     <Compile Include="Metadata\NamespaceMetadata.cs" />
     <Compile Include="Metadata\ParameterMetadata.cs" />
     <Compile Include="Metadata\PropertyMetadata.cs" />
     <Compile Include="Metadata\TypeMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TupleTwo.cs" />
     <Compile Include="TupleFour.cs" />
     <Compile Include="TupleThree.cs" />
   </ItemGroup>

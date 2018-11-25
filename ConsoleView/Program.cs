@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using ViewModel.ViewModelMetadata;
 using Model;
-using Tracer;
+using Logger;
 using System.Diagnostics;
 
 namespace ConsoleView
@@ -145,7 +145,7 @@ namespace ConsoleView
             Console.WriteLine("Stored types: " + TypeMetadata.DictionaryType.Count);
             foreach (TypeMetadata storedType in namespaces[namespac].Types)
             {
-                Console.WriteLine(new ViewModelTypeMetadata(storedType));
+                Console.WriteLine(new VMTypeMetadata(storedType));
                 expandableTypes.Add(storedType.Name, storedType);
             }
         }
