@@ -8,7 +8,7 @@ namespace ViewModel.ViewModelMetadata
         private AssemblyMetadata assemblyMetadata;
         public override string Name => ToString();
 
-        public VMAssemblyMetadata(AssemblyMetadata assembly, Tracer tracer)
+        public VMAssemblyMetadata(AssemblyMetadata assembly, ITracer tracer)
         {
             base.tracer = tracer;
             assemblyMetadata = assembly;

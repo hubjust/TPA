@@ -9,7 +9,7 @@ namespace ViewModel.ViewModelMetadata
         private TypeMetadata typeMetadata;
         public override string Name => this.ToString();
 
-        public VMTypeMetadata(TypeMetadata typeMetadata, Tracer tracer)
+        public VMTypeMetadata(TypeMetadata typeMetadata, ITracer tracer)
         {
             this.tracer = tracer;
             this.typeMetadata = typeMetadata;
@@ -54,9 +54,14 @@ namespace ViewModel.ViewModelMetadata
         private string TransformModifiers()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(typeMetadata.Modifiers.Item1.ToString().Substring(2).ToLower() + " ");
-            builder.Append(typeMetadata.Modifiers.Item2.Equals(SealedEnum.Sealed) ? "sealed " : "");
-            builder.Append(typeMetadata.Modifiers.Item3.Equals(AbstractEnum.Abstract) ? "abstract " : "");
+
+            if (typeMetadata.Modifiers != null)
+            {
+                builder.Append(typeMetadata.Modifiers.Item1.ToString().Substring(2).ToLower() + " ");
+                builder.Append(typeMetadata.Modifiers.Item2.Equals(SealedEnum.Sealed) ? "sealed " : "");
+                builder.Append(typeMetadata.Modifiers.Item3.Equals(AbstractEnum.Abstract) ? "abstract " : "");
+            }
+
             return builder.ToString();
         }
 

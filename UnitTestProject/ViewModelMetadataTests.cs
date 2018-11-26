@@ -48,7 +48,5 @@ namespace UnitTestProject
             Assert.AreEqual("virtual", ViewModelMetadata.GetVirtualString(VirtualEnum.Virtual));
             Assert.AreEqual("", ViewModelMetadata.GetVirtualString(VirtualEnum.NotVirtual));
         }
-
-
-        }
+    }
 }

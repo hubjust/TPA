@@ -9,7 +9,7 @@ namespace ViewModel.ViewModelMetadata
         VMTypeMetadata attributeViewModel;
         public override string Name => ToString();
 
-        public VMAttributeMetadata(TypeMetadata attributeMetadata, Tracer tracer)
+        public VMAttributeMetadata(TypeMetadata attributeMetadata, ITracer tracer)
         {
             base.tracer = tracer;
             this.attributeMetadata = attributeMetadata;

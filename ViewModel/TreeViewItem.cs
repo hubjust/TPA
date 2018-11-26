@@ -9,7 +9,7 @@ namespace ViewModel
         public abstract string Name { get; }
         public ObservableCollection<TreeViewItem> Children { get; } = new ObservableCollection<TreeViewItem>();
         private bool isExpanded;
-        protected Tracer tracer;
+        protected ITracer tracer;
 
         public TreeViewItem()
         { }

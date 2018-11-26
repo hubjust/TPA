@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B3FEA98B-5406-4500-BB50-113253356E37}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ViewModel</RootNamespace>
-    <AssemblyName>ViewModel</AssemblyName>
+    <ProjectGuid>{5045EFE6-823A-4C7C-B1CB-0E57DA36AC88}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>CLI</RootNamespace>
+    <AssemblyName>CLI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,41 +35,19 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="BaseViewModel.cs" />
-    <Compile Include="Interfaces\IFileSelector.cs" />
-    <Compile Include="RelayCommand.cs" />
-    <Compile Include="TreeViewItem.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModelMetadata\VMAttributeMetadata.cs" />
-    <Compile Include="ViewModelMetadata\VMFieldMetadata.cs" />
-    <Compile Include="VMViewModel.cs" />
-    <Compile Include="ViewModelMetadata\VMMethodMetadata.cs" />
-    <Compile Include="ViewModelMetadata\VMTypeMetadata.cs" />
-    <Compile Include="ViewModelMetadata\VMAssemblyMetadata.cs" />
-    <Compile Include="ViewModelMetadata\VMNamespaceMetadata.cs" />
-    <Compile Include="ViewModelMetadata\VMParameterMetadata.cs" />
-    <Compile Include="ViewModelMetadata\VMPropertyMetadata.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{1b92160d-5854-463d-8211-c8d530efb975}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tracer\Logger.csproj">
-      <Project>{bac71bf1-1ab9-4e3f-b060-a01729aee4c3}</Project>
-      <Name>Logger</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

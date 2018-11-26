@@ -1,87 +1,61 @@
-﻿using System.Windows.Forms;
-using System.Windows.Input;
-using System.ComponentModel;
+﻿using System.Windows.Input;
 using System.Collections.ObjectModel;
 using System.Reflection;
+using System.Diagnostics;
 
 using Model;
 using ViewModel.ViewModelMetadata;
 using Logger;
-using System.Diagnostics;
 
 namespace ViewModel
 {
-    public class VMViewModel : INotifyPropertyChanged
+    public class VMViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ICommand Click_Open { get; }
-        public string pathVariable { get; set; }
-
-        private static ITracer tracer = new FileTracer("GraphicalUserInterface.log", TraceLevel.Info);
-
-        private AssemblyMetadata assemblyMetadata;
-        //private VMAssemblyMetadata viewModelAssemblyMetadata;
-
+        private VMAssemblyMetadata assemblyMetadata;
         public ObservableCollection<TreeViewItem> HierarchicalAreas { get; set; }
 
-        public VMViewModel()
-        {
-            tracer.TracerLog(TraceLevel.Verbose, "Initialization started");
-            HierarchicalAreas = new ObservableCollection<TreeViewItem>();
-            Click_Open = new RelayCommand(Open);
-        }
+        private IFileSelector fileSelector;
+        private ITracer tracer;
+        public ICommand OpenDLL { get; }
+        public string pathVariable { get; set; }
 
-        public virtual void RaisePropertyChanged(string propertyNam)
+        public VMViewModel(IFileSelector selector)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyNam));
+            tracer = new FileTracer("GraphicalUserInterface.log", TraceLevel.Info);
+            fileSelector = selector;
+
+            tracer.TracerLog(TraceLevel.Verbose, "ViewModel initialization started");
+            HierarchicalAreas = new ObservableCollection<TreeViewItem>();
+
+            OpenDLL = new RelayCommand(Open);
+            tracer.TracerLog(TraceLevel.Verbose, "ViewModel initialization finished");
         }
 
         private void Open()
         {
-            tracer.TracerLog(TraceLevel.Info, "Opening");
-            OpenFileDialog fileDialog = new OpenFileDialog
-            {
-                Filter = "Dynamic Library File(*.dll) | *.dll|"
-                       + "All files (*.*)| *.*"
-            };
+            pathVariable = fileSelector.FileToOpen();
+            OnPropertyChanged(nameof(pathVariable));
 
-            fileDialog.ShowDialog();
-
-            if (fileDialog.FileName.Length == 0)
+            try
             {
-                MessageBox.Show("No files selected");
-                tracer.TracerLog(TraceLevel.Warning, "No file selected");
+                tracer.TracerLog(TraceLevel.Info, "Open DLL button clicked.");
+                if (pathVariable.Substring(pathVariable.Length - 4) == ".dll")
+                {
+                    assemblyMetadata = new VMAssemblyMetadata(new AssemblyMetadata(Assembly.LoadFrom(pathVariable)), tracer);
+                    LoadTreeView();
+                }
             }
-            
-            else
+            catch (System.SystemException)
             {
-                pathVariable = fileDialog.FileName;
-                RaisePropertyChanged("pathVariable");
-                LoadDLL();
+                tracer.TracerLog(TraceLevel.Error, "DLL must be selected in case of load.");
             }
-        }
-
-        private void LoadDLL()
-        {
-            if (pathVariable.Substring(pathVariable.Length - 4) == ".dll")
-            {
-                assemblyMetadata = new AssemblyMetadata(Assembly.LoadFrom(pathVariable));
-                //viewModelAssemblyMetadata = new VMAssemblyMetadata(assemblyMetadata);
-                LoadTreeView();
-            }
-
         }
 
         private void LoadTreeView()
         {
-            tracer.TracerLog(TraceLevel.Info, "TreeView");
-
-//            HierarchicalAreas.Add(new TreeViewItem
-  //          {
-   //             Name = viewModelAssemblyMetadata.Name,
-    //            Hierarchy = viewModelAssemblyMetadata
-     //       });
+            tracer.TracerLog(TraceLevel.Info, "TreeView loading...");
+            HierarchicalAreas.Add(assemblyMetadata);
+            tracer.TracerLog(TraceLevel.Info, "TreeView loaded.");
         }
     }
 }

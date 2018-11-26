@@ -8,7 +8,7 @@ namespace ViewModel.ViewModelMetadata
         private NamespaceMetadata namespaceMetadata;
         public override string Name => ToString();
 
-        public VMNamespaceMetadata(NamespaceMetadata namespaceMetadata, Tracer tracer)
+        public VMNamespaceMetadata(NamespaceMetadata namespaceMetadata, ITracer tracer)
         {
             this.tracer = tracer;
             this.namespaceMetadata = namespaceMetadata;
