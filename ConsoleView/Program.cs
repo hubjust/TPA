@@ -10,6 +10,11 @@ namespace ConsoleView
 {
     class Program
     {
+        static void Main(string[] args)
+        {
+
+
+
         private static ITracer tracer = new FileTracer("TextUserInterface.log", TraceLevel.Verbose);
 
         private static string path = @"..\..\..\View\bin\Debug\ViewModel.dll";
