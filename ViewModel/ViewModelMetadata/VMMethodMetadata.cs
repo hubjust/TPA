@@ -1,7 +1,8 @@
-﻿using Model;
-using Logger;
-using System.Text;
+﻿using System.Text;
 using System.Collections.Generic;
+
+using Model;
+using Logger;
 
 namespace ViewModel.ViewModelMetadata
 {

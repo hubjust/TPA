@@ -1,5 +1,6 @@
-﻿using Model;
-using System.Text;
+﻿using System.Text;
+
+using Model;
 using Logger;
 
 namespace ViewModel.ViewModelMetadata

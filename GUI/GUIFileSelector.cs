@@ -4,7 +4,7 @@ using ViewModel;
 
 namespace GUI
 {
-    class FileSelector : IFileSelector
+    class GUIFileSelector : IFileSelector
     {
         public string FileToOpen()
         {

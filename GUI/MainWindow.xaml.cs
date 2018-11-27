@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+
 using ViewModel;
 
 namespace GUI
@@ -11,7 +12,7 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new VMViewModel(new FileSelector());
+            DataContext = new VMViewModel(new GUIFileSelector());
         }
     }
 }
