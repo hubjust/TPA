@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using ViewModel;
+using Serializers;
 
 namespace CLI
 {
@@ -13,7 +14,7 @@ namespace CLI
             VMViewModel dataContext = new VMViewModel(new CLIFileSelector());
             dataContext.OpenDLL.Execute(null);
 
-            Stack<TreeViewItem> stack = new Stack<TreeViewItem>();
+        Stack<TreeViewItem> stack = new Stack<TreeViewItem>();
             TreeViewItem current = dataContext.HierarchicalAreas[0];
             current.IsExpanded = true;
 
