@@ -109,7 +109,7 @@ namespace UnitTestProject
 
             List<NamespaceMetadata> namespaceMetadata = assemblyMeta.Namespaces.ToList<NamespaceMetadata>();
 
-            Assert.AreEqual(1, namespaceMetadata.Count);
+            Assert.AreEqual(2, namespaceMetadata.Count);
 
             NamespaceMetadata name = namespaceMetadata[0];
 
