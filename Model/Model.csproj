@@ -57,7 +57,6 @@
     <Compile Include="Metadata\PropertyMetadata.cs" />
     <Compile Include="Metadata\TypeMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\TypeRepository.cs" />
     <Compile Include="TupleTwo.cs" />
     <Compile Include="TupleFour.cs" />
     <Compile Include="TupleThree.cs" />
