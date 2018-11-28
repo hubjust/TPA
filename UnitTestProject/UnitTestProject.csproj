@@ -52,7 +52,6 @@
     <Compile Include="ReflectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LoggerTests.cs" />
-    <Compile Include="ViewModelMetadataTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
