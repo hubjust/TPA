@@ -10,16 +10,15 @@
 
     <Border Padding="10">
         <StackPanel>
-            <Grid>
-                <TextBox x:Name="PathToDll" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,0,169.6,0" Text="{Binding Path=pathVariable, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button x:Name="Open" Content="Open" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding OpenDLL}" />
-                <Button x:Name="Save" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Height="23" Command="{Binding Click_Save}" Margin="0,0,79.6,0" />
+            <Grid Height="52">
+                <TextBox x:Name="PathToDll" Height="52" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,0,114,0" Text="{Binding Path=PathVariable, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button x:Name="Open" Content="Open" HorizontalAlignment="Right" VerticalAlignment="Top" Width="52" Height="52" Command="{Binding OpenButton}" Margin="0,0,57,0"/>
+                <Button x:Name="Save" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Top" Width="52" Height="52" Command="{Binding SaveButton}" />
             </Grid>
-
-            <TreeView x:Name="TreeView" Margin="0 5 0 0" Height="420" ItemsSource="{Binding HierarchicalAreas}">
+            <TreeView x:Name="TreeView" Margin="0 5 0 0" Height="392" ItemsSource="{Binding HierarchicalAreas}">
                 <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Children}">
-                        <TextBlock Text="{Binding Path=Name}" Margin="0 0 4 0"/>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <TextBlock Text="{Binding Name}" Margin="0 0 4 0"/>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
                 <TreeView.ItemContainerStyle>

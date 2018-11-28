@@ -21,9 +21,9 @@ namespace ViewModel
 
         private IFileSelector fileSelector;
         private ITracer tracer;
-        public ICommand OpenDLL { get; }
-        public ICommand Click_Save { get; }
-        public string pathVariable { get; set; }
+        public ICommand OpenButton { get; }
+        public ICommand SaveButton { get; }
+        public string PathVariable { get; set; }
 
         private ISerializer serializer;
 
@@ -37,29 +37,31 @@ namespace ViewModel
             tracer.TracerLog(TraceLevel.Verbose, "ViewModel initialization started");
             HierarchicalAreas = new ObservableCollection<TreeViewItem>();
 
-            OpenDLL = new RelayCommand(Open);
+            OpenButton = new RelayCommand(Open);
             tracer.TracerLog(TraceLevel.Verbose, "ViewModel initialization finished");
 
-            Click_Save = new RelayCommand(Save);
+            SaveButton = new RelayCommand(Save);
             tracer.TracerLog(TraceLevel.Verbose, "ViewModel serialization finished");
         }
 
         private void Open()
         {
-            pathVariable = fileSelector.FileToOpen();
-            OnPropertyChanged(nameof(pathVariable));
+            PathVariable = fileSelector.FileToOpen();
+            OnPropertyChanged(nameof(PathVariable));
 
             try
             {
                 tracer.TracerLog(TraceLevel.Info, "Open DLL button clicked.");
-                if (pathVariable.Substring(pathVariable.Length - 4) == ".dll")
+                if (PathVariable.Substring(PathVariable.Length - 4) == ".dll")
                 {
-                    assemblyMetadata = new VMAssemblyMetadata(new AssemblyMetadata(Assembly.LoadFrom(pathVariable)), tracer);
+                    tracer.TracerLog(TraceLevel.Info, "Loading from DLL.");
+                    assemblyMetadata = new VMAssemblyMetadata(new AssemblyMetadata(Assembly.LoadFrom(PathVariable)), tracer);
                     LoadTreeView();
                 }
-                else if (pathVariable.Substring(pathVariable.Length - 4) == ".xml")
+                else if (PathVariable.Substring(PathVariable.Length - 4) == ".xml")
                 {
-                    assemblyMetadata = new VMAssemblyMetadata(serializer.Deserialize<AssemblyMetadata>(pathVariable), tracer);
+                    tracer.TracerLog(TraceLevel.Info, "Loading from XML.");
+                    assemblyMetadata = new VMAssemblyMetadata(serializer.Deserialize<AssemblyMetadata>(PathVariable), tracer);
                     LoadTreeView();
                 }
             }
