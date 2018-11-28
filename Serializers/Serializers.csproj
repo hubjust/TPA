@@ -43,11 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContext.cs" />
-    <Compile Include="IDeserializer.cs" />
     <Compile Include="ISerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XMLDeserializer.cs" />
     <Compile Include="XMLSerializer.cs" />
   </ItemGroup>
   <ItemGroup>

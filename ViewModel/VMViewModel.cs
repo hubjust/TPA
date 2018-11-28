@@ -17,7 +17,6 @@ namespace ViewModel
     public class VMViewModel : BaseViewModel
     {
         private VMAssemblyMetadata assemblyMetadata;
-        private AssemblyMetadata assemblyMet;
         public ObservableCollection<TreeViewItem> HierarchicalAreas { get; set; }
 
         private IFileSelector fileSelector;
@@ -25,9 +24,6 @@ namespace ViewModel
         public ICommand OpenDLL { get; }
         public ICommand Click_Save { get; }
         public string pathVariable { get; set; }
-
-        private TypeRepository typeRepository = new TypeRepository();
-
 
         private ISerializer serializer;
 
@@ -47,34 +43,6 @@ namespace ViewModel
             Click_Save = new RelayCommand(Save);
             tracer.TracerLog(TraceLevel.Verbose, "ViewModel serialization finished");
         }
-
-        private void LoadXML()
-        {
-            pathVariable = fileSelector.FileToOpen();
-            OnPropertyChanged(nameof(pathVariable));
-
-            tracer.TracerLog(TraceLevel.Info, "XML loading.");
-            if (pathVariable.Substring(pathVariable.Length - 4) == ".xml")
-            {
-                DataContext dataContext = new XmlDeserializer(pathVariable, tracer).Deserialize();
-                assemblyMet = dataContext.AssemblyMetadata;
-                assemblyMetadata = new VMAssemblyMetadata(assemblyMet, tracer);
-                typeRepository.AssemblyMetadata = assemblyMet;
-
-                foreach (var item in dataContext.Dictionary)
-                {
-                    if (!TypeRepository.storedTypes.ContainsKey(item.Key))
-                        TypeRepository.storedTypes.Add(item.Key, item.Value);
-                }
-
-                LoadTreeView();
-            }
-            else
-            {
-                tracer.TracerLog(TraceLevel.Error, "XML error.");
-            }
-        }
-
 
         private void Open()
         {

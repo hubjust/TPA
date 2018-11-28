@@ -8,16 +8,16 @@ namespace GUI
     {
         public string FileToOpen()
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            //{ Filter = "Dynamic Library File(*.dll)| *.dll" };
+            OpenFileDialog dialog = new OpenFileDialog()
+            { Filter = "Dynamic Library File(*.dll)| *.dll| XML File(*.xml)| *.xml" };
             dialog.ShowDialog();
             return dialog.FileName;
         }
 
         public string FileToSave()
         {
-            SaveFileDialog dialog = new SaveFileDialog();
-            //{ Filter = "Dynamic Library File(*.dll)| *.dll" };
+            SaveFileDialog dialog = new SaveFileDialog()
+            { Filter = "XML File(*.xml)| *.xml" };
 
             dialog.ShowDialog();
             return dialog.FileName;
