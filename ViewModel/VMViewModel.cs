@@ -2,15 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Diagnostics;
-using Microsoft.Win32;
 
 using Model;
-using Model.Repository;
 using ViewModel.ViewModelMetadata;
 using Logger;
 using Serializers;
-
-using System.Threading.Tasks;
 
 namespace ViewModel
 {

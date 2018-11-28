@@ -31,7 +31,7 @@ namespace UnitTestProject
 
             AssemblyMetadata assemblyTest = serializer.Deserialize<AssemblyMetadata>(path);
 
-            Assert.AreEqual(assemblyTest.Namespaces.Count(), 2);
+            Assert.AreEqual(assemblyTest.Namespaces.Count(), 1);
         }
     }
 }
