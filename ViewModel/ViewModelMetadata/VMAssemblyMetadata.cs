@@ -3,7 +3,7 @@ using Logger;
 
 namespace ViewModel.ViewModelMetadata
 {
-    internal class VMAssemblyMetadata : TreeViewItem
+    public class VMAssemblyMetadata : TreeViewItem
     {
         private AssemblyMetadata assemblyMetadata;
         public override string Name => ToString();
