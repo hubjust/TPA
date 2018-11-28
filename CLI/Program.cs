@@ -11,12 +11,10 @@ namespace CLI
     {
         static void Main(string[] args)
         {
-            /*ISerializer serializer;
+            VMViewModel dataContext = new VMViewModel(new CLIFileSelector(), new XmlSerializer());
+            dataContext.OpenButton.Execute(null);
 
-            VMViewModel dataContext = new VMViewModel(new CLIFileSelector(), serializer);
-            dataContext.OpenDLL.Execute(null);
-
-        Stack<TreeViewItem> stack = new Stack<TreeViewItem>();
+            Stack<TreeViewItem> stack = new Stack<TreeViewItem>();
             TreeViewItem current = dataContext.HierarchicalAreas[0];
             current.IsExpanded = true;
 
@@ -28,7 +26,6 @@ namespace CLI
             {
                 SetUpConsole(current.Name, stack.Count, showHelp, errorMessage);
                 errorMessage = null;
-                showHelp = false;
                 foreach (TreeViewItem item in current.Children)
                     Console.WriteLine("\t" + item);
                 Console.Write("\n:: TYPE COMMAND ::\n:> ");
@@ -37,18 +34,26 @@ namespace CLI
 
                 switch (command)
                 {
-                    case "help":
-                        showHelp = true;
-                        break;
-
-                    case "exit":
-                        return;
-
                     case "back":
                         if (stack.Count == 0)
                             errorMessage = "You are on root!";
                         else
                             current = stack.Pop();
+                        break;
+
+                    case "exit":
+                        return;
+
+                    case "help":
+                        showHelp = !showHelp;
+                        break;
+
+                    case "load":
+                        dataContext.OpenButton.Execute(null);
+                        break;
+
+                    case "save":
+                        dataContext.SaveButton.Execute(null);
                         break;
 
                     default:
@@ -74,7 +79,6 @@ namespace CLI
             if(!errorMessage.IsNullOrEmpty())
             {
                 Console.WriteLine(":# ERROR: " + errorMessage + "\n");
-                help = true;
             }
 
             if(help)
@@ -86,10 +90,12 @@ namespace CLI
                 Console.WriteLine(":: AVALIABLE COMMANDS ::" +
                                   "\n   ~ [type] - specify type to expand" +
                                   back + "\n   ~  exit  - close program" +
-                                  "\n   ~  help  - show help\n" );
+                                  "\n   ~  help  - hide help (or show when it is hidden)" +
+                                  "\n   ~  load  - load another file" +
+                                  "\n   ~  save  - save file to XML\n" );
             }
 
             Console.WriteLine(":: CURRENT TREE ::\n" + currentName);
-       */ }
+        }
     }
 }

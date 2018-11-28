@@ -11,9 +11,11 @@ namespace CLI
         {
             string filePath;
 
+            Console.Clear();
+
             do
             {
-                Console.Write("Type the path to DLL: ");
+                Console.Write(":: TYPE PATH TO FILE ::\n::> ");
                 filePath = Console.ReadLine();
                 Console.Clear();
             } while (string.IsNullOrEmpty(filePath) || !File.Exists(filePath));
@@ -25,10 +27,13 @@ namespace CLI
         {
             string filePath;
 
+            Console.Clear();
+
             do
             {
-                Console.Write("Type where to save: ");
+                Console.Write(":: TYPE WHERE TO SAVE ::\n::> ");
                 filePath = Console.ReadLine();
+                filePath += ".xml";
                 Console.Clear();
             } while (string.IsNullOrEmpty(filePath));
 
