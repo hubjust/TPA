@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Model
 {
-  public class PropertyMetadata : BaseMetadata
+    [DataContract(IsReference = true)]
+    public class PropertyMetadata : BaseMetadata
   {
+        [DataMember]
         public TypeMetadata Type { get; set; }
+        [DataMember]
         public ICollection<TypeMetadata> Attributes { get; set; }
 
         public PropertyMetadata(string propertyName, TypeMetadata propertyType, ICollection<TypeMetadata> attributesMetadata)

@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Model
 {
+    [DataContract]
     public class FieldMetadata : BaseMetadata
     {
+        [DataMember]
         public TypeMetadata TypeMetadata;
+        [DataMember]
         public ICollection<TypeMetadata> AttributesMetadata { get; set; }
 
+        [DataMember]
         public TupleTwo<AccessLevel, StaticEnum> Modifiers { get; set; }
 
         public FieldMetadata(FieldInfo field)

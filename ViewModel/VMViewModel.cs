@@ -23,13 +23,18 @@ namespace ViewModel
         private IFileSelector fileSelector;
         private ITracer tracer;
         public ICommand OpenDLL { get; }
+        public ICommand Click_Save { get; }
         public string pathVariable { get; set; }
 
         private TypeRepository typeRepository = new TypeRepository();
-        public ICommand Click_Save { get; }
 
-        public VMViewModel(IFileSelector selector)
+
+        private ISerializer serializer;
+
+        public VMViewModel(IFileSelector selector, ISerializer serializer)
         {
+            this.serializer = serializer;
+
             tracer = new FileTracer("GraphicalUserInterface.log", TraceLevel.Info);
             fileSelector = selector;
 
@@ -81,18 +86,13 @@ namespace ViewModel
                 tracer.TracerLog(TraceLevel.Info, "Open DLL button clicked.");
                 if (pathVariable.Substring(pathVariable.Length - 4) == ".dll")
                 {
-                    //assemblyMetadata = new AssemblyMetadata(Assembly.LoadFrom(pathVariable));
-                    //tracer.Trace(TraceEventType.Stop, "dll loaded");
-                    //assemblyMetadataViewModel = new AssemblyMetadataViewModel(assemblyMetadata);
-
                     assemblyMetadata = new VMAssemblyMetadata(new AssemblyMetadata(Assembly.LoadFrom(pathVariable)), tracer);
-                    typeRepository.AssemblyMetadata = new AssemblyMetadata(Assembly.LoadFrom(pathVariable));
                     LoadTreeView();
                 }
-                else if (pathVariable.Contains(".xml"))
+                else if (pathVariable.Substring(pathVariable.Length - 4) == ".xml")
                 {
-                    assemblyMetadata = new VMAssemblyMetadata(new AssemblyMetadata(Assembly.LoadFrom(pathVariable)), tracer);
-                    LoadXML();
+                    assemblyMetadata = new VMAssemblyMetadata(serializer.Deserialize<AssemblyMetadata>(pathVariable), tracer);
+                    LoadTreeView();
                 }
             }
             catch (System.SystemException)
@@ -110,22 +110,8 @@ namespace ViewModel
 
         private void Save()
         {
-            tracer.TracerLog(TraceLevel.Info, "File saving.");
-            //fileSelector.FileToSave();
-            SaveFileDialog dialog = new SaveFileDialog() { Filter = "XML File (*.xml)|*.xml" };
-            dialog.ShowDialog();
-
-            if (dialog.FileName.Length == 0)
-            {
-                tracer.TracerLog(TraceLevel.Info, "No file saving.");
-            }
-            else
-            {
-                pathVariable = dialog.FileName;
-                DataContext data = new DataContext(typeRepository);
-                Task.Run(() => new XmlSerializer(pathVariable, tracer).Serialize(data));
-            }
-            tracer.TracerLog(TraceLevel.Info, "No file saving.");
+            tracer.TracerLog(TraceLevel.Info, "Saving to XML...");
+            serializer.Serialize(fileSelector.FileToSave(), assemblyMetadata.assemblyMetadata);
         }
     }
 }

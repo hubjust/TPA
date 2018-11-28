@@ -12,38 +12,24 @@ namespace Serializers
 {
     public class XmlSerializer : ISerializer
     {
-        private string fileName;
-        private ITracer tracer;
+        private DataContractSerializer serializer;
 
-        public XmlSerializer(string fileName, ITracer tracer)
+        public void Serialize(string filePath, object target)
         {
-            this.fileName = fileName;
-            this.tracer = tracer;
+            serializer = new DataContractSerializer(target.GetType());
+            using (XmlWriter writer = XmlWriter.Create(filePath))
+            {
+                serializer.WriteObject(writer, target);
+            }
         }
 
-        public void Serialize(DataContext dataContext)
+        public T Deserialize<T>(string filePath)
         {
-            DataContractSerializer serializer = new DataContractSerializer(dataContext.GetType());
-
-            XmlWriterSettings xmlSettings = new XmlWriterSettings
+            serializer = new DataContractSerializer(typeof(T));
+            using (XmlReader reader = XmlReader.Create(filePath))
             {
-                Indent = true
-            };
-
-            tracer.TracerLog(TraceLevel.Info, "Started xml serializing: " + fileName);
-            
-            using (XmlWriter writer = XmlWriter.Create(fileName, xmlSettings))
-            {
-                try
-                {
-                    serializer.WriteObject(writer, dataContext);
-                }
-                catch (SerializationException e)
-                {
-                    tracer.TracerLog(TraceLevel.Error, "Error during xml serializing: " + fileName);
-                }
+                return (T)serializer.ReadObject(reader);
             }
-            tracer.TracerLog(TraceLevel.Info, "Finished xml serializing: " + fileName);
         }
     }
 }

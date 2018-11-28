@@ -4,19 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 
 namespace Model
 {
+    [DataContract]
     public class MethodMetadata : BaseMetadata
     {
+        [DataMember]
         public ICollection<TypeMetadata> GenericArguments { get; set; }
+        [DataMember]
         public ICollection<ParameterMetadata> Parameters { get; set; }
+        [DataMember]
         public ICollection<TypeMetadata> AttributesMetadata { get; set; }
 
+        [DataMember]
         public TypeMetadata ReturnType { get; set; }
+        [DataMember]
         public TypeMetadata ReflectedType { get; set; }
 
+        [DataMember]
         public TupleFour<AccessLevel, AbstractEnum, StaticEnum, VirtualEnum> Modifiers { get; set; }
+        [DataMember]
         public bool Extension { get; set; }
 
         public MethodMetadata(MethodBase method)

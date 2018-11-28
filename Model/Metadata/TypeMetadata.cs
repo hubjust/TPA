@@ -2,28 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Model
 {
+    [DataContract]
     public class TypeMetadata : BaseMetadata
     {
+        [DataMember]
         public string NamespaceName { get; set; }
 
+        [DataMember]
         public static Dictionary<string, TypeMetadata> DictionaryType = new Dictionary<string, TypeMetadata>();
 
+        [DataMember]
         public TypeMetadata BaseType { get; set; }
+        [DataMember]
         public TypeMetadata DeclaringType { get; set; }
+        [DataMember]
         public TypeKind TypeKindProperty { get; set; }
 
+        [DataMember]
         public TupleThree<AccessLevel, SealedEnum, AbstractEnum> Modifiers { get; set; }
 
+        [DataMember]
         public ICollection<TypeMetadata> GenericArguments { get; set; }
+        [DataMember]
         public ICollection<TypeMetadata> Attributes { get; set; }
+        [DataMember]
         public ICollection<TypeMetadata> ImplementedInterfaces { get; set; }
+        [DataMember]
         public ICollection<TypeMetadata> NestedTypes { get; set; }
+        [DataMember]
         public ICollection<FieldMetadata> Fields { get; set; }
+        [DataMember]
         public ICollection<PropertyMetadata> Properties { get; set; }
+        [DataMember]
         public ICollection<MethodMetadata> Methods { get; set; }
+        [DataMember]
         public ICollection<MethodMetadata> Constructors { get; set; }
 
         internal TypeMetadata(Type type)

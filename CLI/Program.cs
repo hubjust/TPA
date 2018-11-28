@@ -11,7 +11,9 @@ namespace CLI
     {
         static void Main(string[] args)
         {
-            VMViewModel dataContext = new VMViewModel(new CLIFileSelector());
+            /*ISerializer serializer;
+
+            VMViewModel dataContext = new VMViewModel(new CLIFileSelector(), serializer);
             dataContext.OpenDLL.Execute(null);
 
         Stack<TreeViewItem> stack = new Stack<TreeViewItem>();
@@ -88,6 +90,6 @@ namespace CLI
             }
 
             Console.WriteLine(":: CURRENT TREE ::\n" + currentName);
-        }
+       */ }
     }
 }

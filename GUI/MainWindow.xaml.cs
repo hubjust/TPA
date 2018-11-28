@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 
 using ViewModel;
+using Serializers;
+using Microsoft.Win32;
 
 namespace GUI
 {
@@ -12,7 +14,7 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new VMViewModel(new GUIFileSelector());
+            DataContext = new VMViewModel(new GUIFileSelector(), new XmlSerializer());
         }
     }
 }

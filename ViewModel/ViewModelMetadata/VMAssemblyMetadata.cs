@@ -5,7 +5,7 @@ namespace ViewModel.ViewModelMetadata
 {
     internal class VMAssemblyMetadata : TreeViewItem
     {
-        private AssemblyMetadata assemblyMetadata;
+        public AssemblyMetadata assemblyMetadata { get; }
         public override string Name => ToString();
 
         public VMAssemblyMetadata(AssemblyMetadata assembly, ITracer tracer)

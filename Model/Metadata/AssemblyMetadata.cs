@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Model
 {
+    [DataContract]
     public class AssemblyMetadata : BaseMetadata
     {
+        [DataMember]
         public ICollection<NamespaceMetadata> Namespaces { get; set; }
 
         public AssemblyMetadata(Assembly assembly)
