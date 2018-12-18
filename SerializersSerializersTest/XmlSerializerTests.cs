@@ -1,16 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Serializers;
-using Model;
-using ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace UnitTestProject
+namespace Serializers.Tests
 {
-    [TestClass]
-    public class SerializerTests
+    [TestClass()]
+    public class XmlSerializerTests
     {
         private Assembly assembly;
 
@@ -18,7 +18,7 @@ namespace UnitTestProject
         public void Init()
         {
             string str = @"Model.dll";
-            assembly = Assembly.LoadFrom(str); 
+            assembly = Assembly.LoadFrom(str);
         }
 
         [TestMethod]

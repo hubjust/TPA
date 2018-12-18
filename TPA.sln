@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{B3FEA98B-5406-4500-BB50-113253356E37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{21221C0D-745D-4B06-B980-249DEDD4C941}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModelTest", "UnitTestProject\ViewModelTest.csproj", "{21221C0D-745D-4B06-B980-249DEDD4C941}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Tracer\Logger.csproj", "{BAC71BF1-1AB9-4E3F-B060-A01729AEE4C3}"
 EndProject
@@ -16,6 +16,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI", "CLI\CLI.csproj", "{5045EFE6-823A-4C7C-B1CB-0E57DA36AC88}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializers", "Serializers\Serializers.csproj", "{680BD9BC-2E7D-4EA9-B097-58D8E2A6FD40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializersTest", "SerializersSerializersTest\SerializersTest.csproj", "{D78422FB-49CA-4BD3-B818-24FEC0C7554B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerTest", "LoggerTest\LoggerTest.csproj", "{9594F861-305E-4269-B59C-FC4208904985}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{C82B8B1B-C04D-4A66-A91F-1FF6FF4423E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +57,18 @@ Global
 		{680BD9BC-2E7D-4EA9-B097-58D8E2A6FD40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{680BD9BC-2E7D-4EA9-B097-58D8E2A6FD40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{680BD9BC-2E7D-4EA9-B097-58D8E2A6FD40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D78422FB-49CA-4BD3-B818-24FEC0C7554B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D78422FB-49CA-4BD3-B818-24FEC0C7554B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D78422FB-49CA-4BD3-B818-24FEC0C7554B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D78422FB-49CA-4BD3-B818-24FEC0C7554B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9594F861-305E-4269-B59C-FC4208904985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9594F861-305E-4269-B59C-FC4208904985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9594F861-305E-4269-B59C-FC4208904985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9594F861-305E-4269-B59C-FC4208904985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C82B8B1B-C04D-4A66-A91F-1FF6FF4423E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C82B8B1B-C04D-4A66-A91F-1FF6FF4423E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C82B8B1B-C04D-4A66-A91F-1FF6FF4423E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C82B8B1B-C04D-4A66-A91F-1FF6FF4423E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

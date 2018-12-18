@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace UnitTestProject
+namespace ViewModelTest
 {
     [TestClass]
     public class ReflectionTest

@@ -51,8 +51,6 @@
   <ItemGroup>
     <Compile Include="ReflectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="LoggerTests.cs" />
-    <Compile Include="SerializerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -61,14 +59,6 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{1b92160d-5854-463d-8211-c8d530efb975}</Project>
       <Name>Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Serializers\Serializers.csproj">
-      <Project>{680bd9bc-2e7d-4ea9-b097-58d8e2a6fd40}</Project>
-      <Name>Serializers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tracer\Logger.csproj">
-      <Project>{bac71bf1-1ab9-4e3f-b060-a01729aee4c3}</Project>
-      <Name>Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModel\ViewModel.csproj">
       <Project>{b3fea98b-5406-4500-bb50-113253356e37}</Project>

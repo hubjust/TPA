@@ -6,7 +6,7 @@ using System.IO;
 namespace Logger.Tests
 {
     [TestClass()]
-    public class LoggerTests
+    public class TracerTests
     {
         [TestMethod()]
         public void TraceTest()
@@ -15,7 +15,7 @@ namespace Logger.Tests
 
             StringWriter str = new StringWriter();
             Console.SetOut(str);
-             
+
             tracer.TracerLog(TraceLevel.Info, "warning");
             Assert.AreEqual(str.ToString(), "");
         }
