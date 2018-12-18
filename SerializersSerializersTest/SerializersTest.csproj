@@ -63,9 +63,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{c82b8b1b-c04d-4a66-a91f-1ff6ff4423e5}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{1b92160d-5854-463d-8211-c8d530efb975}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Serializers\Serializers.csproj">
       <Project>{680BD9BC-2E7D-4EA9-B097-58D8E2A6FD40}</Project>
       <Name>Serializers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{b3fea98b-5406-4500-bb50-113253356e37}</Project>
+      <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

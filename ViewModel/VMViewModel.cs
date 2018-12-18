@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Diagnostics;
-using MEF;
 
 using Model;
 using ViewModel.ViewModelMetadata;
@@ -16,7 +15,6 @@ namespace ViewModel
         private VMAssemblyMetadata assemblyMetadata;
         public ObservableCollection<TreeViewItem> HierarchicalAreas { get; set; }
 
-//        [ImportMany(typeof(IFileSupplier))]
         private IFileSelector fileSelector;
         private ITracer tracer;
         public ICommand OpenButton { get; }

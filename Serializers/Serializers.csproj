@@ -47,6 +47,10 @@
     <Compile Include="XMLSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{c82b8b1b-c04d-4a66-a91f-1ff6ff4423e5}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{1b92160d-5854-463d-8211-c8d530efb975}</Project>
       <Name>Model</Name>
