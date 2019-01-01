@@ -41,6 +41,8 @@ namespace Model
         public ICollection<MethodMetadata> Methods { get; set; }
         [DataMember]
         public ICollection<MethodMetadata> Constructors { get; set; }
+        public AccessLevel AccessLevel { get; set; }
+        public AbstractEnum AbstractEnum { get; set; }
 
         internal TypeMetadata(Type type)
             : base(type.Name)
