@@ -16,7 +16,8 @@ namespace Serializers
             return new AssemblyMetadata()
             {
                 Name = assemblyModel.Name,
-                Namespaces = assemblyModel.Namespaces?.Select(NamespaceMetadata).ToList()
+                //Namespaces = assemblyModel.Namespaces?.Select(NamespaceMetadata).ToList()
+                Namespaces = assemblyModel.Namespaces.Select(NamespaceMetadata).ToList()
             };
         }
 
@@ -24,7 +25,8 @@ namespace Serializers
         {
             return new NamespaceMetadata()
             {
-                Types = namespaceModel.Types?.Select(GetOrAdd).ToList();
+                Types = namespaceModel.Types?.Select(GetOrAdd).ToList()
+            };
         }
     
         public static NamespaceMetadata NamespaceMetadata(NamespaceMetadata namespaceModel)
@@ -69,7 +71,8 @@ namespace Serializers
             return new MethodMetadata()
             {
                 Name = methodModel.Name,
-                Modifiers. = methodModel.AbstractEnum,
+                AbstractEnum = methodModel.AbstractEnum,
+                Modifiers = TupleFour<methodModel.AccessLevel, methodModel.AbstractEnum, methodModel.StaticEnum, methodModel.VirtualEnum>,
                 AccessLevel = methodModel.AccessLevel,
                 Extension = methodModel.Extension,
                 ReturnType = GetOrAdd(methodModel.ReturnType),

@@ -14,6 +14,8 @@ namespace Model
         [DataMember]
         public ICollection<TypeMetadata> Attributes { get; set; }
 
+        public PropertyMetadata() { }
+
         public PropertyMetadata(string propertyName, TypeMetadata propertyType, ICollection<TypeMetadata> attributesMetadata)
             : base(propertyName)
         {
