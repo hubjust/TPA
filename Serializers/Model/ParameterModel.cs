@@ -19,7 +19,7 @@ namespace Serializers.Model
         public ParameterModel(ParameterBase parameterMetadata)
         {
             this.Name = parameterMetadata.Name;
-            this.Type = TypeModel.GetOrAdd(parameterMetadata.Type);
+            this.Type = TypeModel.GetOrAdd(parameterMetadata.TypeMetadata);
         }
 
         [DataMember]

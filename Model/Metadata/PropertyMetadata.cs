@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using System.Runtime.Serialization;
+using DBCore.Model;
 
 namespace Model
 {
@@ -31,5 +32,11 @@ namespace Model
                    select new PropertyMetadata(prop.Name, TypeMetadata.EmitReference(prop.PropertyType),
                    TypeMetadata.EmitAttributes(prop.GetCustomAttributes()));
         }
-  }
+
+        public PropertyMetadata(PropertyBase baseProperty)
+        {
+            Name = baseProperty.Name;
+            Type = TypeMetadata.GetOrAdd(baseProperty.Type);
+        }
+    }
 }

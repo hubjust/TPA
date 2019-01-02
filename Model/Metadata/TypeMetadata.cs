@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 
 using DBCore.Model;
+using DBCore.Enum;
 
 namespace Model
 {
@@ -83,32 +84,27 @@ namespace Model
         private TypeMetadata(TypeBase baseType)
             : base(baseType.Name)
         {
-            NamespaceName = baseType.NamespaceName;
+            DictionaryType.Add(Name, this);
+            this.NamespaceName = baseType.NamespaceName;
+            this.Type = baseType.Type.ToLogicEnum();
 
-            if (!DictionaryType.ContainsKey(Name))
-            {
-                DictionaryType.Add(Name, this);
-            }
+            this.BaseType = GetOrAdd(baseType.BaseType);
+            this.DeclaringType = GetOrAdd(baseType.DeclaringType);
 
-            BaseType = GetOrAdd(baseType.BaseType);
-            DeclaringType = GetOrAdd(baseType.DeclaringType);
-            Type = baseType.Type.ToLogicEnum();
+            this.AbstractEnum = baseType.AbstractEnum.ToLogicEnum();
+            this.AccessLevel = baseType.AccessLevel.ToLogicEnum();
+            this.SealedEnum = baseType.SealedEnum.ToLogicEnum();
+            this.StaticEnum = baseType.StaticEnum.ToLogicEnum();
 
-            BaseType = GetOrAdd(baseType.BaseType);
+            Constructors = baseType.Constructors?.Select(c => new MethodMetadata(c)).ToList();
 
+            Fields = baseType.Fields?.Select(t => new ParameterMetadata(t)).ToList();
+            GenericArguments = baseType.GenericArguments?.Select(GetOrAdd).ToList();
+            ImplementedInterfaces = baseType.ImplementedInterfaces?.Select(GetOrAdd).ToList();
+            Methods = baseType.Methods?.Select(t => new MethodMetadata(t)).ToList();
+            NestedTypes = baseType.NestedTypes?.Select(GetOrAdd).ToList();
+            Properties = baseType.Properties?.Select(t => new PropertyMetadata(t)).ToList();
 
-            m_Modifiers = new Tuple<AccessLevelEnum, SealedEnum, AbstractEnum>(
-                baseType.modifiers.Item1.ToLogicEnum(),
-                baseType.modifiers.Item2.ToLogicEnum(),
-                baseType.modifiers.Item3.ToLogicEnum());
-
-            m_Constructors = baseType.constructors?.Select(c => new MethodMetadata(c));
-            m_Fields = baseType.fields?.Select(t => new ParameterMetadata(t));
-            m_GenericArguments = baseType.genericArguments?.Select(GetOrAdd);
-            m_ImplementedInterfaces = baseType.implementedInterfaces?.Select(GetOrAdd);
-            m_Methods = baseType.methods?.Select(t => new MethodMetadata(t));
-            m_NestedTypes = baseType.nestedTypes?.Select(GetOrAdd);
-            m_Properties = baseType.properties?.Select(t => new PropertyMetadata(t));
         }
 
         private TypeMetadata(string typeName, string namespaceName)
@@ -126,6 +122,8 @@ namespace Model
         public TypeMetadata() { }
 
         #endregion
+
+        #region privateMethods
 
         private void EmitModifiers(Type type)
         {
@@ -226,6 +224,8 @@ namespace Model
             StoreType(baseType);
             return EmitReference(baseType);
         }
+
+        #endregion
 
         public static TypeMetadata GetOrAdd(TypeBase baseType)
         {

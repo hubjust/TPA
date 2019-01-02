@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DBCore.Model;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
 
@@ -20,6 +21,13 @@ namespace Model
                 Attributes = TypeMetadata.EmitAttributes(parameter.GetCustomAttributes());
         }
 
-        public ParameterMetadata() { }
+        public ParameterMetadata(FieldBase t) { }
+
+        public ParameterMetadata(ParameterBase baseElement)
+        {
+            Name = baseElement.Name;
+            Type = TypeMetadata.GetOrAdd(baseElement.TypeMetadata);
+
+        }
     }
 }

@@ -9,34 +9,34 @@ namespace Model
     public static class ExtensionMethods
     {
         #region Enum
-        internal static AbstractEnum ToLogicEnum(this AbstractEnum baseEnum)
+        internal static Model.AbstractEnum ToLogicEnum(this DBCore.Enum.AbstractEnum baseEnum)
         {
             switch (baseEnum)
             {
-                case AbstractEnum.Abstract:
+                case DBCore.Enum.AbstractEnum.Abstract:
                     return AbstractEnum.Abstract;
 
-                case AbstractEnum.NotAbstract:
+                case DBCore.Enum.AbstractEnum.NotAbstract:
                     return AbstractEnum.NotAbstract;
                 default:
                     throw new Exception();
             }
         }
 
-        public static AccessLevel ToLogicEnum(this AccessLevel baseEnum)
+        public static Model.AccessLevel ToLogicEnum(this DBCore.Enum.AccessLevel baseEnum)
         {
             switch (baseEnum)
             {
-                case AccessLevel.IsPrivate:
+                case DBCore.Enum.AccessLevel.IsPrivate:
                     return AccessLevel.IsPrivate;
 
-                case AccessLevel.IsProtected:
+                case DBCore.Enum.AccessLevel.IsProtected:
                     return AccessLevel.IsProtected;
 
-                case AccessLevel.IsProtectedInternal:
+                case DBCore.Enum.AccessLevel.IsProtectedInternal:
                     return AccessLevel.IsProtectedInternal;
 
-                case Model.AccessLevel.IsPublic:
+                case DBCore.Enum.AccessLevel.IsPublic:
                     return AccessLevel.IsPublic;
 
                 default:
@@ -44,45 +44,45 @@ namespace Model
             }
         }
 
-        public static SealedEnum ToLogicEnum(this SealedEnum baseEnum)
+        public static Model.SealedEnum ToLogicEnum(this DBCore.Enum.SealedEnum baseEnum)
         {
             switch (baseEnum)
             {
-                case SealedEnum.NotSealed:
+                case DBCore.Enum.SealedEnum.NotSealed:
                     return SealedEnum.NotSealed;
 
-                case Model.SealedEnum.Sealed:
+                case DBCore.Enum.SealedEnum.Sealed:
                     return SealedEnum.Sealed;
                 default:
                     throw new Exception();
             }
         }
 
-        internal static StaticEnum ToLogicEnum(this Model.StaticEnum baseEnum)
+        internal static Model.StaticEnum ToLogicEnum(this DBCore.Enum.StaticEnum baseEnum)
         {
             switch (baseEnum)
             {
-                case StaticEnum.Static:
+                case DBCore.Enum.StaticEnum.Static:
                     return StaticEnum.Static;
 
-                case StaticEnum.NotStatic:
+                case DBCore.Enum.StaticEnum.NotStatic:
                     return StaticEnum.NotStatic;
                 default:
                     throw new Exception();
             }
         }
 
-        public static TypeKind ToLogicEnum(this TypeKind baseEnum)
+        public static Model.TypeKind ToLogicEnum(this DBCore.Enum.TypeKind baseEnum)
         {
             switch (baseEnum)
             {
-                case TypeKind.Class:
+                case DBCore.Enum.TypeKind.Class:
                     return TypeKind.Class;
-                case TypeKind.Enum:
+                case DBCore.Enum.TypeKind.Enum:
                     return TypeKind.Enum;
-                case TypeKind.Interface:
+                case DBCore.Enum.TypeKind.Interface:
                     return TypeKind.Interface;
-                case TypeKind.Struct:
+                case DBCore.Enum.TypeKind.Struct:
                     return TypeKind.Struct;
 
                 default:
@@ -90,14 +90,14 @@ namespace Model
             }
         }
 
-        public static VirtualEnum ToLogicEnum(this VirtualEnum baseEnum)
+        public static Model.VirtualEnum ToLogicEnum(this DBCore.Enum.VirtualEnum baseEnum)
         {
             switch (baseEnum)
             {
-                case VirtualEnum.NotVirtual:
+                case DBCore.Enum.VirtualEnum.NotVirtual:
                     return VirtualEnum.NotVirtual;
 
-                case VirtualEnum.Virtual:
+                case DBCore.Enum.VirtualEnum.Virtual:
                     return VirtualEnum.Virtual;
                 default:
                     throw new Exception();

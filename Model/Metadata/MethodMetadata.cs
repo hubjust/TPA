@@ -48,8 +48,27 @@ namespace Model
             Extension = EmitExtension(method);
         }
 
+        public MethodMetadata(DBCore.Model.MethodBase baseMethod)
+        {
+            this.Name = baseMethod.Name;
+            this.AbstractEnum = baseMethod.AbstractEnum.ToLogicEnum();
+            this.AccessLevel = baseMethod.AccessLevel.ToLogicEnum();
+            this.Extension = baseMethod.Extension;
+            this.ReturnType = TypeMetadata.GetOrAdd(baseMethod.ReturnType);
+            this.StaticEnum = baseMethod.StaticEnum.ToLogicEnum();
+            this.VirtualEnum = baseMethod.VirtualEnum.ToLogicEnum();
+
+            GenericArguments = baseMethod.GenericArguments?.Select(TypeMetadata.GetOrAdd).ToList();
+
+            Parameters = baseMethod.Parameters?.Select(t => new ParameterMetadata(t)).ToList();
+
+        }
+
         public MethodMetadata() { }
 
+
+
+        #region privateMethods
         public static IEnumerable<MethodMetadata> EmitMethods(IEnumerable<MethodBase> methods)
         {
             return (from MethodBase _currentMethod in methods
@@ -89,5 +108,7 @@ namespace Model
 
             VirtualEnum = method.IsVirtual ? VirtualEnum.Virtual : VirtualEnum.NotVirtual;
         }
+
+        #endregion
     }
 }

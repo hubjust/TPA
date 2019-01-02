@@ -92,7 +92,7 @@ namespace Serializers
             return new ParameterBase()
             {
                 Name = parameterModel.Name,
-                Type = GetOrAdd(parameterModel.Type)
+                TypeMetadata = GetOrAdd(parameterModel.Type)
             };
         }
 

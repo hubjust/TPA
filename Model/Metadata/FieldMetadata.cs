@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBCore.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -25,6 +26,14 @@ namespace Model
             AttributesMetadata = TypeMetadata.EmitAttributes(field.GetCustomAttributes());
 
             EmitModifiers(field);
+        }
+
+        public FieldMetadata(FieldBase fieldMetadata)
+        {
+            this.Name = fieldMetadata.Name;
+            this.Type = TypeMetadata.GetOrAdd(fieldMetadata.Type);
+            this.AccessLevel = fieldMetadata.AccessLevel.ToLogicEnum();
+            this.StaticEnum = fieldMetadata.StaticEnum.ToLogicEnum();
         }
 
         public FieldMetadata() { }

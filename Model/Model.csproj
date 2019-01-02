@@ -58,14 +58,18 @@
     <Compile Include="Metadata\PropertyMetadata.cs" />
     <Compile Include="Metadata\TypeMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tuple\TupleTwo.cs" />
-    <Compile Include="Tuple\TupleFour.cs" />
-    <Compile Include="Tuple\TupleThree.cs" />
+    <Compile Include="TupleTwo.cs" />
+    <Compile Include="TupleFour.cs" />
+    <Compile Include="TupleThree.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DBCore\DBCore.csproj">
       <Project>{689b4455-ec85-4640-a6ce-69cf38de4fc2}</Project>
       <Name>DBCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Serializers\Serializers.csproj">
+      <Project>{680BD9BC-2E7D-4EA9-B097-58D8E2A6FD40}</Project>
+      <Name>Serializers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
