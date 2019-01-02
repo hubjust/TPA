@@ -11,6 +11,7 @@ namespace ViewModel.ViewModelMetadata
         public IEnumerable<NamespaceMetadata> Namespaces;
 
         public AssemblyMetadata AssemblyMetadata { get; }
+        public override string Name => ToString();
 
         public VMAssemblyMetadata(AssemblyMetadata assembly)
         {
@@ -22,7 +23,6 @@ namespace ViewModel.ViewModelMetadata
         public VMAssemblyMetadata(AssemblyBase baseAssembly)
         {
             AssemblyMetadata = new AssemblyMetadata(baseAssembly);
-            Name = baseAssembly.Name;
             Namespaces = baseAssembly.Namespaces?.Select(ns => new NamespaceMetadata(ns));
         }
 

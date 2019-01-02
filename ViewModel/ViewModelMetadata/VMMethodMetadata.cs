@@ -8,6 +8,7 @@ namespace ViewModel.ViewModelMetadata
     public class VMMethodMetadata : TreeViewItem
     {
         private MethodMetadata methodMetadata;
+        public override string Name => ToString();
 
         public VMMethodMetadata(MethodMetadata methodMetadata)
         {

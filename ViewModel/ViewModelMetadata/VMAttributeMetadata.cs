@@ -6,6 +6,7 @@ namespace ViewModel.ViewModelMetadata
     {
         TypeMetadata attributeMetadata;
         VMTypeMetadata attributeViewModel;
+        public override string Name => ToString();
 
         public VMAttributeMetadata(TypeMetadata attributeMetadata)
         {

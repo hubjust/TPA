@@ -4,7 +4,7 @@ namespace ViewModel
 {
     public abstract class TreeViewItem
     {
-        public string Name { get; set;  }
+        public abstract string Name { get; }
         public ObservableCollection<TreeViewItem> Children { get; } = new ObservableCollection<TreeViewItem>();
         private bool isExpanded;
 

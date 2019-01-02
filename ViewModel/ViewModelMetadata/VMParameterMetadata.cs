@@ -5,6 +5,7 @@ namespace ViewModel.ViewModelMetadata
     public class VMParameterMetadata : TreeViewItem
     {
         ParameterMetadata parameterMetadata;
+        public override string Name => ToString();
 
         public VMParameterMetadata(ParameterMetadata parameterMetadata)
         {
