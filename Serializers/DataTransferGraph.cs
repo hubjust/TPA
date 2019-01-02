@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Serializers.Model;
 using DBCore.Model;
 
@@ -10,7 +7,7 @@ namespace Serializers
 {
     public static class DataTransferGraph
     {
-        public static AssemblyBase AssemblyMetadata(AssemblyModel assemblyModel)
+        public static AssemblyBase AssemblyBase(AssemblyModel assemblyModel)
         {
             dictionaryType = new Dictionary<string, TypeBase>();
             return new AssemblyBase()
@@ -29,7 +26,7 @@ namespace Serializers
             };
         }
 
-        public static TypeBase TypeMetadata(TypeModel typeModel)
+        public static TypeBase TypeBase(TypeModel typeModel)
         {
             TypeBase typeBase = new TypeBase()
             {

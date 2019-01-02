@@ -26,7 +26,7 @@ namespace Serializers
         {
             using (FileStream reader = new FileStream(filePath, FileMode.Open))
             {
-                return DataTransferGraph.AssemblyMetadata((AssemblyModel)serializer.ReadObject(reader));
+                return DataTransferGraph.AssemblyBase((AssemblyModel)serializer.ReadObject(reader));
 
             }
         }
