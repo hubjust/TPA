@@ -10,7 +10,7 @@ namespace Serializers
 {
     public static class DataTransferGraph
     {
-        public static AssemblyMetadata AssemblyMetadata(AssemblyModel assemblyModel)
+        public static AssemblyBase AssemblyMetadata(AssemblyModel assemblyModel)
         {
             dictionaryType = new Dictionary<string, TypeMetadata>();
             return new AssemblyMetadata()
@@ -82,7 +82,7 @@ namespace Serializers
             return new FieldMetadata()
             {
                 Name = fieldModel.Name,
-                TypeMetadata = GetOrAdd(fieldModel.Type),
+                Type = GetOrAdd(fieldModel.Type),
                 AccessLevel = fieldModel.AccessLevel,
                 StaticEnum = fieldModel.StaticEnum
             };
