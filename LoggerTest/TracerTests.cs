@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace Logger.Tests
+namespace Tracer.Tests
 {
     [TestClass()]
     public class TracerTests

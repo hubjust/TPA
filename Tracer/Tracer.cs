@@ -2,7 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 
-namespace Logger
+namespace Tracer
 {
     public class Tracer : ITracer
     {

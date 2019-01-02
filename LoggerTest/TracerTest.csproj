@@ -7,8 +7,8 @@
     <ProjectGuid>{9594F861-305E-4269-B59C-FC4208904985}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LoggerTest</RootNamespace>
-    <AssemblyName>LoggerTest</AssemblyName>
+    <RootNamespace>TracerTest</RootNamespace>
+    <AssemblyName>TracerTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -67,9 +67,9 @@
       <Project>{c82b8b1b-c04d-4a66-a91f-1ff6ff4423e5}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tracer\Logger.csproj">
-      <Project>{BAC71BF1-1AB9-4E3F-B060-A01729AEE4C3}</Project>
-      <Name>Logger</Name>
+    <ProjectReference Include="..\Tracer\Tracer.csproj">
+      <Project>{9dc8bf9c-5051-4178-a222-8cca90d539de}</Project>
+      <Name>Tracer</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

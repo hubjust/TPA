@@ -67,10 +67,6 @@
       <Project>{1b92160d-5854-463d-8211-c8d530efb975}</Project>
       <Name>Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tracer\Logger.csproj">
-      <Project>{bac71bf1-1ab9-4e3f-b060-a01729aee4c3}</Project>
-      <Name>Logger</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

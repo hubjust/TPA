@@ -2,7 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 
-namespace Logger
+namespace Tracer
 {
     [Export(typeof(ITracer))]
     public class FileTracer : Tracer

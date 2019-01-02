@@ -80,10 +80,6 @@
       <Project>{680bd9bc-2e7d-4ea9-b097-58d8e2a6fd40}</Project>
       <Name>Serializers</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tracer\Logger.csproj">
-      <Project>{bac71bf1-1ab9-4e3f-b060-a01729aee4c3}</Project>
-      <Name>Logger</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

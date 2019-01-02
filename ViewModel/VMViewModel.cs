@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using Model;
 using ViewModel.ViewModelMetadata;
-using Logger;
+using Tracer;
 using MEF;
 using Serializers;
 using DBCore.Model;
