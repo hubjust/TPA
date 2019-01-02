@@ -56,12 +56,9 @@ namespace ViewModel.ViewModelMetadata
         {
             StringBuilder builder = new StringBuilder();
 
-            if (typeMetadata.Modifiers != null)
-            {
-                builder.Append(typeMetadata.Modifiers.Item1.ToString().Substring(2).ToLower() + " ");
-                builder.Append(typeMetadata.Modifiers.Item2.Equals(SealedEnum.Sealed) ? "sealed " : "");
-                builder.Append(typeMetadata.Modifiers.Item3.Equals(AbstractEnum.Abstract) ? "abstract " : "");
-            }
+            builder.Append(typeMetadata.AccessLevel.ToString().Substring(2).ToLower() + " ");
+            builder.Append(typeMetadata.SealedEnum.Equals(SealedEnum.Sealed) ? "sealed " : "");
+            builder.Append(typeMetadata.AbstractEnum.Equals(AbstractEnum.Abstract) ? "abstract " : "");
 
             return builder.ToString();
         }

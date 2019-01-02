@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using Model;
 
@@ -11,7 +9,7 @@ namespace Serializers.Model
     [DataContract(Name = "NamespaceModel", IsReference = true)]
     public class NamespaceModel
     {
-        private NamespaceModel() { }
+        private NamespaceModel(object key) { }
 
         public NamespaceModel(NamespaceMetadata namespaceMetadata)
         {

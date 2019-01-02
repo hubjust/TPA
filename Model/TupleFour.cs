@@ -7,12 +7,27 @@ namespace Model
 
     public class TupleFour<T1, T2, T3, T4>
     {
+        private AccessLevel accessLevel;
+        private AbstractEnum abstractEnum;
+        private StaticEnum staticEnum;
+        private VirtualEnum virtualEnum;
+
         public T1 Item1 { get; set; }
         public T2 Item2 { get; set; }
         public T3 Item3 { get; set; }
         public T4 Item4 { get; set; }
 
         public TupleFour() { }
+
+        public TupleFour(AccessLevel accessLevel) { }
+
+        public TupleFour(AccessLevel accessLevel, AbstractEnum abstractEnum, StaticEnum staticEnum, VirtualEnum virtualEnum)
+        {
+            this.accessLevel = accessLevel;
+            this.abstractEnum = abstractEnum;
+            this.staticEnum = staticEnum;
+            this.virtualEnum = virtualEnum;
+        }
 
         public static implicit operator TupleFour<T1, T2, T3, T4>(Tuple<T1, T2, T3, T4> t)
         {

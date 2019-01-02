@@ -22,8 +22,13 @@ namespace Model
         [DataMember]
         public TypeKind TypeKindProperty { get; set; }
 
-        [DataMember]
-        public TupleThree<AccessLevel, SealedEnum, AbstractEnum> Modifiers { get; set; }
+        public AccessLevel AccessLevel { get; set; }
+
+        public AbstractEnum AbstractEnum { get; set; }
+
+        public StaticEnum StaticEnum { get; set; }
+
+        public SealedEnum SealedEnum { get; set; }
 
         [DataMember]
         public ICollection<TypeMetadata> GenericArguments { get; set; }
@@ -41,8 +46,6 @@ namespace Model
         public ICollection<MethodMetadata> Methods { get; set; }
         [DataMember]
         public ICollection<MethodMetadata> Constructors { get; set; }
-        public AccessLevel AccessLevel { get; set; }
-        public AbstractEnum AbstractEnum { get; set; }
 
         internal TypeMetadata(Type type)
             : base(type.Name)
@@ -58,7 +61,7 @@ namespace Model
             DeclaringType = EmitDeclaringType(type.DeclaringType);
             TypeKindProperty = GetTypeKind(type);
 
-            Modifiers = EmitModifiers(type);
+            EmitModifiers(type);
 
             if (!type.IsGenericTypeDefinition)
                 GenericArguments = null;
@@ -89,23 +92,21 @@ namespace Model
         public TypeMetadata() { }
 
 
-        static TupleThree<AccessLevel, SealedEnum, AbstractEnum> EmitModifiers(Type type)
+        private void EmitModifiers(Type type)
         {
-            AccessLevel _access = AccessLevel.IsPrivate;
-            if (type.IsPublic)
-                _access = AccessLevel.IsPublic;
-            else if (type.IsNestedPublic)
-                _access = AccessLevel.IsPublic;
-            else if (type.IsNestedFamily)
-                _access = AccessLevel.IsProtected;
-            else if (type.IsNestedFamANDAssem)
-                _access = AccessLevel.IsProtectedInternal;
-            SealedEnum _sealed = SealedEnum.NotSealed;
-            if (type.IsSealed) _sealed = SealedEnum.Sealed;
-            AbstractEnum _abstract = AbstractEnum.NotAbstract;
-            if (type.IsAbstract)
-                _abstract = AbstractEnum.Abstract;
-            return new Tuple<AccessLevel, SealedEnum, AbstractEnum>(_access, _sealed, _abstract);
+            AccessLevel = type.IsPublic || type.IsNestedPublic ? AccessLevel.IsPublic :
+                    type.IsNestedFamily ? AccessLevel.IsProtected :
+                    type.IsNestedFamANDAssem ? AccessLevel.Internal : AccessLevel.IsPrivate;
+
+            StaticEnum = type.IsSealed && type.IsAbstract ? StaticEnum.Static : StaticEnum.NotStatic;
+            SealedEnum = SealedEnum.NotSealed;
+            AbstractEnum = AbstractEnum.NotAbstract;
+
+            if (StaticEnum == StaticEnum.NotStatic)
+            {
+                SealedEnum = type.IsSealed ? SealedEnum.Sealed : SealedEnum.NotSealed;
+                AbstractEnum = type.IsAbstract ? AbstractEnum.Abstract : AbstractEnum.NotAbstract;
+            }
         }
 
         public static TypeMetadata EmitReference(Type type)

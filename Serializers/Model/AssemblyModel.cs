@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Runtime.Serialization;
 using Model;
 
@@ -17,7 +15,6 @@ namespace Serializers.Model
         {
             this.Name = assemblyMetadata.Name;
             Namespaces = assemblyMetadata.Namespaces?.Select(ns => new NamespaceModel(ns)).ToList();
-
         }
 
         [DataMember]

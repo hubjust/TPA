@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using Model;
 
@@ -15,13 +12,13 @@ namespace Serializers.Model
 
         public MethodModel(MethodMetadata baseMethod)
         {
-            this.Name = baseMethod.Name;
-            this.AbstractEnum = baseMethod.Modifiers.Item2;
-            this.AccessLevel = baseMethod.Modifiers.Item1;
-            this.Extension = baseMethod.Extension;
-            this.ReturnType = TypeModel.GetOrAdd(baseMethod.ReturnType);
-            this.StaticEnum = baseMethod.Modifiers.Item3;
-            this.VirtualEnum = baseMethod.Modifiers.Item4;
+            Name = baseMethod.Name;
+            AbstractEnum = baseMethod.AbstractEnum;
+            AccessLevel = baseMethod.AccessLevel;
+            Extension = baseMethod.Extension;
+            ReturnType = TypeModel.GetOrAdd(baseMethod.ReturnType);
+            StaticEnum = baseMethod.StaticEnum;
+            VirtualEnum = baseMethod.VirtualEnum;
 
             GenericArguments = baseMethod.GenericArguments?.Select(TypeModel.GetOrAdd).ToList();
 

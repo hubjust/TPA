@@ -14,8 +14,9 @@ namespace Model
         [DataMember]
         public ICollection<TypeMetadata> AttributesMetadata { get; set; }
 
-        [DataMember]
-        public TupleTwo<AccessLevel, StaticEnum> Modifiers { get; set; }
+        public AccessLevel AccessLevel { get; set; }
+
+        public StaticEnum StaticEnum { get; set; }
 
         public FieldMetadata(FieldInfo field)
             : base(field.Name)
@@ -23,7 +24,7 @@ namespace Model
             TypeMetadata = TypeMetadata.EmitReference(field.FieldType);
             AttributesMetadata = TypeMetadata.EmitAttributes(field.GetCustomAttributes());
 
-            Modifiers = EmitModifiers(field);
+            EmitModifiers(field);
         }
 
         public FieldMetadata() { }
@@ -35,19 +36,13 @@ namespace Model
                     select new FieldMetadata(field)).ToList();
         }
 
-        private static TupleTwo<AccessLevel, StaticEnum> EmitModifiers(FieldInfo field)
+        private void EmitModifiers(FieldInfo field)
         {
-            AccessLevel _access = AccessLevel.IsPrivate;
-            if (field.IsPublic)
-                _access = AccessLevel.IsPublic;
-            else if (field.IsFamily)
-                _access = AccessLevel.IsProtected;
-            else if (field.IsFamilyAndAssembly)
-                _access = AccessLevel.IsProtectedInternal;
-            StaticEnum _static = StaticEnum.NotStatic;
-            if (field.IsStatic)
-                _static = StaticEnum.Static;
-            return new Tuple<AccessLevel, StaticEnum>(_access, _static);
+            AccessLevel = field.IsPublic ? AccessLevel.IsPublic :
+                field.IsFamily ? AccessLevel.IsProtected :
+                field.IsAssembly ? AccessLevel.Internal : AccessLevel.IsPrivate;
+
+            StaticEnum = field.IsStatic ? StaticEnum.Static : StaticEnum.NotStatic;
         }
     }
 }

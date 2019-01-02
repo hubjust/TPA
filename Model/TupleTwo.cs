@@ -7,10 +7,21 @@ namespace Model
 
     public class TupleTwo<T1, T2>
     {
+        private AccessLevel accessLevel;
+        private StaticEnum staticEnum;
+
         public T1 Item1 { get; set; }
         public T2 Item2 { get; set; }
 
         public TupleTwo() { }
+
+        public TupleTwo(AccessLevel accessLevel) { }
+
+        public TupleTwo(AccessLevel accessLevel, StaticEnum staticEnum)
+        {
+            this.accessLevel = accessLevel;
+            this.staticEnum = staticEnum;
+        }
 
         public static implicit operator TupleTwo<T1, T2>(Tuple<T1, T2> t)
         {

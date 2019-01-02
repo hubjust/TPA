@@ -23,8 +23,14 @@ namespace Model
         [DataMember]
         public TypeMetadata ReflectedType { get; set; }
 
-        [DataMember]
-        public TupleFour<AccessLevel, AbstractEnum, StaticEnum, VirtualEnum> Modifiers { get; set; }
+        public AccessLevel AccessLevel { get; set; }
+
+        public AbstractEnum AbstractEnum { get; set; }
+
+        public StaticEnum StaticEnum { get; set; }
+
+        public VirtualEnum VirtualEnum { get; set; }
+
         [DataMember]
         public bool Extension { get; set; }
 
@@ -38,7 +44,7 @@ namespace Model
             ReturnType = EmitReturnType(method);
             ReflectedType = TypeMetadata.EmitReference(method.ReflectedType);
 
-            Modifiers = EmitModifiers(method);
+            EmitModifiers(method);
             Extension = EmitExtension(method);
         }
 
@@ -71,25 +77,17 @@ namespace Model
             return method.IsDefined(typeof(ExtensionAttribute), true);
         }
 
-        private static TupleFour<AccessLevel, AbstractEnum, StaticEnum, VirtualEnum> EmitModifiers(MethodBase method)
+        private void EmitModifiers(MethodBase method)
         {
-            AccessLevel _access = AccessLevel.IsPrivate;
-            if (method.IsPublic)
-                _access = AccessLevel.IsPublic;
-            else if (method.IsFamily)
-                _access = AccessLevel.IsProtected;
-            else if (method.IsFamilyAndAssembly)
-                _access = AccessLevel.IsProtectedInternal;
-            AbstractEnum _abstract = AbstractEnum.NotAbstract;
-            if (method.IsAbstract)
-                _abstract = AbstractEnum.Abstract;
-            StaticEnum _static = StaticEnum.NotStatic;
-            if (method.IsStatic)
-                _static = StaticEnum.Static;
-            VirtualEnum _virtual = VirtualEnum.NotVirtual;
-            if (method.IsVirtual)
-                _virtual = VirtualEnum.Virtual;
-            return new Tuple<AccessLevel, AbstractEnum, StaticEnum, VirtualEnum>(_access, _abstract, _static, _virtual);
+            AccessLevel = method.IsPublic ? AccessLevel.IsPublic :
+                method.IsFamily ? AccessLevel.IsProtected :
+                method.IsAssembly ? AccessLevel.Internal : AccessLevel.IsPrivate;
+
+            AbstractEnum = method.IsAbstract ? AbstractEnum.Abstract : AbstractEnum.NotAbstract;
+
+            StaticEnum = method.IsStatic ? StaticEnum.Static : StaticEnum.NotStatic;
+
+            VirtualEnum = method.IsVirtual ? VirtualEnum.Virtual : VirtualEnum.NotVirtual;
         }
     }
 }

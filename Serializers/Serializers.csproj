@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DataTransferGraph.cs" />
     <Compile Include="Model\AssemblyModel.cs" />
+    <Compile Include="Model\FieldModel.cs" />
     <Compile Include="Model\MethodModel.cs" />
     <Compile Include="Model\NamespaceModel.cs" />
     <Compile Include="Model\ParameterModel.cs" />

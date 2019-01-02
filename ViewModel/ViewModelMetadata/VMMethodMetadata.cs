@@ -51,10 +51,10 @@ namespace ViewModel.ViewModelMetadata
         private string TransformModifiers()
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append(methodMetadata.Modifiers.Item1.ToString().Substring(2).ToLower() + " ");
-            builder.Append(methodMetadata.Modifiers.Item3.Equals(AbstractEnum.Abstract) ? "abstract " : "");
-            builder.Append(methodMetadata.Modifiers.Item3.Equals(StaticEnum.Static) ? "static " : "");
-            builder.Append(methodMetadata.Modifiers.Item2.Equals(VirtualEnum.Virtual) ? "virtual " : "");
+            builder.Append(methodMetadata.AccessLevel.ToString().Substring(2).ToLower() + " ");
+            builder.Append(methodMetadata.AbstractEnum.Equals(AbstractEnum.Abstract) ? "abstract " : "");
+            builder.Append(methodMetadata.StaticEnum.Equals(StaticEnum.Static) ? "static " : "");
+            builder.Append(methodMetadata.VirtualEnum.Equals(VirtualEnum.Virtual) ? "virtual " : "");
             return builder.ToString();
         }
 

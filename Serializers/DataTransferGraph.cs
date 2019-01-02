@@ -16,20 +16,11 @@ namespace Serializers
             return new AssemblyMetadata()
             {
                 Name = assemblyModel.Name,
-                //Namespaces = assemblyModel.Namespaces?.Select(NamespaceMetadata).ToList()
-                Namespaces = assemblyModel.Namespaces.Select(NamespaceMetadata).ToList()
-            };
-        }
-
-        public static NamespaceMetadata NamespaceMetadata(NamespaceMetadata namespaceModel)
-        {
-            return new NamespaceMetadata()
-            {
-                Types = namespaceModel.Types?.Select(GetOrAdd).ToList()
+                Namespaces = assemblyModel.Namespaces?.Select(NamespaceMetadata).ToList()
             };
         }
     
-        public static NamespaceMetadata NamespaceMetadata(NamespaceMetadata namespaceModel)
+        public static NamespaceMetadata NamespaceMetadata(NamespaceModel namespaceModel)
         {
             return new NamespaceMetadata()
             {
@@ -51,12 +42,13 @@ namespace Serializers
             typeBase.TypeKindProperty = typeModel.Type;
             typeBase.BaseType = GetOrAdd(typeModel.BaseType);
             typeBase.DeclaringType = GetOrAdd(typeModel.DeclaringType);
-            typeBase.AbstractEnum = typeModel.AbstractEnum;
             typeBase.AccessLevel = typeModel.AccessLevel;
-            typeBase.Modifiers.Item2 = typeModel.SealedEnum;
+            typeBase.AbstractEnum = typeModel.AbstractEnum;
+            typeBase.StaticEnum = typeModel.StaticEnum;
+            typeBase.SealedEnum = typeModel.SealedEnum;
 
             typeBase.Constructors = typeModel.Constructors?.Select(MethodMetadata).ToList();
-            typeBase.Fields = typeModel.Fields?.Select(ParameterMetadata).ToList();
+            typeBase.Fields = typeModel.Fields?.Select(FieldMetadata).ToList();
             typeBase.GenericArguments = typeModel.GenericArguments?.Select(GetOrAdd).ToList();
             typeBase.ImplementedInterfaces = typeModel.ImplementedInterfaces?.Select(GetOrAdd).ToList();
             typeBase.Methods = typeModel.Methods?.Select(MethodMetadata).ToList();
@@ -71,15 +63,28 @@ namespace Serializers
             return new MethodMetadata()
             {
                 Name = methodModel.Name,
-                AbstractEnum = methodModel.AbstractEnum,
-                Modifiers = TupleFour<methodModel.AccessLevel, methodModel.AbstractEnum, methodModel.StaticEnum, methodModel.VirtualEnum>,
-                AccessLevel = methodModel.AccessLevel,
+
                 Extension = methodModel.Extension,
                 ReturnType = GetOrAdd(methodModel.ReturnType),
-                StaticEnum = methodModel.StaticEnum,
-                VirtualEnum = methodModel.VirtualEnum,
+
                 GenericArguments = methodModel.GenericArguments?.Select(GetOrAdd).ToList(),
-                Parameters = methodModel.Parameters?.Select(ParameterBase).ToList()
+                Parameters = methodModel.Parameters?.Select(ParameterMetadata).ToList(),
+
+                AccessLevel = methodModel.AccessLevel,
+                AbstractEnum = methodModel.AbstractEnum,
+                StaticEnum = methodModel.StaticEnum,
+                VirtualEnum = methodModel.VirtualEnum
+            };
+        }
+
+        public static FieldMetadata FieldMetadata(FieldModel fieldModel)
+        {
+            return new FieldMetadata()
+            {
+                Name = fieldModel.Name,
+                TypeMetadata = GetOrAdd(fieldModel.Type),
+                AccessLevel = fieldModel.AccessLevel,
+                StaticEnum = fieldModel.StaticEnum
             };
         }
 
@@ -119,9 +124,6 @@ namespace Serializers
         }
 
         private static Dictionary<string, TypeMetadata> dictionaryType;
-
-
-
     }
 }
 

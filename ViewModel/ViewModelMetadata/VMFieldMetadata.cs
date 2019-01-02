@@ -34,8 +34,8 @@ namespace ViewModel.ViewModelMetadata
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.Append(fieldMetadata.Modifiers.Item1.ToString().Substring(2).ToLower() + " ");
-            builder.Append(fieldMetadata.Modifiers.Item2.Equals(StaticEnum.Static) ? "static " : "");
+            builder.Append(fieldMetadata.AccessLevel.ToString().Substring(2).ToLower() + " ");
+            builder.Append(fieldMetadata.StaticEnum.Equals(StaticEnum.Static) ? "static " : "");
 
             return builder.ToString();
         }
