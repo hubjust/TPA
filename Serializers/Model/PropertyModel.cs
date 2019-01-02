@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using Model;
+using DBCore.Model;
+using DBCore;
+using DBCore.Enum;
 
 namespace Serializers.Model
 {
@@ -13,7 +16,7 @@ namespace Serializers.Model
     {
         private PropertyModel() { }
 
-        public PropertyModel(PropertyMetadata propertyMetadata)
+        public PropertyModel(PropertyBase propertyMetadata)
         {
             this.Name = propertyMetadata.Name;
             this.Type = TypeModel.GetOrAdd(propertyMetadata.Type);

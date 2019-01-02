@@ -1,4 +1,4 @@
-﻿namespace BaseCore.Enum
+﻿namespace DBCore.Enum
 {
     public enum AccessLevel
     {

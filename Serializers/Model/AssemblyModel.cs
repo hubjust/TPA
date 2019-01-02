@@ -3,6 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using Model;
+using DBCore;
+using DBCore.Model;
 
 namespace Serializers.Model
 {
@@ -11,7 +13,7 @@ namespace Serializers.Model
     {
         private AssemblyModel() { }
 
-        public AssemblyModel(AssemblyMetadata assemblyMetadata)
+        public AssemblyModel(AssemblyBase assemblyMetadata)
         {
             this.Name = assemblyMetadata.Name;
             Namespaces = assemblyMetadata.Namespaces?.Select(ns => new NamespaceModel(ns)).ToList();

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using Model;
-
+using DBCore.Model;
 
 namespace Serializers.Model
 {

@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using Model;
+using DBCore.Model;
+using DBCore;
+using DBCore.Enum;
 
 namespace Serializers.Model
 {
@@ -24,19 +27,19 @@ namespace Serializers.Model
         public List<TypeModel> GenericArguments { get; set; }
 
         [DataMember]
-        public AccessLevel AccessLevel { get; set; }
+        public DBCore.Enum.AccessLevel AccessLevel { get; set; }
 
         [DataMember]
-        public AbstractEnum AbstractEnum { get; set; }
+        public DBCore.Enum.AbstractEnum AbstractEnum { get; set; }
 
         [DataMember]
-        public SealedEnum SealedEnum { get; set; }
+        public DBCore.Enum.SealedEnum SealedEnum { get; set; }
 
         [DataMember]
-        public StaticEnum StaticEnum { get; set; }
+        public DBCore.Enum.StaticEnum StaticEnum { get; set; }
 
         [DataMember]
-        public TypeKind Type { get; set; }
+        public DBCore.Enum.TypeKind Type { get; set; }
 
         [DataMember]
         public List<TypeModel> ImplementedInterfaces { get; set; }

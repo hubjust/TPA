@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using Model;
+using DBCore.Model;
+using DBCore;
+using DBCore.Enum;
 
 namespace Serializers.Model
 {
@@ -10,15 +13,15 @@ namespace Serializers.Model
     {
         private MethodModel() { }
 
-        public MethodModel(MethodMetadata baseMethod)
+        public MethodModel(MethodBase baseMethod)
         {
-            Name = baseMethod.Name;
-            AbstractEnum = baseMethod.AbstractEnum;
-            AccessLevel = baseMethod.AccessLevel;
-            Extension = baseMethod.Extension;
-            ReturnType = TypeModel.GetOrAdd(baseMethod.ReturnType);
-            StaticEnum = baseMethod.StaticEnum;
-            VirtualEnum = baseMethod.VirtualEnum;
+            this.Name = baseMethod.Name;
+            this.AbstractEnum = baseMethod.AbstractEnum;
+            this.AccessLevel = baseMethod.AccessLevel;
+            this.Extension = baseMethod.Extension;
+            this.ReturnType = TypeModel.GetOrAdd(baseMethod.ReturnType);
+            this.StaticEnum = baseMethod.StaticEnum;
+            this.VirtualEnum = baseMethod.VirtualEnum;
 
             GenericArguments = baseMethod.GenericArguments?.Select(TypeModel.GetOrAdd).ToList();
 
@@ -32,16 +35,16 @@ namespace Serializers.Model
         public List<TypeModel> GenericArguments { get; set; }
 
         [DataMember]
-        public AccessLevel AccessLevel { get; set; }
+        public DBCore.Enum.AccessLevel AccessLevel { get; set; }
 
         [DataMember]
-        public AbstractEnum AbstractEnum { get; set; }
+        public DBCore.Enum.AbstractEnum AbstractEnum { get; set; }
 
         [DataMember]
-        public StaticEnum StaticEnum { get; set; }
+        public DBCore.Enum.StaticEnum StaticEnum { get; set; }
 
         [DataMember]
-        public VirtualEnum VirtualEnum { get; set; }
+        public DBCore.Enum.VirtualEnum VirtualEnum { get; set; }
 
         [DataMember]
         public TypeModel ReturnType { get; set; }

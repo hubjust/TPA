@@ -55,6 +55,10 @@
     <Compile Include="XMLSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DBCore\DBCore.csproj">
+      <Project>{689b4455-ec85-4640-a6ce-69cf38de4fc2}</Project>
+      <Name>DBCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{c82b8b1b-c04d-4a66-a91f-1ff6ff4423e5}</Project>
       <Name>Interfaces</Name>

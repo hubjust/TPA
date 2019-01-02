@@ -5,22 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Serializers.Model;
+using DBCore;
+using DBCore.Model;
 
 namespace Serializers
 {
     public static class DataTransferGraph
     {
-        public static AssemblyMetadata AssemblyMetadata(AssemblyModel assemblyModel)
+        public static AssemblyBase AssemblyMetadata(AssemblyModel assemblyModel)
         {
-            dictionaryType = new Dictionary<string, TypeMetadata>();
-            return new AssemblyMetadata()
+            dictionaryType = new Dictionary<string, TypeBase>();
+            return new AssemblyBase()
             {
                 Name = assemblyModel.Name,
-                Namespaces = assemblyModel.Namespaces?.Select(NamespaceMetadata).ToList()
+                Namespaces = assemblyModel.Namespaces?.Select(NamespaceBase).ToList()
             };
         }
     
-        public static NamespaceMetadata NamespaceMetadata(NamespaceModel namespaceModel)
+        public static NamespaceBase NamespaceMetadata(NamespaceBase namespaceModel)
         {
             return new NamespaceMetadata()
             {
@@ -29,9 +31,9 @@ namespace Serializers
             };
         }
 
-        public static TypeMetadata TypeMetadata(TypeModel typeModel)
+        public static TypeBase TypeMetadata(TypeBase typeModel)
         {
-            TypeMetadata typeBase = new TypeMetadata()
+            TypeBase typeBase = new TypeBase()
             {
                 Name = typeModel.Name
             };
@@ -39,7 +41,7 @@ namespace Serializers
             dictionaryType.Add(typeBase.Name, typeBase);
 
             typeBase.NamespaceName = typeModel.NamespaceName;
-            typeBase.TypeKindProperty = typeModel.Type;
+            typeBase.Type = typeModel.Type;
             typeBase.BaseType = GetOrAdd(typeModel.BaseType);
             typeBase.DeclaringType = GetOrAdd(typeModel.DeclaringType);
             typeBase.AccessLevel = typeModel.AccessLevel;
@@ -58,7 +60,7 @@ namespace Serializers
             return typeBase;
         }
 
-        public static MethodMetadata MethodMetadata(MethodModel methodModel)
+        public static MethodBase MethodMetadata(MethodBase methodModel)
         {
             return new MethodMetadata()
             {
@@ -88,7 +90,7 @@ namespace Serializers
             };
         }
 
-        public static ParameterMetadata ParameterMetadata(ParameterModel parameterModel)
+        public static ParameterBase ParameterMetadata(ParameterBase parameterModel)
         {
             return new ParameterMetadata()
             {
@@ -97,16 +99,16 @@ namespace Serializers
             };
         }
 
-        public static PropertyMetadata PropertyMetadata(PropertyModel propertyModel)
+        public static PropertyBase PropertyMetadata(PropertyBase propertyModel)
         {
-            return new PropertyMetadata()
+            return new PropertyBase()
             {
                 Name = propertyModel.Name,
                 Type = GetOrAdd(propertyModel.Type)
             };
         }
 
-        public static TypeMetadata GetOrAdd(TypeModel baseType)
+        public static TypeBase GetOrAdd(TypeBase baseType)
         {
             if (baseType != null)
             {
@@ -116,14 +118,14 @@ namespace Serializers
                 }
                 else
                 {
-                    return TypeMetadata(baseType);
+                    return TypeBase(baseType);
                 }
             }
             else
                 return null;
         }
 
-        private static Dictionary<string, TypeMetadata> dictionaryType;
+        private static Dictionary<string, TypeBase> dictionaryType;
     }
 }
 

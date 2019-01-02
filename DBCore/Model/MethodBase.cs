@@ -1,7 +1,7 @@
-﻿using BaseCore.Enum;
+﻿using DBCore.Enum;
 using System.Collections.Generic;
 
-namespace BaseCore.Model
+namespace DBCore.Model
 {
     public class MethodBase
     {
