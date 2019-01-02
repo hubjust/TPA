@@ -61,7 +61,7 @@ namespace ViewModelTest
             TypeMetadata typeMetadata = TypeMetadata.EmitReference(typeof(TestClass));
 
             Assert.IsNull(typeMetadata.GenericArguments);
-            Assert.AreEqual("UnitTestProject", typeMetadata.NamespaceName);
+            Assert.AreEqual("ViewModelTest", typeMetadata.NamespaceName);
         }
 
         [TestMethod]
@@ -85,10 +85,10 @@ namespace ViewModelTest
 
             MethodMetadata method = methods.Find(m => m.Name.Equals("function"));
 
-            Assert.AreEqual(AccessLevel.IsPublic, method.Modifiers.Item1);
-            Assert.AreEqual(AbstractEnum.NotAbstract, method.Modifiers.Item2);
-            Assert.AreEqual(StaticEnum.NotStatic, method.Modifiers.Item3);
-            Assert.AreEqual(VirtualEnum.Virtual, method.Modifiers.Item4);
+            Assert.AreEqual(AccessLevel.IsPublic, method.AccessLevel);
+            Assert.AreEqual(AbstractEnum.NotAbstract, method.AbstractEnum);
+            Assert.AreEqual(StaticEnum.NotStatic, method.StaticEnum);
+            Assert.AreEqual(VirtualEnum.Virtual, method.VirtualEnum);
             Assert.AreEqual("Void", method.ReturnType.Name);
         }
 
