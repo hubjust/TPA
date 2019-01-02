@@ -10,7 +10,7 @@ namespace Model
     public class FieldMetadata : BaseMetadata
     {
         [DataMember]
-        public TypeMetadata TypeMetadata;
+        public TypeMetadata Type;
         [DataMember]
         public ICollection<TypeMetadata> AttributesMetadata { get; set; }
 
@@ -21,7 +21,7 @@ namespace Model
         public FieldMetadata(FieldInfo field)
             : base(field.Name)
         {
-            TypeMetadata = TypeMetadata.EmitReference(field.FieldType);
+            Type = TypeMetadata.EmitReference(field.FieldType);
             AttributesMetadata = TypeMetadata.EmitAttributes(field.GetCustomAttributes());
 
             EmitModifiers(field);

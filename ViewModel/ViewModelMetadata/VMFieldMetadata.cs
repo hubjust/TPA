@@ -21,13 +21,13 @@ namespace ViewModel.ViewModelMetadata
         protected override void LoadChildren()
         {
             base.LoadChildren();
-            Children.Add(new VMTypeMetadata(fieldMetadata.TypeMetadata, tracer));
+            Children.Add(new VMTypeMetadata(fieldMetadata.Type, tracer));
             FinishedLoadingChildren();
         }
 
         public override string ToString()
         {
-            return "Field: " + TransformModifiers() + fieldMetadata.TypeMetadata.Name + " " + fieldMetadata.Name + TransformGenericArguments();
+            return "Field: " + TransformModifiers() + fieldMetadata.Type.Name + " " + fieldMetadata.Name + TransformGenericArguments();
         }
 
         private string TransformModifiers()
@@ -42,13 +42,13 @@ namespace ViewModel.ViewModelMetadata
 
         private string TransformGenericArguments()
         {
-            if (fieldMetadata.TypeMetadata.GenericArguments.IsNullOrEmpty())
+            if (fieldMetadata.Type.GenericArguments.IsNullOrEmpty())
                 return "";
 
             StringBuilder builder = new StringBuilder();
             builder.Append("<");
 
-            foreach (TypeMetadata arg in fieldMetadata.TypeMetadata.GenericArguments)
+            foreach (TypeMetadata arg in fieldMetadata.Type.GenericArguments)
                 builder.Append(arg.Name + ",");
 
             builder.Remove(builder.Length - 1, 1);

@@ -84,7 +84,7 @@ namespace Serializers
             return new FieldMetadata()
             {
                 Name = fieldModel.Name,
-                TypeMetadata = GetOrAdd(fieldModel.Type),
+                Type = GetOrAdd(fieldModel.Type),
                 AccessLevel = fieldModel.AccessLevel,
                 StaticEnum = fieldModel.StaticEnum
             };

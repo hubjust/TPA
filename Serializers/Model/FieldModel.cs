@@ -14,7 +14,7 @@ namespace Serializers.Model
         public FieldModel(FieldMetadata fieldMetadata)
         {
             this.Name = fieldMetadata.Name;
-            this.Type = TypeModel.GetOrAdd(fieldMetadata.TypeMetadata);
+            this.Type = TypeModel.GetOrAdd(fieldMetadata.Type);
             this.AccessLevel = fieldMetadata.AccessLevel;
             this.StaticEnum = fieldMetadata.StaticEnum;
         }
