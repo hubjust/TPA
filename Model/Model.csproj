@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTransferGraph.cs" />
     <Compile Include="Enum\AbstractEnum.cs" />
     <Compile Include="Enum\AccessLevel.cs" />
     <Compile Include="Enum\SealedEnum.cs" />
