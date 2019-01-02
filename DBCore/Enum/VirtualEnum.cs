@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace BaseCore.Enum
 {
     public enum VirtualEnum
     {

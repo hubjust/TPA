@@ -1,4 +1,4 @@
-﻿using BaseCore.Enums;
+﻿using BaseCore.Enum;
 using System.Collections.Generic;
 
 namespace BaseCore.Model
@@ -16,11 +16,11 @@ namespace BaseCore.Model
 
         public AccessLevel AccessLevel { get; set; }
 
-        public IsAbstract AbstractEnum { get; set; }
+        public AbstractEnum AbstractEnum { get; set; }
 
-        public IsStatic StaticEnum { get; set; }
+        public StaticEnum StaticEnum { get; set; }
 
-        public IsSealed SealedEnum { get; set; }
+        public SealedEnum SealedEnum { get; set; }
 
         public TypeKind Type { get; set; }
 
