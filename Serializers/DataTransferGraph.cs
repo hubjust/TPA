@@ -122,7 +122,7 @@ namespace Serializers
                 return null;
         }
 
-        private static Dictionary<string, TypeBase> dictionaryType;
+        private static Dictionary<string, TypeBase> dictionaryType = new Dictionary<string, TypeBase>();
     }
 
 }
