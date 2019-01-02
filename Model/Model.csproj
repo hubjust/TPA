@@ -61,5 +61,11 @@
     <Compile Include="Tuple\TupleFour.cs" />
     <Compile Include="Tuple\TupleThree.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBCore\DBCore.csproj">
+      <Project>{689b4455-ec85-4640-a6ce-69cf38de4fc2}</Project>
+      <Name>DBCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
