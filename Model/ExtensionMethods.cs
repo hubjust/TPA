@@ -26,9 +26,6 @@ namespace Model
         {
             switch (baseEnum)
             {
-                case Model.AccessLevel.Internal:
-                    return DBCore.Enum.AccessLevel.Internal;
-
                 case Model.AccessLevel.IsPrivate:
                     return DBCore.Enum.AccessLevel.IsPrivate;
 
