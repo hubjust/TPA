@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializers", "Serializers\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializersTest", "SerializersSerializersTest\SerializersTest.csproj", "{D78422FB-49CA-4BD3-B818-24FEC0C7554B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerTest", "LoggerTest\LoggerTest.csproj", "{9594F861-305E-4269-B59C-FC4208904985}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TracerTest", "LoggerTest\TracerTest.csproj", "{9594F861-305E-4269-B59C-FC4208904985}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{C82B8B1B-C04D-4A66-A91F-1FF6FF4423E5}"
 EndProject
