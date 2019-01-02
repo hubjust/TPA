@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -59,9 +60,17 @@
     <Compile Include="ViewModelMetadata\VMPropertyMetadata.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DBCore\DBCore.csproj">
+      <Project>{689b4455-ec85-4640-a6ce-69cf38de4fc2}</Project>
+      <Name>DBCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{c82b8b1b-c04d-4a66-a91f-1ff6ff4423e5}</Project>
       <Name>Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MEF\MEF.csproj">
+      <Project>{d69621f7-b563-42d4-ae34-c7d949791caf}</Project>
+      <Name>MEF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{1b92160d-5854-463d-8211-c8d530efb975}</Project>

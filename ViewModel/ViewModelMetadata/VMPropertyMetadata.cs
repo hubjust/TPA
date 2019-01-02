@@ -1,7 +1,6 @@
 ﻿using System.Text;
 
 using Model;
-using Logger;
 
 namespace ViewModel.ViewModelMetadata
 {
@@ -10,9 +9,8 @@ namespace ViewModel.ViewModelMetadata
         private PropertyMetadata propertyMetadata;
         public override string Name => ToString();
 
-        public VMPropertyMetadata(PropertyMetadata propertyMetadata, ITracer tracer)
+        public VMPropertyMetadata(PropertyMetadata propertyMetadata)
         {
-            this.tracer = tracer;
             this.propertyMetadata = propertyMetadata;
             if (CanLoadChildren())
                 Children.Add(null);
@@ -22,8 +20,8 @@ namespace ViewModel.ViewModelMetadata
         {
             base.LoadChildren();
             foreach (TypeMetadata attribute in propertyMetadata.Attributes.OrEmptyIfNull())
-                Children.Add(new VMAttributeMetadata(attribute, tracer));
-            base.Children.Add(new VMTypeMetadata(propertyMetadata.Type, tracer));
+                Children.Add(new VMAttributeMetadata(attribute));
+            base.Children.Add(new VMTypeMetadata(propertyMetadata.Type));
             base.FinishedLoadingChildren();
         }
 

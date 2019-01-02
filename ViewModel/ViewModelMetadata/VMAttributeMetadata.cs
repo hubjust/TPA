@@ -1,5 +1,4 @@
 ﻿using Model;
-using Logger;
 
 namespace ViewModel.ViewModelMetadata
 {
@@ -9,9 +8,8 @@ namespace ViewModel.ViewModelMetadata
         VMTypeMetadata attributeViewModel;
         public override string Name => ToString();
 
-        public VMAttributeMetadata(TypeMetadata attributeMetadata, ITracer tracer)
+        public VMAttributeMetadata(TypeMetadata attributeMetadata)
         {
-            base.tracer = tracer;
             this.attributeMetadata = attributeMetadata;
             if (CanLoadChildren())
                 Children.Add(null);
@@ -20,7 +18,7 @@ namespace ViewModel.ViewModelMetadata
         protected override void LoadChildren()
         {
             base.LoadChildren();
-            attributeViewModel = new VMTypeMetadata(attributeMetadata, tracer);
+            attributeViewModel = new VMTypeMetadata(attributeMetadata);
             Children.Add(attributeViewModel);
             FinishedLoadingChildren();
         }

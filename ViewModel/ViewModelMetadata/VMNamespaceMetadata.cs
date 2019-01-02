@@ -1,5 +1,4 @@
 ﻿using Model;
-using Logger;
 
 namespace ViewModel.ViewModelMetadata
 {
@@ -8,9 +7,8 @@ namespace ViewModel.ViewModelMetadata
         private NamespaceMetadata namespaceMetadata;
         public override string Name => ToString();
 
-        public VMNamespaceMetadata(NamespaceMetadata namespaceMetadata, ITracer tracer)
+        public VMNamespaceMetadata(NamespaceMetadata namespaceMetadata)
         {
-            this.tracer = tracer;
             this.namespaceMetadata = namespaceMetadata;
             if (CanLoadChildren())
                 Children.Add(null);
@@ -20,7 +18,7 @@ namespace ViewModel.ViewModelMetadata
         {
             base.LoadChildren();
             foreach (TypeMetadata typeMetadata in namespaceMetadata.Types.OrEmptyIfNull())
-                Children.Add(new VMTypeMetadata(typeMetadata, tracer));
+                Children.Add(new VMTypeMetadata(typeMetadata));
             FinishedLoadingChildren();
         }
 

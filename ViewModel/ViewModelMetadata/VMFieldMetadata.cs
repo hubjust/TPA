@@ -1,7 +1,6 @@
 ﻿using System.Text;
 
 using Model;
-using Logger;
 
 namespace ViewModel.ViewModelMetadata
 {
@@ -10,9 +9,8 @@ namespace ViewModel.ViewModelMetadata
         private FieldMetadata fieldMetadata;
         public override string Name => ToString();
 
-        public VMFieldMetadata(FieldMetadata field, ITracer tracer)
+        public VMFieldMetadata(FieldMetadata field)
         {
-            base.tracer = tracer;
             fieldMetadata = field;
             if (CanLoadChildren())
                 Children.Add(null);
@@ -21,7 +19,7 @@ namespace ViewModel.ViewModelMetadata
         protected override void LoadChildren()
         {
             base.LoadChildren();
-            Children.Add(new VMTypeMetadata(fieldMetadata.Type, tracer));
+            Children.Add(new VMTypeMetadata(fieldMetadata.Type));
             FinishedLoadingChildren();
         }
 

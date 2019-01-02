@@ -1,7 +1,6 @@
 ﻿using System.Text;
 
 using Model;
-using Logger;
 
 namespace ViewModel.ViewModelMetadata
 {
@@ -10,9 +9,8 @@ namespace ViewModel.ViewModelMetadata
         private TypeMetadata typeMetadata;
         public override string Name => this.ToString();
 
-        public VMTypeMetadata(TypeMetadata typeMetadata, ITracer tracer)
+        public VMTypeMetadata(TypeMetadata typeMetadata)
         {
-            this.tracer = tracer;
             this.typeMetadata = typeMetadata;
             if (CanLoadChildren())
                 Children.Add(null);
@@ -22,21 +20,21 @@ namespace ViewModel.ViewModelMetadata
         {
             base.LoadChildren();
             foreach (TypeMetadata attribute in typeMetadata.Attributes.OrEmptyIfNull())
-                Children.Add(new VMAttributeMetadata(attribute, tracer));
+                Children.Add(new VMAttributeMetadata(attribute));
             foreach (PropertyMetadata propertyMetadata in typeMetadata.Properties.OrEmptyIfNull())
-                Children.Add(new VMPropertyMetadata(propertyMetadata, tracer));
+                Children.Add(new VMPropertyMetadata(propertyMetadata));
             foreach (TypeMetadata typeMetadata in typeMetadata.NestedTypes.OrEmptyIfNull())
-                Children.Add(new VMTypeMetadata(typeMetadata, tracer));
+                Children.Add(new VMTypeMetadata(typeMetadata));
             foreach (MethodMetadata methodMetadata in typeMetadata.Methods.OrEmptyIfNull())
-                Children.Add(new VMMethodMetadata(methodMetadata, tracer));
+                Children.Add(new VMMethodMetadata(methodMetadata));
             foreach (MethodMetadata methodMetadata in typeMetadata.Constructors.OrEmptyIfNull())
-                Children.Add(new VMMethodMetadata(methodMetadata, tracer));
+                Children.Add(new VMMethodMetadata(methodMetadata));
             foreach (FieldMetadata fieldMetadata in typeMetadata.Fields.OrEmptyIfNull())
-                Children.Add(new VMFieldMetadata(fieldMetadata, tracer));
+                Children.Add(new VMFieldMetadata(fieldMetadata));
             if (typeMetadata.BaseType != null)
-                Children.Add(new VMTypeMetadata(typeMetadata.BaseType, tracer));
+                Children.Add(new VMTypeMetadata(typeMetadata.BaseType));
             foreach (TypeMetadata implementedInterface in typeMetadata.ImplementedInterfaces.OrEmptyIfNull())
-                Children.Add(new VMTypeMetadata(implementedInterface, tracer));
+                Children.Add(new VMTypeMetadata(implementedInterface));
             base.FinishedLoadingChildren();
         }
 

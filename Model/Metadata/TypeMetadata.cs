@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
+
+using DBCore.Model;
 
 namespace Model
 {
@@ -47,6 +48,8 @@ namespace Model
         [DataMember]
         public ICollection<MethodMetadata> Constructors { get; set; }
 
+        #region TypeMetadata construcctors
+
         internal TypeMetadata(Type type)
             : base(type.Name)
         {
@@ -66,7 +69,7 @@ namespace Model
             if (!type.IsGenericTypeDefinition)
                 GenericArguments = null;
             else
-                GenericArguments = TypeMetadata.EmitGenericArguments(type.GetGenericArguments()).ToList();
+                GenericArguments = EmitGenericArguments(type.GetGenericArguments()).ToList();
 
             Attributes = EmitAttributes(type.GetCustomAttributes(false).Cast<Attribute>());
             ImplementedInterfaces = EmitImplements(type.GetInterfaces()).ToList();
@@ -75,6 +78,37 @@ namespace Model
             Properties = PropertyMetadata.EmitProperties(type.GetProperties()).ToList();
             Methods = MethodMetadata.EmitMethods(type.GetMethods()).ToList();
             Constructors = MethodMetadata.EmitMethods(type.GetConstructors()).ToList();
+        }
+
+        private TypeMetadata(TypeBase baseType)
+            : base(baseType.Name)
+        {
+            NamespaceName = baseType.NamespaceName;
+
+            if (!DictionaryType.ContainsKey(Name))
+            {
+                DictionaryType.Add(Name, this);
+            }
+
+            BaseType = GetOrAdd(baseType.BaseType);
+            DeclaringType = GetOrAdd(baseType.DeclaringType);
+            Type = baseType.Type.ToLogicEnum();
+
+            BaseType = GetOrAdd(baseType.BaseType);
+
+
+            m_Modifiers = new Tuple<AccessLevelEnum, SealedEnum, AbstractEnum>(
+                baseType.modifiers.Item1.ToLogicEnum(),
+                baseType.modifiers.Item2.ToLogicEnum(),
+                baseType.modifiers.Item3.ToLogicEnum());
+
+            m_Constructors = baseType.constructors?.Select(c => new MethodMetadata(c));
+            m_Fields = baseType.fields?.Select(t => new ParameterMetadata(t));
+            m_GenericArguments = baseType.genericArguments?.Select(GetOrAdd);
+            m_ImplementedInterfaces = baseType.implementedInterfaces?.Select(GetOrAdd);
+            m_Methods = baseType.methods?.Select(t => new MethodMetadata(t));
+            m_NestedTypes = baseType.nestedTypes?.Select(GetOrAdd);
+            m_Properties = baseType.properties?.Select(t => new PropertyMetadata(t));
         }
 
         private TypeMetadata(string typeName, string namespaceName)
@@ -91,6 +125,7 @@ namespace Model
 
         public TypeMetadata() { }
 
+        #endregion
 
         private void EmitModifiers(Type type)
         {
@@ -190,6 +225,23 @@ namespace Model
                 return null;
             StoreType(baseType);
             return EmitReference(baseType);
+        }
+
+        public static TypeMetadata GetOrAdd(TypeBase baseType)
+        {
+            if (baseType != null)
+            {
+                if (DictionaryType.ContainsKey(baseType.Name))
+                {
+                    return DictionaryType[baseType.Name];
+                }
+                else
+                {
+                    return new TypeMetadata(baseType);
+                }
+            }
+            else
+                return null;
         }
     }
 }

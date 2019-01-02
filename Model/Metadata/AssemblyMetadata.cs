@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 
+using DBCore.Model;
+
 namespace Model
 {
     [DataContract]
@@ -20,6 +22,12 @@ namespace Model
                           group type by type.GetNamespace() into _group
                           orderby _group.Key
                           select new NamespaceMetadata(_group.Key, _group.ToList())).ToList();
+        }
+
+        public AssemblyMetadata(AssemblyBase baseAssembly)
+        {
+            Name = baseAssembly.Name;
+            Namespaces = baseAssembly.Namespaces?.Select(ns => new NamespaceMetadata(ns));
         }
 
         public AssemblyMetadata() { }

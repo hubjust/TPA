@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using Model;
-using Logger;
 
 namespace ViewModel.ViewModelMetadata
 {
@@ -11,9 +10,8 @@ namespace ViewModel.ViewModelMetadata
         private MethodMetadata methodMetadata;
         public override string Name => ToString();
 
-        public VMMethodMetadata(MethodMetadata methodMetadata, ITracer tracer)
+        public VMMethodMetadata(MethodMetadata methodMetadata)
         {
-            base.tracer = tracer;
             this.methodMetadata = methodMetadata;
             if (CanLoadChildren())
                 Children.Add(null);
@@ -23,11 +21,11 @@ namespace ViewModel.ViewModelMetadata
         {
             base.LoadChildren();
             if (methodMetadata.ReturnType != null)
-                base.Children.Add(new VMTypeMetadata(methodMetadata.ReturnType, tracer));
+                base.Children.Add(new VMTypeMetadata(methodMetadata.ReturnType));
             foreach (TypeMetadata attribute in methodMetadata.AttributesMetadata.OrEmptyIfNull())
-                base.Children.Add(new VMAttributeMetadata(attribute, tracer));
+                base.Children.Add(new VMAttributeMetadata(attribute));
             foreach (ParameterMetadata parameter in methodMetadata.Parameters.OrEmptyIfNull())
-                base.Children.Add(new VMParameterMetadata(parameter, tracer));
+                base.Children.Add(new VMParameterMetadata(parameter));
             base.FinishedLoadingChildren();
         }
 

@@ -10,7 +10,6 @@ namespace ViewModel
         public abstract string Name { get; }
         public ObservableCollection<TreeViewItem> Children { get; } = new ObservableCollection<TreeViewItem>();
         private bool isExpanded;
-        protected ITracer tracer;
 
         public TreeViewItem()
         { }
@@ -29,12 +28,10 @@ namespace ViewModel
         protected virtual void LoadChildren()
         {
             Children.Clear();
-            tracer.TracerLog(TraceLevel.Info, "Started loading " + Name + " childrens.");
         }
 
         protected void FinishedLoadingChildren()
         {
-            tracer.TracerLog(TraceLevel.Info, "Children loaded.");
         }
 
         protected virtual bool CanLoadChildren()
