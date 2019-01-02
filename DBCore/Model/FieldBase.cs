@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BaseCore.Enum;
+using DBCore.Enum;
+using DBCore.Model;
 
-namespace BaseCore.Model
+namespace DBCore.Model
 {
     public class FieldBase
     {

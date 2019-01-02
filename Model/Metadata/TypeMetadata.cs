@@ -20,7 +20,7 @@ namespace Model
         [DataMember]
         public TypeMetadata DeclaringType { get; set; }
         [DataMember]
-        public TypeKind TypeKindProperty { get; set; }
+        public TypeKind Type { get; set; }
 
         public AccessLevel AccessLevel { get; set; }
 
@@ -59,7 +59,7 @@ namespace Model
 
             BaseType = EmitExtends(type.BaseType);
             DeclaringType = EmitDeclaringType(type.DeclaringType);
-            TypeKindProperty = GetTypeKind(type);
+            Type = GetTypeKind(type);
 
             EmitModifiers(type);
 

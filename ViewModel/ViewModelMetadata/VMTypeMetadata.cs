@@ -48,7 +48,7 @@ namespace ViewModel.ViewModelMetadata
 
         private string TransformAccurateType()
         {
-            if (typeMetadata.TypeKindProperty == TypeKind.Interface) return "Interface: ";
+            if (typeMetadata.Type == TypeKind.Interface) return "Interface: ";
             else return "Type: ";
         }
 

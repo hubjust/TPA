@@ -66,12 +66,12 @@ namespace Serializers.Model
 
         private TypeModel() { }
 
-        private TypeModel(TypeMetadata baseType)
+        public TypeModel(TypeBase baseType)
         {
             this.Name = baseType.Name;
             TypeDictionary.Add(Name, this);
             this.NamespaceName = baseType.NamespaceName;
-            this.Type = baseType.TypeKindProperty;
+            this.Type = baseType.Type;
 
             this.BaseType = GetOrAdd(baseType.BaseType);
             this.DeclaringType = GetOrAdd(baseType.DeclaringType);
@@ -97,7 +97,7 @@ namespace Serializers.Model
 
         }
 
-        public static TypeModel GetOrAdd(TypeMetadata baseType)
+        public static TypeModel GetOrAdd(TypeBase baseType)
         {
             if (baseType != null)
             {

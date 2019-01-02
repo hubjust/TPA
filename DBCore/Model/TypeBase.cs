@@ -36,6 +36,6 @@ namespace DBCore.Model
 
         public List<MethodBase> Constructors { get; set; }
 
-        public List<ParameterBase> Fields { get; set; }
+        public List<FieldBase> Fields { get; set; }
     }
 }

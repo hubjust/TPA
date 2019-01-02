@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model;
 using Serializers.Model;
-using DBCore;
 using DBCore.Model;
 
 namespace Serializers
@@ -21,17 +19,17 @@ namespace Serializers
                 Namespaces = assemblyModel.Namespaces?.Select(NamespaceBase).ToList()
             };
         }
-    
-        public static NamespaceBase NamespaceMetadata(NamespaceBase namespaceModel)
+
+        public static NamespaceBase NamespaceBase(NamespaceModel namespaceModel)
         {
-            return new NamespaceMetadata()
+            return new NamespaceBase()
             {
                 Name = namespaceModel.Name,
                 Types = namespaceModel.Types?.Select(GetOrAdd).ToList()
             };
         }
 
-        public static TypeBase TypeMetadata(TypeBase typeModel)
+        public static TypeBase TypeMetadata(TypeModel typeModel)
         {
             TypeBase typeBase = new TypeBase()
             {
@@ -49,20 +47,21 @@ namespace Serializers
             typeBase.StaticEnum = typeModel.StaticEnum;
             typeBase.SealedEnum = typeModel.SealedEnum;
 
-            typeBase.Constructors = typeModel.Constructors?.Select(MethodMetadata).ToList();
-            typeBase.Fields = typeModel.Fields?.Select(FieldMetadata).ToList();
+            typeBase.Constructors = typeModel.Constructors?.Select(MethodBase).ToList();
+            typeBase.Fields = typeModel.Fields?.Select(FieldBase).ToList();
             typeBase.GenericArguments = typeModel.GenericArguments?.Select(GetOrAdd).ToList();
             typeBase.ImplementedInterfaces = typeModel.ImplementedInterfaces?.Select(GetOrAdd).ToList();
-            typeBase.Methods = typeModel.Methods?.Select(MethodMetadata).ToList();
-            typeBase.NestedTypes = typeModel.NestedTypes?.Select(GetOrAdd).ToList();
-            typeBase.Properties = typeModel.Properties?.Select(PropertyMetadata).ToList();
+            typeBase.Methods = typeModel.Methods?.Select(MethodBase).ToList();
+            typeBase.NestedTypes = typeModel.NestedTypes?.Select(GetOrAdd).ToList();         
+            typeBase.Properties = typeModel.Properties?.Select(PropertyBase).ToList();
+
 
             return typeBase;
         }
 
-        public static MethodBase MethodMetadata(MethodBase methodModel)
+        public static MethodBase MethodBase(MethodModel methodModel)
         {
-            return new MethodMetadata()
+            return new MethodBase()
             {
                 Name = methodModel.Name,
 
@@ -70,7 +69,8 @@ namespace Serializers
                 ReturnType = GetOrAdd(methodModel.ReturnType),
 
                 GenericArguments = methodModel.GenericArguments?.Select(GetOrAdd).ToList(),
-                Parameters = methodModel.Parameters?.Select(ParameterMetadata).ToList(),
+                
+                Parameters = methodModel.Parameters?.Select(ParameterBase).ToList(),
 
                 AccessLevel = methodModel.AccessLevel,
                 AbstractEnum = methodModel.AbstractEnum,
@@ -79,9 +79,9 @@ namespace Serializers
             };
         }
 
-        public static FieldMetadata FieldMetadata(FieldModel fieldModel)
+        public static FieldBase FieldBase(FieldModel fieldModel)
         {
-            return new FieldMetadata()
+            return new FieldBase()
             {
                 Name = fieldModel.Name,
                 Type = GetOrAdd(fieldModel.Type),
@@ -90,16 +90,16 @@ namespace Serializers
             };
         }
 
-        public static ParameterBase ParameterMetadata(ParameterBase parameterModel)
+        public static ParameterBase ParameterBase(ParameterModel parameterModel)
         {
-            return new ParameterMetadata()
+            return new ParameterBase()
             {
                 Name = parameterModel.Name,
                 Type = GetOrAdd(parameterModel.Type)
             };
         }
 
-        public static PropertyBase PropertyMetadata(PropertyBase propertyModel)
+        public static PropertyBase PropertyBase(PropertyModel propertyModel)
         {
             return new PropertyBase()
             {
@@ -108,7 +108,7 @@ namespace Serializers
             };
         }
 
-        public static TypeBase GetOrAdd(TypeBase baseType)
+        public static TypeBase GetOrAdd(TypeModel baseType)
         {
             if (baseType != null)
             {
@@ -127,5 +127,6 @@ namespace Serializers
 
         private static Dictionary<string, TypeBase> dictionaryType;
     }
+
 }
 

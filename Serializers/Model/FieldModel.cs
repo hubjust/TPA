@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Model;
+using DBCore.Enum;
 using DBCore.Model;
 
 namespace Serializers.Model
@@ -9,9 +9,9 @@ namespace Serializers.Model
     [DataContract(Name = "FieldModel", IsReference = true)]
     public class FieldModel
     {
-        private FieldModel() { }
+        public FieldModel(ParameterBase t) { }
 
-        public FieldModel(FieldMetadata fieldMetadata)
+        public FieldModel(FieldBase fieldMetadata)
         {
             this.Name = fieldMetadata.Name;
             this.Type = TypeModel.GetOrAdd(fieldMetadata.Type);
