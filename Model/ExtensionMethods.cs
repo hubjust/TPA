@@ -2,103 +2,102 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using DBCore.Enum;
 
 namespace Model
 {
     public static class ExtensionMethods
     {
         #region Enum
-        internal static Model.AbstractEnum ToLogicEnum(this DBCore.Enum.AbstractEnum baseEnum)
+        public static DBCore.Enum.AbstractEnum ToBaseEnum(this Model.AbstractEnum baseEnum)
         {
             switch (baseEnum)
             {
-                case DBCore.Enum.AbstractEnum.Abstract:
-                    return AbstractEnum.Abstract;
+                case Model.AbstractEnum.Abstract:
+                    return DBCore.Enum.AbstractEnum.Abstract;
 
-                case DBCore.Enum.AbstractEnum.NotAbstract:
-                    return AbstractEnum.NotAbstract;
+                case Model.AbstractEnum.NotAbstract:
+                    return DBCore.Enum.AbstractEnum.NotAbstract;
                 default:
                     throw new Exception();
             }
         }
 
-        public static Model.AccessLevel ToLogicEnum(this DBCore.Enum.AccessLevel baseEnum)
+        public static DBCore.Enum.AccessLevel ToBaseEnum(this Model.AccessLevel baseEnum)
         {
             switch (baseEnum)
             {
-                case DBCore.Enum.AccessLevel.IsPrivate:
-                    return AccessLevel.IsPrivate;
+                case Model.AccessLevel.IsPrivate:
+                    return DBCore.Enum.AccessLevel.IsPrivate;
 
-                case DBCore.Enum.AccessLevel.IsProtected:
-                    return AccessLevel.IsProtected;
+                case Model.AccessLevel.IsProtected:
+                    return DBCore.Enum.AccessLevel.IsProtected;
 
-                case DBCore.Enum.AccessLevel.IsProtectedInternal:
-                    return AccessLevel.IsProtectedInternal;
+                case Model.AccessLevel.IsProtectedInternal:
+                    return DBCore.Enum.AccessLevel.IsProtectedInternal;
 
-                case DBCore.Enum.AccessLevel.IsPublic:
-                    return AccessLevel.IsPublic;
-
-                default:
-                    throw new Exception();
-            }
-        }
-
-        public static Model.SealedEnum ToLogicEnum(this DBCore.Enum.SealedEnum baseEnum)
-        {
-            switch (baseEnum)
-            {
-                case DBCore.Enum.SealedEnum.NotSealed:
-                    return SealedEnum.NotSealed;
-
-                case DBCore.Enum.SealedEnum.Sealed:
-                    return SealedEnum.Sealed;
-                default:
-                    throw new Exception();
-            }
-        }
-
-        internal static Model.StaticEnum ToLogicEnum(this DBCore.Enum.StaticEnum baseEnum)
-        {
-            switch (baseEnum)
-            {
-                case DBCore.Enum.StaticEnum.Static:
-                    return StaticEnum.Static;
-
-                case DBCore.Enum.StaticEnum.NotStatic:
-                    return StaticEnum.NotStatic;
-                default:
-                    throw new Exception();
-            }
-        }
-
-        public static Model.TypeKind ToLogicEnum(this DBCore.Enum.TypeKind baseEnum)
-        {
-            switch (baseEnum)
-            {
-                case DBCore.Enum.TypeKind.Class:
-                    return TypeKind.Class;
-                case DBCore.Enum.TypeKind.Enum:
-                    return TypeKind.Enum;
-                case DBCore.Enum.TypeKind.Interface:
-                    return TypeKind.Interface;
-                case DBCore.Enum.TypeKind.Struct:
-                    return TypeKind.Struct;
+                case Model.AccessLevel.IsPublic:
+                    return DBCore.Enum.AccessLevel.IsPublic;
 
                 default:
                     throw new Exception();
             }
         }
 
-        public static Model.VirtualEnum ToLogicEnum(this DBCore.Enum.VirtualEnum baseEnum)
+        public static DBCore.Enum.SealedEnum ToBaseEnum(this Model.SealedEnum baseEnum)
         {
             switch (baseEnum)
             {
-                case DBCore.Enum.VirtualEnum.NotVirtual:
-                    return VirtualEnum.NotVirtual;
+                case Model.SealedEnum.NotSealed:
+                    return DBCore.Enum.SealedEnum.NotSealed;
 
-                case DBCore.Enum.VirtualEnum.Virtual:
-                    return VirtualEnum.Virtual;
+                case Model.SealedEnum.Sealed:
+                    return DBCore.Enum.SealedEnum.Sealed;
+                default:
+                    throw new Exception();
+            }
+        }
+
+        internal static DBCore.Enum.StaticEnum ToBaseEnum(this Model.StaticEnum baseEnum)
+        {
+            switch (baseEnum)
+            {
+                case Model.StaticEnum.Static:
+                    return DBCore.Enum.StaticEnum.Static;
+
+                case Model.StaticEnum.NotStatic:
+                    return DBCore.Enum.StaticEnum.NotStatic;
+                default:
+                    throw new Exception();
+            }
+        }
+
+        public static DBCore.Enum.TypeKind ToBaseEnum(this Model.TypeKind baseEnum)
+        {
+            switch (baseEnum)
+            {
+                case Model.TypeKind.Class:
+                    return DBCore.Enum.TypeKind.Class;
+                case Model.TypeKind.Enum:
+                    return DBCore.Enum.TypeKind.Enum;
+                case Model.TypeKind.Interface:
+                    return DBCore.Enum.TypeKind.Interface;
+                case Model.TypeKind.Struct:
+                    return DBCore.Enum.TypeKind.Struct;
+
+                default:
+                    throw new Exception();
+            }
+        }
+
+        public static DBCore.Enum.VirtualEnum ToBaseEnum(this Model.VirtualEnum baseEnum)
+        {
+            switch (baseEnum)
+            {
+                case Model.VirtualEnum.NotVirtual:
+                    return DBCore.Enum.VirtualEnum.NotVirtual;
+
+                case Model.VirtualEnum.Virtual:
+                    return DBCore.Enum.VirtualEnum.Virtual;
                 default:
                     throw new Exception();
             }

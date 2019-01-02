@@ -92,8 +92,8 @@ namespace ViewModel
                     string fileName = fileSelector.GetImport().FileToSave();
                     if (fileName != "")
                     {
-                        // TO DO AFTER JUSTYNA FINISH DTG in MODEL
-                        serializer.GetImport().Serialize(fileName, Model.DTGMapper.ToBase(assemblyMetadataView.AssemblyMetadata));
+                        serializer.GetImport().Serialize(fileName,
+                            Model.DataTransferGraph.AssemblyBase(assemblyMetadata.AssemblyMetadata));
                     }
                     else
                     {
