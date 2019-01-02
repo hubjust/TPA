@@ -1,10 +1,9 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Tracer
 {
     public interface ITracer
     {
-        void TracerLog(TraceLevel level, Object obj);
+        void TracerLog(TraceLevel level, object obj);
     }
 }

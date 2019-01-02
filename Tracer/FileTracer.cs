@@ -8,7 +8,7 @@ namespace Tracer
     public class FileTracer : Tracer
     {
         [ImportingConstructor]
-        public FileTracer(string fileName, TraceLevel level = TraceLevel.Info)
-            : base(new TextWriterTraceListener(DateTime.Now.ToString("d-m-yyyy_HH-mm-ss") + "_" + fileName), level) { }
+        public FileTracer()
+            : base(new TextWriterTraceListener(DateTime.Now.ToString("d-m-yyyy_HH-mm-ss") + "_" + "log.log"), TraceLevel.Info) { }
     }
 }

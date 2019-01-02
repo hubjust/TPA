@@ -23,7 +23,7 @@ namespace Tracer.Tests
         [TestMethod()]
         public void FileTracerTest()
         {
-            ITracer tracer = new FileTracer("FileTracerTest.log");
+            ITracer tracer = new FileTracer();
             tracer.TracerLog(TraceLevel.Info, "FileTracerTest");
         }
     }

@@ -12,8 +12,8 @@ namespace Tracer
         public Tracer(TraceListener listener, TraceLevel level = TraceLevel.Error)
         {
             traceSwitch.Level = level;
-            System.Diagnostics.Trace.Listeners.Add(listener);
-            System.Diagnostics.Trace.AutoFlush = true;
+            Trace.Listeners.Add(listener);
+            Trace.AutoFlush = true;
         }
 
         public void TracerLog(TraceLevel level, Object obj)
