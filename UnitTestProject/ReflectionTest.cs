@@ -10,7 +10,7 @@ namespace ViewModelTest
     [TestClass]
     public class ReflectionTest
     {
-        private Assembly assembly;
+       private Assembly assembly;
 
         [TestInitialize]
         public void Init()

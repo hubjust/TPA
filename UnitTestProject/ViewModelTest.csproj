@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DBCore\DBCore.csproj">
+      <Project>{689B4455-EC85-4640-A6CE-69CF38DE4FC2}</Project>
+      <Name>DBCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{1b92160d-5854-463d-8211-c8d530efb975}</Project>
       <Name>Model</Name>

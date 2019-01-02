@@ -8,32 +8,48 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModel;
 using Model;
+using DBCore.Model;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Serializers.Tests
 {
     [TestClass()]
     public class XmlSerializerTests
     {
-        private Assembly assembly;
-
-        [TestInitialize]
-        public void Init()
-        {
-            string str = @"Model.dll";
-            assembly = Assembly.LoadFrom(str);
-        }
-
         [TestMethod]
-        public void XmlSerialization()
+        public void SerializationTest()
         {
-            ISerializer serializer = new XmlSerializer();
-            string path = @"serializer.xml";
-            AssemblyMetadata assemblyMetadata = new AssemblyMetadata(assembly);
-            serializer.Serialize(path, assemblyMetadata);
+            List<NamespaceBase> namespaceList = new List<NamespaceBase>()
+                {
+                    new NamespaceBase()
+                    {
+                        Name = "name1"
+                    },
+                    new NamespaceBase()
+                    {
+                        Name = "name2"
+                    }
+                };   
 
-            AssemblyMetadata assemblyTest = serializer.Deserialize<AssemblyMetadata>(path);
+            AssemblyBase assemblyObject = new AssemblyBase()
+            {
+                Name = "test",
+                Namespaces = namespaceList
+            };
 
-            Assert.AreEqual(assemblyTest.Namespaces.Count(), 1);
+            XmlSerializer serializer = new XmlSerializer();
+            string path = "SerializationXMLTest.xml";
+            serializer.Serialize(path, assemblyObject);
+            AssemblyBase deserializedObject = serializer.Deserialize(path);
+            Assert.AreEqual(assemblyObject.Name, deserializedObject.Name);
+            Assert.AreEqual(assemblyObject.Namespaces.ToList()[0].Name, deserializedObject.Namespaces.ToList()[0].Name);
+            Assert.AreEqual(assemblyObject.Namespaces.ToList()[1].Name, deserializedObject.Namespaces.ToList()[1].Name);
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
         }
     }
 }
