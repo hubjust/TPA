@@ -9,8 +9,8 @@ namespace MEF
         public void ComposeApplication(object o)
         {
             AggregateCatalog catalog = new AggregateCatalog();
-            DirectoryCatalog exe = new DirectoryCatalog("..\\..\\..\\Parts", "*.exe");
-            DirectoryCatalog dll = new DirectoryCatalog("..\\..\\..\\Parts");
+            DirectoryCatalog exe = new DirectoryCatalog("..\\..\\..\\Exec", "*.exe");
+            DirectoryCatalog dll = new DirectoryCatalog("..\\..\\..\\Exec");
             catalog.Catalogs.Add(exe);
             catalog.Catalogs.Add(dll);
             container = new CompositionContainer(catalog);

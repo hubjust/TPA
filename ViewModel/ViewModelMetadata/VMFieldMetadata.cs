@@ -7,7 +7,6 @@ namespace ViewModel.ViewModelMetadata
     class VMFieldMetadata : TreeViewItem
     {
         private FieldMetadata fieldMetadata;
-        public override string Name => ToString();
 
         public VMFieldMetadata(FieldMetadata field)
         {

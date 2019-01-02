@@ -13,7 +13,6 @@ using MEF;
 using Serializers;
 using DBCore.Model;
 
-
 namespace ViewModel
 {
     public class VMViewModel : BaseViewModel
@@ -64,8 +63,7 @@ namespace ViewModel
                 else if (PathVariable.Substring(PathVariable.Length - 4) == ".xml")
                 {
                     tracer.GetImport().TracerLog(TraceLevel.Info, "Loading from XML.");
-                    AssemblyBase assemblyBase = serializer.GetImport().Deserialize(PathVariable);
-                    assemblyMetadata = new VMAssemblyMetadata(new serializer.GetImport().Deserialize(PathVariable));
+                    assemblyMetadata = new VMAssemblyMetadata(serializer.GetImport().Deserialize(PathVariable));
                     LoadTreeView();
                 }
             }

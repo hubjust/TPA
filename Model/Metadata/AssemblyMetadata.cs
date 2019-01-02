@@ -12,7 +12,7 @@ namespace Model
     public class AssemblyMetadata : BaseMetadata
     {
         [DataMember]
-        public ICollection<NamespaceMetadata> Namespaces { get; set; }
+        public IEnumerable<NamespaceMetadata> Namespaces { get; set; }
 
         public AssemblyMetadata(Assembly assembly)
             :base(assembly.ManifestModule.Name)

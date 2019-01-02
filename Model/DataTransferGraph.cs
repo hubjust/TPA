@@ -12,7 +12,7 @@ namespace Model
             return new AssemblyBase()
             {
                 Name = assemblyModel.Name,
-                Namespaces = assemblyModel.Namespaces?.Select(assemblyModel)
+                Namespaces = assemblyModel.Namespaces?.Select(NamespaceBase)
             };
         }
 

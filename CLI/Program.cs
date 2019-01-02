@@ -11,7 +11,7 @@ namespace CLI
     {
         static void Main(string[] args)
         {
-            VMViewModel dataContext = new VMViewModel(new CLIFileSelector(), new XmlSerializer());
+            VMViewModel dataContext = new VMViewModel();
             dataContext.OpenButton.Execute(null);
 
             Stack<TreeViewItem> stack = new Stack<TreeViewItem>();

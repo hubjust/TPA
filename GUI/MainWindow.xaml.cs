@@ -14,7 +14,7 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new VMViewModel(new GUIFileSelector(), new XmlSerializer());
+            DataContext = new VMViewModel();
         }
     }
 }

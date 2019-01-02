@@ -6,6 +6,6 @@ namespace DBCore.Model
     {
         public string Name { get; set; }
 
-        public List<TypeBase> Types { get; set; }
+        public IEnumerable<TypeBase> Types { get; set; }
     }
 }

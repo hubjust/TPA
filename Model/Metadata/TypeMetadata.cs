@@ -98,7 +98,7 @@ namespace Model
 
             Constructors = baseType.Constructors?.Select(c => new MethodMetadata(c)).ToList();
 
-            Fields = baseType.Fields?.Select(t => new ParameterMetadata(t)).ToList();
+            Fields = baseType.Fields?.Select(t => new FieldMetadata(t)).ToList();
             GenericArguments = baseType.GenericArguments?.Select(GetOrAdd).ToList();
             ImplementedInterfaces = baseType.ImplementedInterfaces?.Select(GetOrAdd).ToList();
             Methods = baseType.Methods?.Select(t => new MethodMetadata(t)).ToList();

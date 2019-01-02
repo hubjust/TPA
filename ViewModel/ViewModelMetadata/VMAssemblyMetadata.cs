@@ -1,12 +1,16 @@
-﻿using Model;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+using Model;
 using DBCore.Model;
 
 namespace ViewModel.ViewModelMetadata
 {
     public class VMAssemblyMetadata : TreeViewItem
     {
+        public IEnumerable<NamespaceMetadata> Namespaces;
+
         public AssemblyMetadata AssemblyMetadata { get; }
-        public override string Name => ToString();
 
         public VMAssemblyMetadata(AssemblyMetadata assembly)
         {

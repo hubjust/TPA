@@ -5,7 +5,6 @@ namespace ViewModel.ViewModelMetadata
     public class VMNamespaceMetadata : TreeViewItem
     {
         private NamespaceMetadata namespaceMetadata;
-        public override string Name => ToString();
 
         public VMNamespaceMetadata(NamespaceMetadata namespaceMetadata)
         {

@@ -11,7 +11,7 @@ namespace Model
     public class NamespaceMetadata : BaseMetadata
     {
         [DataMember]
-        public List<TypeMetadata> Types { get; set; }
+        public IEnumerable<TypeMetadata> Types { get; set; }
 
         public NamespaceMetadata(string name, List<Type> types)
             : base(name)
