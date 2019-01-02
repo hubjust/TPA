@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerTest", "LoggerTest\Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{C82B8B1B-C04D-4A66-A91F-1FF6FF4423E5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{5AC94C96-A542-447E-8A16-14A0F73486FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{21221C0D-745D-4B06-B980-249DEDD4C941} = {5AC94C96-A542-447E-8A16-14A0F73486FE}
+		{D78422FB-49CA-4BD3-B818-24FEC0C7554B} = {5AC94C96-A542-447E-8A16-14A0F73486FE}
+		{9594F861-305E-4269-B59C-FC4208904985} = {5AC94C96-A542-447E-8A16-14A0F73486FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35BC7C44-62FC-4FF2-8B86-D3EC82779F38}
