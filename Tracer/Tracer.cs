@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.Composition;
 using System.Diagnostics;
 
 namespace Logger
@@ -11,6 +8,7 @@ namespace Logger
     {
         static TraceSwitch traceSwitch = new TraceSwitch("General", "The whole app");
 
+        [ImportingConstructor]
         public Tracer(TraceListener listener, TraceLevel level = TraceLevel.Error)
         {
             traceSwitch.Level = level;
@@ -20,7 +18,7 @@ namespace Logger
 
         public void TracerLog(TraceLevel level, Object obj)
         {
-            Trace.WriteLineIf(level <= traceSwitch.Level, "" + level + ":\t" + DateTime.Now + "\t" + obj);
+            Trace.WriteLineIf(level <= traceSwitch.Level, "[" + level + "] :\t" + DateTime.Now + "\t" + obj);
 
         }
     }

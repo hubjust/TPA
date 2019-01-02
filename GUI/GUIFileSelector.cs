@@ -1,9 +1,11 @@
 ﻿using Microsoft.Win32;
+using System.ComponentModel.Composition;
 
 using ViewModel;
 
 namespace GUI
 {
+    [Export(typeof(IFileSelector))]
     class GUIFileSelector : IFileSelector
     {
         public string FileToOpen()

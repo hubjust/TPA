@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.ComponentModel.Composition;
 
 using ViewModel;
 
 namespace CLI
 {
+    [Export(typeof(IFileSelector))]
     class CLIFileSelector : IFileSelector
     {
         public string FileToOpen()
