@@ -58,9 +58,9 @@
     <Compile Include="Metadata\PropertyMetadata.cs" />
     <Compile Include="Metadata\TypeMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TupleTwo.cs" />
-    <Compile Include="TupleFour.cs" />
-    <Compile Include="TupleThree.cs" />
+    <Compile Include="Tuple\TupleTwo.cs" />
+    <Compile Include="Tuple\TupleFour.cs" />
+    <Compile Include="Tuple\TupleThree.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DBCore\DBCore.csproj">
