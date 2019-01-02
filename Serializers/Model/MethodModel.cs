@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using Model;
 using DBCore.Model;
-using DBCore;
-using DBCore.Enum;
 
 namespace Serializers.Model
 {

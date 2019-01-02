@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization;
-using Model;
-using DBCore;
 using DBCore.Model;
 
 namespace Serializers.Model
