@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEF", "MEF\MEF.csproj", "{D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracer", "Tracer\Tracer.csproj", "{9DC8BF9C-5051-4178-A222-8CCA90D539DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{70461D13-A324-4F13-9874-AC1C8BDACABB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{9DC8BF9C-5051-4178-A222-8CCA90D539DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DC8BF9C-5051-4178-A222-8CCA90D539DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DC8BF9C-5051-4178-A222-8CCA90D539DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70461D13-A324-4F13-9874-AC1C8BDACABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70461D13-A324-4F13-9874-AC1C8BDACABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70461D13-A324-4F13-9874-AC1C8BDACABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70461D13-A324-4F13-9874-AC1C8BDACABB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
