@@ -8,7 +8,7 @@ namespace Model
     {
         public static AssemblyBase AssemblyBase(AssemblyMetadata assemblyModel)
         {
-            dictionaryType = new Dictionary<string, TypeBase>();
+            dictionaryType.Clear();
             return new AssemblyBase()
             {
                 Name = assemblyModel.Name,
@@ -21,7 +21,7 @@ namespace Model
             return new NamespaceBase()
             {
                 Name = namespaceModel.Name,
-                Types = namespaceModel.Types?.Select(GetOrAdd).ToList()
+                Types = namespaceModel.Types?.Select(TypeBase)
             };
         }
 
@@ -36,8 +36,8 @@ namespace Model
 
             typeBase.NamespaceName = typeModel.NamespaceName;
             typeBase.Type = typeModel.Type.ToBaseEnum();
-            typeBase.BaseType = GetOrAdd(typeModel.BaseType);
-            typeBase.DeclaringType = GetOrAdd(typeModel.DeclaringType);
+            typeBase.BaseType = TypeBase(typeModel.BaseType);
+            typeBase.DeclaringType = TypeBase(typeModel.DeclaringType);
             typeBase.AccessLevel = typeModel.AccessLevel.ToBaseEnum();
             typeBase.AbstractEnum = typeModel.AbstractEnum.ToBaseEnum();
             typeBase.StaticEnum = typeModel.StaticEnum.ToBaseEnum();
@@ -48,7 +48,7 @@ namespace Model
             typeBase.GenericArguments = typeModel.GenericArguments?.Select(GetOrAdd).ToList();
             typeBase.ImplementedInterfaces = typeModel.ImplementedInterfaces?.Select(GetOrAdd).ToList();
             typeBase.Methods = typeModel.Methods?.Select(MethodBase).ToList();
-            typeBase.NestedTypes = typeModel.NestedTypes?.Select(GetOrAdd).ToList();
+            typeBase.NestedTypes = typeModel.NestedTypes?.Select(TypeBase).ToList();
             typeBase.Properties = typeModel.Properties?.Select(PropertyBase).ToList();
 
 
@@ -91,7 +91,7 @@ namespace Model
             return new ParameterBase()
             {
                 Name = parameterModel.Name,
-                TypeMetadata = GetOrAdd(parameterModel.Type)
+                TypeMetadata = TypeBase(parameterModel.Type)
             };
         }
 
@@ -100,7 +100,7 @@ namespace Model
             return new PropertyBase()
             {
                 Name = propertyModel.Name,
-                Type = GetOrAdd(propertyModel.Type)
+                Type = TypeBase(propertyModel.Type)
             };
         }
 
