@@ -54,22 +54,22 @@ namespace ViewModel
             try
             {
                 tracer.GetImport().TracerLog(TraceLevel.Info, "Open DLL button clicked.");
-                if (PathVariable.Substring(PathVariable.Length - 4) == ".dll")
+                if (PathVariable?.Substring(PathVariable.Length - 4) == ".dll")
                 {
                     tracer.GetImport().TracerLog(TraceLevel.Info, "Loading from DLL.");
                     assemblyMetadata = new VMAssemblyMetadata(new AssemblyMetadata(Assembly.LoadFrom(PathVariable)));
                     LoadTreeView();
                 }
-                else if (PathVariable.Substring(PathVariable.Length - 4) == ".xml")
+                else
                 {
-                    tracer.GetImport().TracerLog(TraceLevel.Info, "Loading from XML.");
+                    tracer.GetImport().TracerLog(TraceLevel.Info, "Loading from another type of file.");
                     assemblyMetadata = new VMAssemblyMetadata(serializer.GetImport().Deserialize(PathVariable));
                     LoadTreeView();
                 }
             }
             catch (System.SystemException)
             {
-                tracer.GetImport().TracerLog(TraceLevel.Error, "DLL must be selected in case of load.");
+                tracer.GetImport().TracerLog(TraceLevel.Error, "File must be selected in case of load.");
             }
         }  
 
