@@ -10,7 +10,6 @@ using DBCore.Enum;
 
 namespace Serializers.Model
 {
-    [DataContract(Name = "ParameterModel", IsReference = true)]
     public class ParameterModel
     {
         public ParameterModel(FieldBase t) {   }
@@ -21,10 +20,8 @@ namespace Serializers.Model
             this.Type = TypeModel.GetOrAdd(parameterMetadata.TypeMetadata);
         }
 
-        [DataMember]
         public string Name { get; set; }
 
-        [DataMember]
         public TypeModel Type { get; set; }
     }
 }

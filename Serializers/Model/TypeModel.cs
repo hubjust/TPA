@@ -5,55 +5,38 @@ using DBCore.Model;
 
 namespace Serializers.Model
 {
-    [DataContract(Name = "TypeModel", IsReference = true)]
     public class TypeModel
     {
-        [DataMember]
         public string Name { get; set; }
 
-        [DataMember]
         public string NamespaceName { get; set; }
 
-        [DataMember]
         public TypeModel BaseType { get; set; }
 
-        [DataMember]
         public List<TypeModel> GenericArguments { get; set; }
 
-        [DataMember]
         public DBCore.Enum.AccessLevel AccessLevel { get; set; }
 
-        [DataMember]
         public DBCore.Enum.AbstractEnum AbstractEnum { get; set; }
 
-        [DataMember]
         public DBCore.Enum.SealedEnum SealedEnum { get; set; }
 
-        [DataMember]
         public DBCore.Enum.StaticEnum StaticEnum { get; set; }
 
-        [DataMember]
         public DBCore.Enum.TypeKind Type { get; set; }
 
-        [DataMember]
         public List<TypeModel> ImplementedInterfaces { get; set; }
 
-        [DataMember]
         public List<TypeModel> NestedTypes { get; set; }
 
-        [DataMember]
         public List<PropertyModel> Properties { get; set; }
 
-        [DataMember]
         public TypeModel DeclaringType { get; set; }
 
-        [DataMember]
         public List<MethodModel> Methods { get; set; }
 
-        [DataMember]
         public List<MethodModel> Constructors { get; set; }
 
-        [DataMember]
         public List<FieldModel> Fields { get; set; }
 
         public static Dictionary<string, TypeModel> TypeDictionary = new Dictionary<string, TypeModel>();
