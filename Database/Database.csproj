@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -44,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseLog.cs" />
+    <Compile Include="DataContext.cs" />
+    <Compile Include="DataSerializer.cs" />
+    <Compile Include="DataTransferGraph.cs" />
     <Compile Include="Model\DatabaseAssembly.cs" />
     <Compile Include="Model\DatabaseField.cs" />
     <Compile Include="Model\DatabaseMethod.cs" />
@@ -58,6 +67,14 @@
       <Project>{689b4455-ec85-4640-a6ce-69cf38de4fc2}</Project>
       <Name>DBCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{c82b8b1b-c04d-4a66-a91f-1ff6ff4423e5}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
