@@ -71,14 +71,13 @@ namespace ViewModel
                     tracer.GetImport().TracerLog(TraceLevel.Info, "Open button clicked.");
                     Repo.Load(fileSelector.GetImport());
                     assemblyMetadata = new VMAssemblyMetadata(Repo.Metadata);
-                    LoadTreeView();
-
                 }
                 catch (Exception e)
                 {
-                    tracer.GetImport().TracerLog(TraceLevel.Error, "File must be selected in case of load: " + e.Message);
+                    tracer.GetImport().TracerLog(TraceLevel.Error, "Error while loading: " + e.Message);
                 }
             });
+            LoadTreeView();
             
         }  
 

@@ -15,10 +15,7 @@ namespace Database.Model
         public string Name { get; set; }
         public ICollection<DatabaseNamespace> Namespaces { get; set; }
 
-        public DatabaseAssembly()
-        {
-            Namespaces = new List<DatabaseNamespace>();
-        }
+        public DatabaseAssembly() { }
 
         public DatabaseAssembly(AssemblyBase assemblyBase)
         {

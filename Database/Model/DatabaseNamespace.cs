@@ -15,10 +15,7 @@ namespace Database.Model
         public string Name { get; set; }
         public ICollection<DatabaseType> Types { get; set; }
 
-        public DatabaseNamespace()
-        {
-            Types = new List<DatabaseType>();
-        }
+        public DatabaseNamespace() { }
 
         public DatabaseNamespace(NamespaceBase namespaceBase)
         {
