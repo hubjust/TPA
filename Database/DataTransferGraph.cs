@@ -17,11 +17,12 @@ public static class DataTransferGraph
 
     public static NamespaceBase NamespaceBase(DatabaseNamespace namespaceModel)
     {
-        return new NamespaceBase()
+        NamespaceBase nb = new NamespaceBase()
         {
             Name = namespaceModel.Name,
             Types = namespaceModel.Types?.Select(TypeBase)
         };
+        return nb;
     }
 
     public static TypeBase TypeBase(DatabaseType typeModel)

@@ -20,6 +20,24 @@ namespace ViewModel.ViewModelMetadata
             foreach (TypeMetadata typeMetadata in namespaceMetadata.Types.OrEmptyIfNull())
                 Children.Add(new VMTypeMetadata(typeMetadata));
             FinishedLoadingChildren();
+            //if(namespaceMetadata != null)
+            //{
+            //    if(namespaceMetadata.Types != null)
+            //    {
+            //        try
+            //        {
+            //            foreach (TypeMetadata typeMetadata in namespaceMetadata.Types)
+            //                Children.Add(new VMTypeMetadata(typeMetadata));
+            //        } 
+            //        catch (System.Exception e)
+            //        {
+            //            System.Console.WriteLine(e.StackTrace);
+            //        }
+
+            //    }
+
+            //    FinishedLoadingChildren();
+            //}
         }
 
         public override string ToString()

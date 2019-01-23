@@ -11,11 +11,15 @@ namespace ViewModel
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> enumerable)
         {
             return enumerable == null || !enumerable.Any();
+            // if (enumerable == null)
+            //     return true;
+            // return enumerable.ToList().Count == 0;
         }
 
         public static IEnumerable<T> OrEmptyIfNull<T>(this IEnumerable<T> enumerable)
         {
             return enumerable ?? Enumerable.Empty<T>();
+            //return enumerable ?? new List<T>();
         }
 
         #region enums

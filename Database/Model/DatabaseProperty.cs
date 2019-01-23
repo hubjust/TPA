@@ -13,6 +13,7 @@ namespace Database.Model
         public int ID { get; set; }
         public string Name { get; set; }
         public DatabaseType Type { get; set; }
+        public virtual ICollection<DatabaseType> databaseTypes { get; set; }
 
         public DatabaseProperty()
         {
