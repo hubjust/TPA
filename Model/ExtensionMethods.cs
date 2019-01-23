@@ -202,7 +202,6 @@ namespace Model
         }
         #endregion
 
-
         internal static bool GetVisible(this Type type)
         {
             return type.IsPublic || type.IsNestedPublic || type.IsNestedFamily || type.IsNestedFamANDAssem;

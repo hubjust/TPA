@@ -11,11 +11,11 @@ namespace CLI
     {
         static void Main(string[] args)
         {
-            VMViewModel dataContext = new VMViewModel();
-            dataContext.OpenButton.Execute(null);
+            VMViewModel viewModel = new VMViewModel();
+            viewModel.OpenDLLButton.Execute(null);
 
             Stack<TreeViewItem> stack = new Stack<TreeViewItem>();
-            TreeViewItem current = dataContext.HierarchicalAreas[0];
+            TreeViewItem current = viewModel.HierarchicalAreas[0];
             current.IsExpanded = true;
 
             string command;
@@ -49,11 +49,11 @@ namespace CLI
                         break;
 
                     case "load":
-                        dataContext.OpenButton.Execute(null);
+                        viewModel.OpenDLLButton.Execute(null);
                         break;
 
                     case "save":
-                        dataContext.SaveButton.Execute(null);
+                        viewModel.SaveButton.Execute(null);
                         break;
 
                     default:

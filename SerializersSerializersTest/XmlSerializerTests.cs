@@ -1,16 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Serializers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using ViewModel;
-using Model;
-using DBCore.Model;
-using System.Xml.Serialization;
 using System.IO;
+
+using DBCore.Model;
+using Interfaces;
 
 namespace Serializers.Tests
 {
@@ -20,6 +14,7 @@ namespace Serializers.Tests
         [TestMethod]
         public void SerializationTest()
         {
+            IFileSelector selector = new Selector();
             List<NamespaceBase> namespaceList = new List<NamespaceBase>()
                 {
                     new NamespaceBase()
@@ -40,8 +35,8 @@ namespace Serializers.Tests
 
             XmlSerializer serializer = new XmlSerializer();
             string path = "SerializationXMLTest.xml";
-            serializer.Serialize(path, assemblyObject);
-            AssemblyBase deserializedObject = serializer.Deserialize(path);
+            serializer.Serialize(selector, assemblyObject);
+            AssemblyBase deserializedObject = serializer.Deserialize(selector);
             Assert.AreEqual(assemblyObject.Name, deserializedObject.Name);
             Assert.AreEqual(assemblyObject.Namespaces.ToList()[0].Name, deserializedObject.Namespaces.ToList()[0].Name);
             Assert.AreEqual(assemblyObject.Namespaces.ToList()[1].Name, deserializedObject.Namespaces.ToList()[1].Name);
@@ -50,6 +45,19 @@ namespace Serializers.Tests
             {
                 File.Delete(path);
             }
+        }
+    }
+
+    class Selector : IFileSelector
+    {
+        public string FileToOpen(string filter = null)
+        {
+            return "SerializationTestFile.xml";
+        }
+
+        public string FileToSave(string filter = null)
+        {
+            return "SerializationTestFile.xml";
         }
     }
 }

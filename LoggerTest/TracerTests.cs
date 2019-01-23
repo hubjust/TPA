@@ -3,6 +3,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
+using Interfaces;
+
 namespace Tracer.Tests
 {
     [TestClass()]

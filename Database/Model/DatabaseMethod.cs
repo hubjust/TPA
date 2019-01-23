@@ -13,27 +13,19 @@ namespace Database.Model
     {
         [Key]
         public int ID { get; set; }
-        
         public string Name { get; set; }
-
         public bool Extension { get; set; }
-
         public DatabaseType ReturnType { get; set; }
-
         public ICollection<DatabaseType> GenericArguments { get; set; }
-
         public ICollection<DatabaseParameter> Parameters { get; set; }
-
         public AccessLevel AccessLevel { get; set; }
-
         public AbstractEnum AbstractEnum { get; set; }
-
         public StaticEnum StaticEnum { get; set; }
-
         public VirtualEnum VirtualEnum { get; set; }
 
         public DatabaseMethod()
         {
+            ReturnType = new DatabaseType();
             GenericArguments = new List<DatabaseType>();
             Parameters = new List<DatabaseParameter>();
         }

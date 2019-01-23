@@ -17,7 +17,6 @@ namespace Database.Model
         public int ID { get; set; }
         public string Name { get; set; }
         public string NamespaceName { get; set; }
-
         public DatabaseType BaseType { get; set; }
         public DatabaseType DeclaringType { get; set; }
         public TypeKind Type { get; set; }
@@ -25,7 +24,6 @@ namespace Database.Model
         public AbstractEnum AbstractEnum { get; set; }
         public StaticEnum StaticEnum { get; set; }
         public SealedEnum SealedEnum { get; set; }
-
         public ICollection<DatabaseType> GenericArguments { get; set; }
         public ICollection<DatabaseType> Attributes { get; set; }
         public ICollection<DatabaseType> ImplementedInterfaces { get; set; }
@@ -35,16 +33,16 @@ namespace Database.Model
         public ICollection<DatabaseMethod> Methods { get; set; }
         public ICollection<DatabaseMethod> Constructors { get; set; }
 
-
-
-        #region Constructors
-
         public DatabaseType()
         {
-            MethodGenericArguments = new HashSet<DatabaseMethod>();
-            TypeGenericArguments = new HashSet<DatabaseType>();
-            TypeImplementedInterfaces = new HashSet<DatabaseType>();
-            TypeNestedTypes = new HashSet<DatabaseType>();
+            GenericArguments = new List<DatabaseType>();
+            Attributes = new List<DatabaseType>();
+            ImplementedInterfaces = new List<DatabaseType>();
+            NestedTypes = new List<DatabaseType>();
+            Fields = new List<DatabaseField>();
+            Properties = new List<DatabaseProperty>();
+            Methods = new List<DatabaseMethod>();
+            Constructors = new List<DatabaseMethod>();
         }
 
         public DatabaseType(TypeBase typeBase)
@@ -71,28 +69,6 @@ namespace Database.Model
             NestedTypes = typeBase.NestedTypes?.Select(t => GetOrAdd(t)).ToList();
             Properties = typeBase.Properties?.Select(p => new DatabaseProperty(p)).ToList();
         }
-
-        #endregion
-
-        #region Inverse Properties
-        
-        public virtual ICollection<DatabaseType> TypeBaseTypes { get; set; }
-        
-        public virtual ICollection<DatabaseType> TypeDeclaringTypes { get; set; }
-
-        [InverseProperty("GenericArguments")]
-        public virtual ICollection<DatabaseMethod> MethodGenericArguments { get; set; }
-
-        [InverseProperty("GenericArguments")]
-        public virtual ICollection<DatabaseType> TypeGenericArguments { get; set; }
-
-        [InverseProperty("ImplementedInterfaces")]
-        public virtual ICollection<DatabaseType> TypeImplementedInterfaces { get; set; }
-
-        [InverseProperty("NestedTypes")]
-        public virtual ICollection<DatabaseType> TypeNestedTypes { get; set; }
-
-        #endregion
 
         public static DatabaseType GetOrAdd(TypeBase baseType)
         {

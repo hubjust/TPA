@@ -10,10 +10,8 @@ namespace Database.Model
     public class DatabaseParameter
     {
         [Key]
-        public int ID { get; set; }
-        
+        public int ID { get; set; }     
         public string Name { get; set; }
-
         public DatabaseType Type { get; set; }
 
         public DatabaseParameter()

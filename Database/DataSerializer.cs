@@ -4,8 +4,8 @@ using System.ComponentModel.Composition;
 using System.Data.Entity;
 using System.Linq;
 using DBCore.Model;
-using ViewModel;
-using Serializers;
+
+using Interfaces;
 
 namespace Database
 {

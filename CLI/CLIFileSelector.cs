@@ -2,14 +2,14 @@
 using System.IO;
 using System.ComponentModel.Composition;
 
-using ViewModel;
+using Interfaces;
 
 namespace CLI
 {
     [Export(typeof(IFileSelector))]
     class CLIFileSelector : IFileSelector
     {
-        public string FileToOpen()
+        public string FileToOpen(string filter = null)
         {
             string filePath;
 
@@ -25,7 +25,7 @@ namespace CLI
             return filePath;
         }
 
-        public string FileToSave()
+        public string FileToSave(string filter = null)
         {
             string filePath;
 

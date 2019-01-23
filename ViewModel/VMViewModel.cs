@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 using Model;
 using ViewModel.ViewModelMetadata;
-using Tracer;
+using Interfaces;
 using MEF;
-using Serializers;
 using DBCore.Model;
 
 namespace ViewModel
@@ -18,6 +17,9 @@ namespace ViewModel
     public class VMViewModel : BaseViewModel
     {
         private VMAssemblyMetadata assemblyMetadata;
+
+        private Repository Repo;
+
         public ObservableCollection<TreeViewItem> HierarchicalAreas { get; set; }
 
         [ImportMany(typeof(IFileSelector))]
@@ -29,7 +31,8 @@ namespace ViewModel
         [ImportMany(typeof(ITracer))]
         private ImportSelector<ITracer> tracer;
 
-        public ICommand OpenButton { get; }
+        public ICommand OpenDBButton { get; }
+        public ICommand OpenDLLButton { get; }
         public ICommand SaveButton { get; }
 
         public string PathVariable { get; set; }
@@ -40,68 +43,57 @@ namespace ViewModel
             tracer.GetImport().TracerLog(TraceLevel.Verbose, "ViewModel initialization started");
 
             HierarchicalAreas = new ObservableCollection<TreeViewItem>();
-            OpenButton = new RelayCommand(Open);
+            Repo = new Repository();
+            OpenDBButton = new RelayCommand(OpenDB);
+            OpenDLLButton = new RelayCommand(OpenDLL);
             SaveButton = new RelayCommand(Save);
 
             tracer.GetImport().TracerLog(TraceLevel.Verbose, "ViewModel initialization finished");
         }
 
-        private void Open()
+        private async void OpenDB()
         {
-            PathVariable = fileSelector.GetImport().FileToOpen();
-            OnPropertyChanged(nameof(PathVariable));
-
-            try
+            await Task.Run(() =>
             {
-                tracer.GetImport().TracerLog(TraceLevel.Info, "Open DLL button clicked.");
-                if (PathVariable?.Substring(PathVariable.Length - 4) == ".dll")
+                try
                 {
-                    tracer.GetImport().TracerLog(TraceLevel.Info, "Loading from DLL.");
-                    assemblyMetadata = new VMAssemblyMetadata(new AssemblyMetadata(Assembly.LoadFrom(PathVariable)));
-                    LoadTreeView();
+                    tracer.GetImport().TracerLog(TraceLevel.Info, "Open button clicked.");
+                    Repo.Load(fileSelector.GetImport());
+                    assemblyMetadata = new VMAssemblyMetadata(Repo.Metadata);
                 }
-                else
+                catch (Exception e)
                 {
-                    tracer.GetImport().TracerLog(TraceLevel.Info, "Loading from another type of file.");
-                    assemblyMetadata = new VMAssemblyMetadata(serializer.GetImport().Deserialize(PathVariable));
-                    LoadTreeView();
+                    tracer.GetImport().TracerLog(TraceLevel.Error, "File must be selected in case of load.");
                 }
-            }
-            catch (System.SystemException)
-            {
-                tracer.GetImport().TracerLog(TraceLevel.Error, "File must be selected in case of load.");
-            }
+            });
+            LoadTreeView();
         }  
+
+        private void OpenDLL()
+        {
+            PathVariable = fileSelector.GetImport().FileToOpen("Dynamic Library File(*.dll) | *.dll");
+            if (PathVariable != null)
+            {
+                Repo.CreateFromFile(PathVariable);
+                assemblyMetadata = new VMAssemblyMetadata(Repo.Metadata);
+                LoadTreeView();
+            }
+            OnPropertyChanged(nameof(PathVariable));
+        }
 
         private void LoadTreeView()
         {
             tracer.GetImport().TracerLog(TraceLevel.Info, "TreeView loading...");
             HierarchicalAreas.Add(assemblyMetadata);
             tracer.GetImport().TracerLog(TraceLevel.Info, "TreeView loaded.");
-        }
+        }  
 
         private void Save()
         {
             Task.Run(() =>
             {
-                try
-                {
-                    tracer.GetImport().TracerLog(TraceLevel.Verbose, "Saving assembly to XML");
-                    string fileName = fileSelector.GetImport().FileToSave();
-                    if (fileName != "")
-                    {
-                        serializer.GetImport().Serialize(fileName,
-                            Model.DataTransferGraph.AssemblyBase(assemblyMetadata.AssemblyMetadata));
-                    }
-                    else
-                    {
-                        tracer.GetImport().TracerLog(TraceLevel.Warning, "No file selected");
-                    }
-                }
-                catch (Exception e)
-                {
-                    tracer.GetImport().TracerLog(TraceLevel.Error, "Serialization threw an exception: " + e.Message);
-                }
+                tracer.GetImport().TracerLog(TraceLevel.Verbose, "Saving assembly");
+                Repo.Save(fileSelector.GetImport());
             });
         }
     }

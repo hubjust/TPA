@@ -8,13 +8,13 @@ using System.Linq;
 
 namespace Database.Model
 {
+    [Table("Field")]
     public class DatabaseField
     {
-        [Key]
         public int ID { get; set; }
+        [Key]
         public string Name { get; set; }
         public ICollection<DatabaseType> AttributesMetadata { get; set; }
-
         public AccessLevel AccessLevel { get; set; }
         public StaticEnum StaticEnum { get; set; }
 

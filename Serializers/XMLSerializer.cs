@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
-using System.Xml;
 using System.ComponentModel.Composition;
 using System.IO;
+
+using Interfaces;
 using Serializers.Model;
-using DBCore;
 using DBCore.Model;
 
 namespace Serializers
@@ -13,18 +13,19 @@ namespace Serializers
     {
         private DataContractSerializer serializer = new DataContractSerializer(typeof(AssemblyModel));
 
-        public void Serialize(string filePath, AssemblyBase ab)
+        public void Serialize(IFileSelector selector, AssemblyBase ab)
         {
             AssemblyModel assemblyModel = new AssemblyModel(ab);
-            using (FileStream writer = new FileStream(filePath, FileMode.OpenOrCreate))
+            string path = selector.FileToSave("XML file (.xml) | *.xml");
+            using (FileStream writer = new FileStream(path, FileMode.OpenOrCreate))
             {
                 serializer.WriteObject(writer, assemblyModel);
             }
         }
 
-        public AssemblyBase Deserialize(string filePath)
+        public AssemblyBase Deserialize(IFileSelector selector)
         {
-            using (FileStream reader = new FileStream(filePath, FileMode.Open))
+            using (FileStream reader = new FileStream(selector.FileToOpen(), FileMode.Open))
             {
                 return DataTransferGraph.AssemblyBase((AssemblyModel)serializer.ReadObject(reader));
 

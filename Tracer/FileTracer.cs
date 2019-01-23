@@ -2,6 +2,8 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 
+using Interfaces;
+
 namespace Tracer
 {
     [Export(typeof(ITracer))]

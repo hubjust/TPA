@@ -12,9 +12,7 @@ namespace Database.Model
     {
         [Key]
         public int ID { get; set; }
-        
         public string Name { get; set; }
-
         public ICollection<DatabaseType> Types { get; set; }
 
         public DatabaseNamespace()
