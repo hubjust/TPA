@@ -10,7 +10,8 @@ namespace MEF
             var settings = ConfigurationManager.AppSettings;
             string name = typeof(T).Name;
             string result = settings[name];
-            return Find(item => item.GetType().Name == result);
+            var temp = Find(item => item.GetType().Name == result);
+            return temp;
         }
     }
 }

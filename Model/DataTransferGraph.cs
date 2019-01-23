@@ -27,6 +27,16 @@ namespace Model
 
         public static TypeBase TypeBase(TypeMetadata typeModel)
         {
+            if (typeModel == null)
+            {
+                return null;
+            }
+
+            if(dictionaryType.ContainsKey(typeModel.Name))
+            {
+                return dictionaryType[typeModel.Name];
+            }
+
             TypeBase typeBase = new TypeBase()
             {
                 Name = typeModel.Name

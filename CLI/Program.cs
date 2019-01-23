@@ -12,7 +12,7 @@ namespace CLI
         static void Main(string[] args)
         {
             VMViewModel viewModel = new VMViewModel();
-            viewModel.OpenDLLButton.Execute(null);
+            viewModel.OpenButton.Execute(null);
 
             Stack<TreeViewItem> stack = new Stack<TreeViewItem>();
             TreeViewItem current = viewModel.HierarchicalAreas[0];
@@ -49,7 +49,7 @@ namespace CLI
                         break;
 
                     case "load":
-                        viewModel.OpenDLLButton.Execute(null);
+                        viewModel.OpenButton.Execute(null);
                         break;
 
                     case "save":

@@ -9,7 +9,7 @@ using Interfaces;
 namespace Serializers.Tests
 {
     [TestClass()]
-    public class XmlSerializerTests
+    public class XMLSerializerTests
     {
         [TestMethod]
         public void SerializationTest()
@@ -33,7 +33,7 @@ namespace Serializers.Tests
                 Namespaces = namespaceList
             };
 
-            XmlSerializer serializer = new XmlSerializer();
+            XMLSerializer serializer = new XMLSerializer();
             string path = "SerializationXMLTest.xml";
             serializer.Serialize(selector, assemblyObject);
             AssemblyBase deserializedObject = serializer.Deserialize(selector);

@@ -9,7 +9,7 @@ using DBCore.Model;
 namespace Serializers
 {
     [Export(typeof(ISerializer<AssemblyBase>))]
-    public class XmlSerializer : ISerializer<AssemblyBase>
+    public class XMLSerializer : ISerializer<AssemblyBase>
     {
         private DataContractSerializer serializer = new DataContractSerializer(typeof(AssemblyModel));
 

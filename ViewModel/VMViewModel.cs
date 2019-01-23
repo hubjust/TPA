@@ -31,8 +31,8 @@ namespace ViewModel
         [ImportMany(typeof(ITracer))]
         private ImportSelector<ITracer> tracer;
 
-        public ICommand OpenDBButton { get; }
-        public ICommand OpenDLLButton { get; }
+        public ICommand LoadButton { get; }
+        public ICommand OpenButton { get; }
         public ICommand SaveButton { get; }
 
         public string PathVariable { get; set; }
@@ -44,14 +44,26 @@ namespace ViewModel
 
             HierarchicalAreas = new ObservableCollection<TreeViewItem>();
             Repo = new Repository();
-            OpenDBButton = new RelayCommand(OpenDB);
-            OpenDLLButton = new RelayCommand(OpenDLL);
+            LoadButton = new RelayCommand(Load);
+            OpenButton = new RelayCommand(Open);
             SaveButton = new RelayCommand(Save);
 
             tracer.GetImport().TracerLog(TraceLevel.Verbose, "ViewModel initialization finished");
         }
 
-        private async void OpenDB()
+        private void Load()
+        {
+            PathVariable = fileSelector.GetImport().FileToOpen("Dynamic Library File(*.dll) | *.dll");
+            if (PathVariable != null)
+            {
+                Repo.CreateFromFile(PathVariable);
+                assemblyMetadata = new VMAssemblyMetadata(Repo.Metadata);
+                LoadTreeView();
+            }
+            OnPropertyChanged(nameof(PathVariable));
+        }
+
+        private async void Open()
         {
             await Task.Run(() =>
             {
@@ -69,25 +81,6 @@ namespace ViewModel
             LoadTreeView();
         }  
 
-        private void OpenDLL()
-        {
-            PathVariable = fileSelector.GetImport().FileToOpen("Dynamic Library File(*.dll) | *.dll");
-            if (PathVariable != null)
-            {
-                Repo.CreateFromFile(PathVariable);
-                assemblyMetadata = new VMAssemblyMetadata(Repo.Metadata);
-                LoadTreeView();
-            }
-            OnPropertyChanged(nameof(PathVariable));
-        }
-
-        private void LoadTreeView()
-        {
-            tracer.GetImport().TracerLog(TraceLevel.Info, "TreeView loading...");
-            HierarchicalAreas.Add(assemblyMetadata);
-            tracer.GetImport().TracerLog(TraceLevel.Info, "TreeView loaded.");
-        }  
-
         private void Save()
         {
             Task.Run(() =>
@@ -95,6 +88,13 @@ namespace ViewModel
                 tracer.GetImport().TracerLog(TraceLevel.Verbose, "Saving assembly");
                 Repo.Save(fileSelector.GetImport());
             });
+        }
+
+        private void LoadTreeView()
+        {
+            tracer.GetImport().TracerLog(TraceLevel.Info, "TreeView loading...");
+            HierarchicalAreas.Add(assemblyMetadata);
+            tracer.GetImport().TracerLog(TraceLevel.Info, "TreeView loaded.");
         }
     }
 }
