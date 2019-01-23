@@ -7,10 +7,8 @@ using DBCore.Model;
 
 namespace Model
 {
-    [DataContract]
     public class NamespaceMetadata : BaseMetadata
     {
-        [DataMember]
         public IEnumerable<TypeMetadata> Types { get; set; }
 
         public NamespaceMetadata(string name, List<Type> types)

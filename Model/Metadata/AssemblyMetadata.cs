@@ -8,10 +8,8 @@ using DBCore.Model;
 
 namespace Model
 {
-    [DataContract]
     public class AssemblyMetadata : BaseMetadata
     {
-        [DataMember]
         public IEnumerable<NamespaceMetadata> Namespaces { get; set; }
 
         public AssemblyMetadata(Assembly assembly)

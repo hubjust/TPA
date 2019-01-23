@@ -5,12 +5,9 @@ using System.Runtime.Serialization;
 
 namespace Model
 {
-    [DataContract]
     public class ParameterMetadata : BaseMetadata
     {
-        [DataMember]
         public TypeMetadata Type { get; set; }
-        [DataMember]
         public ICollection<TypeMetadata> Attributes { get; set; }
 
         public ParameterMetadata(ParameterInfo parameter)

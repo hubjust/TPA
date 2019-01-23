@@ -7,12 +7,9 @@ using DBCore.Model;
 
 namespace Model
 {
-    [DataContract(IsReference = true)]
     public class PropertyMetadata : BaseMetadata
   {
-        [DataMember]
         public TypeMetadata Type { get; set; }
-        [DataMember]
         public ICollection<TypeMetadata> Attributes { get; set; }
 
         public PropertyMetadata() { }

@@ -1,26 +1,17 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
 
 namespace Model
 {
-    [DataContract]
     public class MethodMetadata : BaseMetadata
     {
-        [DataMember]
         public ICollection<TypeMetadata> GenericArguments { get; set; }
-        [DataMember]
         public ICollection<ParameterMetadata> Parameters { get; set; }
-        [DataMember]
         public ICollection<TypeMetadata> AttributesMetadata { get; set; }
 
-        [DataMember]
         public TypeMetadata ReturnType { get; set; }
-        [DataMember]
         public TypeMetadata ReflectedType { get; set; }
 
         public AccessLevel AccessLevel { get; set; }
@@ -31,7 +22,6 @@ namespace Model
 
         public VirtualEnum VirtualEnum { get; set; }
 
-        [DataMember]
         public bool Extension { get; set; }
 
         public MethodMetadata(MethodBase method)

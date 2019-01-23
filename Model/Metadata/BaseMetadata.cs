@@ -7,10 +7,8 @@ using System.Runtime.Serialization;
 
 namespace Model
 {
-    [DataContract(IsReference = true)]
     public abstract class BaseMetadata
     {
-        [DataMember]
         public string Name { get; set; }
 
         public BaseMetadata(string name)

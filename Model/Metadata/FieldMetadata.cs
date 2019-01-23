@@ -1,5 +1,4 @@
 ﻿using DBCore.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -7,12 +6,9 @@ using System.Runtime.Serialization;
 
 namespace Model
 {
-    [DataContract]
     public class FieldMetadata : BaseMetadata
     {
-        [DataMember]
         public TypeMetadata Type;
-        [DataMember]
         public ICollection<TypeMetadata> AttributesMetadata { get; set; }
 
         public AccessLevel AccessLevel { get; set; }
