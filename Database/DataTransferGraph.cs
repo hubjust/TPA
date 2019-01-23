@@ -41,25 +41,26 @@ public static class DataTransferGraph
         TypeBase typeBase = new TypeBase()
         {
             Name = typeMetadata.Name,
-            NamespaceName = typeMetadata.NamespaceName,
-            Type = typeMetadata.Type,
-            BaseType = TypeBase(typeMetadata.BaseType),
-            DeclaringType = TypeBase(typeMetadata.DeclaringType),
-            AccessLevel = typeMetadata.AccessLevel,
-            AbstractEnum = typeMetadata.AbstractEnum,
-            StaticEnum = typeMetadata.StaticEnum,
-            SealedEnum = typeMetadata.SealedEnum,
-
-            Constructors = typeMetadata.Constructors?.Select(MethodBase).ToList(),
-            Fields = typeMetadata.Fields?.Select(FieldBase).ToList(),
-            GenericArguments = typeMetadata.GenericArguments?.Select(TypeBase).ToList(),
-            ImplementedInterfaces = typeMetadata.ImplementedInterfaces?.Select(TypeBase).ToList(),
-            Methods = typeMetadata.Methods?.Select(MethodBase).ToList(),
-            NestedTypes = typeMetadata.NestedTypes?.Select(TypeBase).ToList(),
-            Properties = typeMetadata.Properties?.Select(PropertyBase).ToList()
         };
 
         dictionaryType.Add(typeBase.Name, typeBase);
+
+        typeBase.NamespaceName = typeMetadata.NamespaceName;
+        typeBase.Type = typeMetadata.Type;
+        typeBase.BaseType = TypeBase(typeMetadata.BaseType);
+        typeBase.DeclaringType = TypeBase(typeMetadata.DeclaringType);
+        typeBase.AccessLevel = typeMetadata.AccessLevel;
+        typeBase.AbstractEnum = typeMetadata.AbstractEnum;
+        typeBase.StaticEnum = typeMetadata.StaticEnum;
+        typeBase.SealedEnum = typeMetadata.SealedEnum;
+
+        typeBase.Constructors = typeMetadata.Constructors?.Select(MethodBase).ToList();
+        typeBase.Fields = typeMetadata.Fields?.Select(FieldBase).ToList();
+        typeBase.GenericArguments = typeMetadata.GenericArguments?.Select(TypeBase).ToList();
+        typeBase.ImplementedInterfaces = typeMetadata.ImplementedInterfaces?.Select(TypeBase).ToList();
+        typeBase.Methods = typeMetadata.Methods?.Select(MethodBase).ToList();
+        typeBase.NestedTypes = typeMetadata.NestedTypes?.Select(TypeBase).ToList();
+        typeBase.Properties = typeMetadata.Properties?.Select(PropertyBase).ToList();
 
         return typeBase;
     }
