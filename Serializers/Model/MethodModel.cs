@@ -5,6 +5,7 @@ using DBCore.Model;
 
 namespace Serializers.Model
 {
+    [DataContract(Name = "MethodModel", IsReference = true)]
     public class MethodModel
     {
         private MethodModel() { }
@@ -24,22 +25,32 @@ namespace Serializers.Model
             Parameters = baseMethod.Parameters?.Select(t => new ParameterModel(t)).ToList();
         }
 
+        [DataMember]
         public string Name { get; set; }
 
+        [DataMember]
         public List<TypeModel> GenericArguments { get; set; }
 
+        [DataMember]
         public DBCore.Enum.AccessLevel AccessLevel { get; set; }
 
+        [DataMember]
         public DBCore.Enum.AbstractEnum AbstractEnum { get; set; }
 
+        [DataMember]
         public DBCore.Enum.StaticEnum StaticEnum { get; set; }
 
+        [DataMember]
         public DBCore.Enum.VirtualEnum VirtualEnum { get; set; }
 
+        [DataMember]
         public TypeModel ReturnType { get; set; }
 
+        [DataMember]
         public bool Extension { get; set; }
 
+        [DataMember]
         public List<ParameterModel> Parameters { get; set; }
+
     }
 }

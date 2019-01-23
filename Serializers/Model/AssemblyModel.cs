@@ -5,6 +5,7 @@ using DBCore.Model;
 
 namespace Serializers.Model
 {
+    [DataContract(Name = "AssemblyModel", IsReference = true)]
     public class AssemblyModel
     {
         private AssemblyModel() { }
@@ -15,8 +16,10 @@ namespace Serializers.Model
             Namespaces = assemblyMetadata.Namespaces?.Select(ns => new NamespaceModel(ns)).ToList();
         }
 
+        [DataMember]
         public List<NamespaceModel> Namespaces { get; set; }
 
+        [DataMember]
         public string Name { get; set; }
     }
 }

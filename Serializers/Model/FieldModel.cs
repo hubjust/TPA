@@ -6,6 +6,7 @@ using DBCore.Model;
 
 namespace Serializers.Model
 {
+    [DataContract(Name = "FieldModel", IsReference = true)]
     public class FieldModel
     {
         public FieldModel(ParameterBase t) { }
@@ -20,12 +21,16 @@ namespace Serializers.Model
 
         public List<NamespaceModel> Namespaces { get; set; }
 
+        [DataMember]
         public string Name { get; set; }
 
+        [DataMember]
         public AccessLevel AccessLevel { get; set; }
 
+        [DataMember]
         public StaticEnum StaticEnum { get; set; }
 
+        [DataMember]
         public TypeModel Type { get; set; }
     }
 }

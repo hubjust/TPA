@@ -10,6 +10,7 @@ using DBCore.Enum;
 
 namespace Serializers.Model
 {
+    [DataContract(Name = "PropertyModel", IsReference = true)]
     public class PropertyModel
     {
         private PropertyModel() { }
@@ -20,8 +21,10 @@ namespace Serializers.Model
             this.Type = TypeModel.GetOrAdd(propertyMetadata.Type);
         }
 
+        [DataMember]
         public string Name { get; set; }
 
+        [DataMember]
         public TypeModel Type { get; set; }
     }
 }
