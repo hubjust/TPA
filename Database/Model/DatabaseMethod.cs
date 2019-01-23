@@ -25,9 +25,8 @@ namespace Database.Model
 
         public DatabaseMethod()
         {
-            ReturnType = new DatabaseType();
-            GenericArguments = new List<DatabaseType>();
-            Parameters = new List<DatabaseParameter>();
+            TypeConstructors = new HashSet<DatabaseType>();
+            TypeMethods = new HashSet<DatabaseType>();
         }
 
         public DatabaseMethod(MethodBase baseMethod)
@@ -43,5 +42,9 @@ namespace Database.Model
             StaticEnum = baseMethod.StaticEnum;
             VirtualEnum = baseMethod.VirtualEnum;
         }
+
+        public virtual ICollection<DatabaseType> TypeConstructors { get; set; }
+        public virtual ICollection<DatabaseType> TypeMethods { get; set; }
+
     }
 }

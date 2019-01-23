@@ -34,14 +34,10 @@ namespace Database.Model
 
         public DatabaseType()
         {
-            GenericArguments = new List<DatabaseType>();
-            Attributes = new List<DatabaseType>();
-            ImplementedInterfaces = new List<DatabaseType>();
-            NestedTypes = new List<DatabaseType>();
-            Fields = new List<DatabaseField>();
-            Properties = new List<DatabaseProperty>();
-            Methods = new List<DatabaseMethod>();
-            Constructors = new List<DatabaseMethod>();
+            MethodGenericArguments = new HashSet<DatabaseMethod>();
+            TypeGenericArguments = new HashSet<DatabaseType>();
+            TypeImplementedInterfaces = new HashSet<DatabaseType>();
+            TypeNestedTypes = new HashSet<DatabaseType>();
         }
 
         public DatabaseType(TypeBase typeBase)
@@ -68,6 +64,17 @@ namespace Database.Model
             NestedTypes = typeBase.NestedTypes?.Select(t => GetOrAdd(t)).ToList();
             Properties = typeBase.Properties?.Select(p => new DatabaseProperty(p)).ToList();
         }
+
+        public virtual ICollection<DatabaseType> TypeBaseTypes { get; set; }
+        public virtual ICollection<DatabaseType> TypeDeclaringTypes { get; set; }
+        [InverseProperty("GenericArguments")]
+        public virtual ICollection<DatabaseMethod> MethodGenericArguments { get; set; }
+        [InverseProperty("GenericArguments")]
+        public virtual ICollection<DatabaseType> TypeGenericArguments { get; set; }
+        [InverseProperty("ImplementedInterfaces")]
+        public virtual ICollection<DatabaseType> TypeImplementedInterfaces { get; set; }
+        [InverseProperty("NestedTypes")]
+        public virtual ICollection<DatabaseType> TypeNestedTypes { get; set; }
 
         public static DatabaseType GetOrAdd(TypeBase baseType)
         {

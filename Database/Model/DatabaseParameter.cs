@@ -16,7 +16,8 @@ namespace Database.Model
 
         public DatabaseParameter()
         {
-            Type = new DatabaseType();
+            MethodParameters = new HashSet<DatabaseMethod>();
+            TypeFields = new HashSet<DatabaseType>();
         }
 
         public DatabaseParameter(ParameterBase parameterBase)
@@ -24,5 +25,9 @@ namespace Database.Model
             Name = parameterBase.Name;
             Type = DatabaseType.GetOrAdd(parameterBase.Type);
         }
+
+        public virtual ICollection<DatabaseMethod> MethodParameters { get; set; }
+        public virtual ICollection<DatabaseType> TypeFields { get; set; }
+
     }
 }

@@ -20,7 +20,8 @@ namespace Database.Model
 
         public DatabaseField()
         {
-            Type = new DatabaseType();
+            MethodParameters = new HashSet<DatabaseMethod>();
+            TypeFields = new HashSet<DatabaseType>();
         }
 
         public DatabaseField(FieldBase fieldBase)
@@ -30,5 +31,8 @@ namespace Database.Model
             AccessLevel = fieldBase.AccessLevel;
             StaticEnum = fieldBase.StaticEnum;
         }
+
+        public virtual ICollection<DatabaseMethod> MethodParameters { get; set; }
+        public virtual ICollection<DatabaseType> TypeFields { get; set; }
     }
 }

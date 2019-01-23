@@ -16,7 +16,7 @@ namespace Database.Model
 
         public DatabaseProperty()
         {
-            Type = new DatabaseType();
+            TypeProperties = new HashSet<DatabaseType>();
         }
 
         public DatabaseProperty(PropertyBase propertyBase)
@@ -24,5 +24,7 @@ namespace Database.Model
             Name = propertyBase.Name ?? "default";
             Type = DatabaseType.GetOrAdd(propertyBase.Type);
         }
+
+        public virtual ICollection<DatabaseType> TypeProperties { get; set; }
     }
 }
