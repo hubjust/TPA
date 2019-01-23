@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
-using System.Reflection;
 using System.Diagnostics;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
@@ -63,15 +62,16 @@ namespace ViewModel
             OnPropertyChanged(nameof(PathVariable));
         }
 
-        private void Open()
+        private async void Open()
         {
-            Task.Run(() =>
+            await Task.Run(() =>
             {
                 try
                 {
                     tracer.GetImport().TracerLog(TraceLevel.Info, "Open button clicked.");
                     Repo.Load(fileSelector.GetImport());
                     assemblyMetadata = new VMAssemblyMetadata(Repo.Metadata);
+                    
                 }
                 catch (Exception e)
                 {
@@ -81,15 +81,15 @@ namespace ViewModel
             LoadTreeView();
         }  
 
-        private void Save()
+        private async void Save()
         {
-            Task.Run(() =>
+            await Task.Run(() =>
             {
                 try
                 {
-                    tracer.GetImport().TracerLog(TraceLevel.Verbose, "Saving assembly.");
+                    tracer.GetImport().TracerLog(TraceLevel.Info, "Saving assembly.");
                     Repo.Save(fileSelector.GetImport());
-                    tracer.GetImport().TracerLog(TraceLevel.Verbose, "Saving succesfull.");
+                    tracer.GetImport().TracerLog(TraceLevel.Info, "Saving succesfull.");
                 }
                 catch (Exception e)
                 {
