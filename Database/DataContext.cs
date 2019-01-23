@@ -10,13 +10,12 @@ namespace Database
     public class DatabaseContext : DbContext
     {
         public DatabaseContext()
-           // : base("name=TP.StructuralData.Properties.Settings.CDCatalogConnectionString")
-           : base("bazadanych")
+           : base(ConfigurationManager.AppSettings["connectionString"])
         {
-            //string relative = @"..\..\..\Database";
-           // string absolute = Path.GetFullPath(relative);
+            string relative = @"..\..\..\Database";
+            string absolute = Path.GetFullPath(relative);
 
-           // AppDomain.CurrentDomain.SetData("DataDirectory", absolute);
+            AppDomain.CurrentDomain.SetData("DataDirectory", absolute);
         }
 
         public virtual DbSet<DatabaseAssembly> AssemblyModel { get; set; }

@@ -101,7 +101,7 @@ namespace Model
             return new ParameterBase()
             {
                 Name = parameterModel.Name,
-                TypeMetadata = TypeBase(parameterModel.Type)
+                Type = TypeBase(parameterModel.Type)
             };
         }
 

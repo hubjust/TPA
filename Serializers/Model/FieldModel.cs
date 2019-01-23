@@ -19,8 +19,6 @@ namespace Serializers.Model
             this.StaticEnum = fieldMetadata.StaticEnum;
         }
 
-        public List<NamespaceModel> Namespaces { get; set; }
-
         [DataMember]
         public string Name { get; set; }
 

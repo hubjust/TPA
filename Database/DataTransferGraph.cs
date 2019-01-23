@@ -5,121 +5,108 @@ using Database.Model;
 
 public static class DataTransferGraph
 {
-    public static AssemblyBase AssemblyBase(DatabaseAssembly assemblyModel)
+    private static Dictionary<string, TypeBase> dictionaryType = new Dictionary<string, TypeBase>();
+
+    public static AssemblyBase AssemblyBase(DatabaseAssembly assemblyMetadata)
     {
         dictionaryType.Clear();
         return new AssemblyBase()
         {
-            Name = assemblyModel.Name,
-            Namespaces = assemblyModel.Namespaces?.Select(NamespaceBase)
+            Name = assemblyMetadata.Name,
+            Namespaces = assemblyMetadata.Namespaces?.Select(NamespaceBase)
         };
     }
 
-    public static NamespaceBase NamespaceBase(DatabaseNamespace namespaceModel)
+    public static NamespaceBase NamespaceBase(DatabaseNamespace namespaceMetadata)
     {
-        NamespaceBase nb = new NamespaceBase()
+        return new NamespaceBase()
         {
-            Name = namespaceModel.Name,
-            Types = namespaceModel.Types?.Select(TypeBase)
+            Name = namespaceMetadata.Name,
+            Types = namespaceMetadata.Types?.Select(TypeBase)
         };
-        return nb;
     }
 
-    public static TypeBase TypeBase(DatabaseType typeModel)
+    public static TypeBase TypeBase(DatabaseType typeMetadata)
     {
+        if (typeMetadata == null)
+        {
+            return null;
+        }
+
+        if(dictionaryType.ContainsKey(typeMetadata.Name))
+        {
+            return dictionaryType[typeMetadata.Name];
+        }
+
         TypeBase typeBase = new TypeBase()
         {
-            Name = typeModel.Name
+            Name = typeMetadata.Name,
+            NamespaceName = typeMetadata.NamespaceName,
+            Type = typeMetadata.Type,
+            BaseType = TypeBase(typeMetadata.BaseType),
+            DeclaringType = TypeBase(typeMetadata.DeclaringType),
+            AccessLevel = typeMetadata.AccessLevel,
+            AbstractEnum = typeMetadata.AbstractEnum,
+            StaticEnum = typeMetadata.StaticEnum,
+            SealedEnum = typeMetadata.SealedEnum,
+
+            Constructors = typeMetadata.Constructors?.Select(MethodBase).ToList(),
+            Fields = typeMetadata.Fields?.Select(FieldBase).ToList(),
+            GenericArguments = typeMetadata.GenericArguments?.Select(TypeBase).ToList(),
+            ImplementedInterfaces = typeMetadata.ImplementedInterfaces?.Select(TypeBase).ToList(),
+            Methods = typeMetadata.Methods?.Select(MethodBase).ToList(),
+            NestedTypes = typeMetadata.NestedTypes?.Select(TypeBase).ToList(),
+            Properties = typeMetadata.Properties?.Select(PropertyBase).ToList()
         };
 
         dictionaryType.Add(typeBase.Name, typeBase);
 
-        typeBase.NamespaceName = typeModel.NamespaceName;
-        typeBase.Type = typeModel.Type;
-        typeBase.BaseType = TypeBase(typeModel.BaseType);
-        typeBase.DeclaringType = TypeBase(typeModel.DeclaringType);
-        typeBase.AccessLevel = typeModel.AccessLevel;
-        typeBase.AbstractEnum = typeModel.AbstractEnum;
-        typeBase.StaticEnum = typeModel.StaticEnum;
-        typeBase.SealedEnum = typeModel.SealedEnum;
-
-        typeBase.Constructors = typeModel.Constructors?.Select(MethodBase).ToList();
-        typeBase.Fields = typeModel.Fields?.Select(FieldBase).ToList();
-        typeBase.GenericArguments = typeModel.GenericArguments?.Select(GetOrAdd).ToList();
-        typeBase.ImplementedInterfaces = typeModel.ImplementedInterfaces?.Select(GetOrAdd).ToList();
-        typeBase.Methods = typeModel.Methods?.Select(MethodBase).ToList();
-        typeBase.NestedTypes = typeModel.NestedTypes?.Select(TypeBase).ToList();
-        typeBase.Properties = typeModel.Properties?.Select(PropertyBase).ToList();
-
-
         return typeBase;
     }
 
-    public static MethodBase MethodBase(DatabaseMethod methodModel)
+    public static MethodBase MethodBase(DatabaseMethod methodMetadata)
     {
         return new MethodBase()
         {
-            Name = methodModel.Name,
+            Name = methodMetadata.Name,
 
-            Extension = methodModel.Extension,
-            ReturnType = GetOrAdd(methodModel.ReturnType),
-
-            GenericArguments = methodModel.GenericArguments?.Select(GetOrAdd).ToList(),
-
-            Parameters = methodModel.Parameters?.Select(ParameterBase).ToList(),
-
-            AccessLevel = methodModel.AccessLevel,
-            AbstractEnum = methodModel.AbstractEnum,
-            StaticEnum = methodModel.StaticEnum,
-            VirtualEnum = methodModel.VirtualEnum
+            Extension = methodMetadata.Extension,
+            ReturnType = TypeBase(methodMetadata.ReturnType),
+            GenericArguments = methodMetadata.GenericArguments?.Select(TypeBase).ToList(),
+            Parameters = methodMetadata.Parameters?.Select(ParameterBase).ToList(),
+            AccessLevel = methodMetadata.AccessLevel,
+            AbstractEnum = methodMetadata.AbstractEnum,
+            StaticEnum = methodMetadata.StaticEnum,
+            VirtualEnum = methodMetadata.VirtualEnum
         };
     }
 
-    public static FieldBase FieldBase(DatabaseField fieldModel)
+    public static FieldBase FieldBase(DatabaseField fieldMetadata)
     {
         return new FieldBase()
         {
-            Name = fieldModel.Name,
-            //Type = GetOrAdd(fieldModel.),
-            AccessLevel = fieldModel.AccessLevel,
-            StaticEnum = fieldModel.StaticEnum
+            Name = fieldMetadata.Name,
+            Type = TypeBase(fieldMetadata.Type),
+            AccessLevel = fieldMetadata.AccessLevel,
+            StaticEnum = fieldMetadata.StaticEnum
         };
     }
 
-    public static ParameterBase ParameterBase(DatabaseParameter parameterModel)
+    public static ParameterBase ParameterBase(DatabaseParameter parameterMetadata)
     {
         return new ParameterBase()
         {
-            Name = parameterModel.Name,
-            TypeMetadata = TypeBase(parameterModel.Type)
+            Name = parameterMetadata.Name,
+            Type = TypeBase(parameterMetadata.Type)
         };
     }
 
-    public static PropertyBase PropertyBase(DatabaseProperty propertyModel)
+    public static PropertyBase PropertyBase(DatabaseProperty propertyMetadata)
     {
         return new PropertyBase()
         {
-            Name = propertyModel.Name,
-            Type = TypeBase(propertyModel.Type)
+            Name = propertyMetadata.Name,
+            Type = TypeBase(propertyMetadata.Type)
         };
     }
-
-    public static TypeBase GetOrAdd(DatabaseType baseType)
-    {
-        if (baseType != null)
-        {
-            if (dictionaryType.ContainsKey(baseType.Name))
-            {
-                return dictionaryType[baseType.Name];
-            }
-            else
-            {
-                return TypeBase(baseType);
-            }
-        }
-        else
-            return null;
-    }
-
-    private static Dictionary<string, TypeBase> dictionaryType = new Dictionary<string, TypeBase>();
 }

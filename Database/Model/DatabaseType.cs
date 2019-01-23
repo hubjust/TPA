@@ -13,8 +13,7 @@ namespace Database.Model
     {
         public static Dictionary<string, DatabaseType> DictionaryType = new Dictionary<string, DatabaseType>();
 
-        [Key]
-        public int ID { get; set; }
+        [Key, StringLength(150)]
         public string Name { get; set; }
         public string NamespaceName { get; set; }
         public DatabaseType BaseType { get; set; }

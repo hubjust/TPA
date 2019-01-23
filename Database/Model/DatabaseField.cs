@@ -14,19 +14,19 @@ namespace Database.Model
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
-        public ICollection<DatabaseType> AttributesMetadata { get; set; }
+        public DatabaseType Type { get; set; }
         public AccessLevel AccessLevel { get; set; }
         public StaticEnum StaticEnum { get; set; }
 
         public DatabaseField()
         {
-            AttributesMetadata = new List<DatabaseType>();
+            Type = new DatabaseType();
         }
 
         public DatabaseField(FieldBase fieldBase)
         {
             Name = fieldBase.Name;
-            AttributesMetadata = fieldBase.AttributesMetadata?.Select(n => new DatabaseType(n)).ToList();
+            Type = DatabaseType.GetOrAdd(fieldBase.Type);
             AccessLevel = fieldBase.AccessLevel;
             StaticEnum = fieldBase.StaticEnum;
         }

@@ -23,7 +23,7 @@ namespace Model
         public ParameterMetadata(ParameterBase baseElement)
         {
             Name = baseElement.Name;
-            Type = TypeMetadata.GetOrAdd(baseElement.TypeMetadata);
+            Type = TypeMetadata.GetOrAdd(baseElement.Type);
 
         }
     }

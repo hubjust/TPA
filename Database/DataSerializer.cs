@@ -15,13 +15,14 @@ namespace Database
         public AssemblyBase Deserialize(IFileSelector supplier)
         {
             AssemblyBase assembly;
+
             using (var ctx = new DatabaseContext())
             {
                 ctx.AssemblyModel.Load();
-                ctx.FieldModel.Load();
                 ctx.NamespaceModel.Load();
                 ctx.TypeModel.Load();
                 ctx.MethodModel.Load();
+                ctx.FieldModel.Load();
                 ctx.PropertyModel.Load();
                 ctx.ParameterModel.Load();
 

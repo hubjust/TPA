@@ -22,7 +22,7 @@ namespace Database.Model
         public DatabaseParameter(ParameterBase parameterBase)
         {
             Name = parameterBase.Name;
-            Type = DatabaseType.GetOrAdd(parameterBase.TypeMetadata);
+            Type = DatabaseType.GetOrAdd(parameterBase.Type);
         }
     }
 }

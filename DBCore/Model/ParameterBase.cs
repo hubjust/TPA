@@ -4,6 +4,6 @@
     {
         public string Name { get; set; }
 
-        public TypeBase TypeMetadata { get; set; }
+        public TypeBase Type { get; set; }
     }
 }

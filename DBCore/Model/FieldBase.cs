@@ -9,8 +9,6 @@ namespace DBCore.Model
 
         public TypeBase Type { get; set; }
 
-        public ICollection<TypeBase> AttributesMetadata { get; set; }
-
         public AccessLevel AccessLevel { get; set; }
 
         public StaticEnum StaticEnum { get; set; }

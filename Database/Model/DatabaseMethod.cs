@@ -32,17 +32,16 @@ namespace Database.Model
 
         public DatabaseMethod(MethodBase baseMethod)
         {
-            this.Name = baseMethod.Name;
-            this.AbstractEnum = baseMethod.AbstractEnum;
-            this.AccessLevel = baseMethod.AccessLevel;
-            this.Extension = baseMethod.Extension;
-            this.ReturnType = DatabaseType.GetOrAdd(baseMethod.ReturnType);
-            this.StaticEnum = baseMethod.StaticEnum;
-            this.VirtualEnum = baseMethod.VirtualEnum;
-
+            Name = baseMethod.Name;
+            Extension = baseMethod.Extension;
+            ReturnType = DatabaseType.GetOrAdd(baseMethod.ReturnType);
             GenericArguments = baseMethod.GenericArguments?.Select(DatabaseType.GetOrAdd).ToList();
-
             Parameters = baseMethod.Parameters?.Select(t => new DatabaseParameter(t)).ToList();
+
+            AccessLevel = baseMethod.AccessLevel;
+            AbstractEnum = baseMethod.AbstractEnum;
+            StaticEnum = baseMethod.StaticEnum;
+            VirtualEnum = baseMethod.VirtualEnum;
         }
     }
 }
