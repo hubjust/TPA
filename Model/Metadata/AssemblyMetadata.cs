@@ -18,7 +18,7 @@ namespace Model
             :base(assembly.ManifestModule.Name)
         {       
             Namespaces = (from Type type in assembly.GetTypes()
-                          where type.GetVisible()
+                          where type.IsNested == false
                           group type by type.GetNamespace() into _group
                           orderby _group.Key
                           select new NamespaceMetadata(_group.Key, _group.ToList())).ToList();

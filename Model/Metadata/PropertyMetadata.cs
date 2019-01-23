@@ -28,7 +28,7 @@ namespace Model
         {
             return from prop
                    in props
-                   where prop.GetGetMethod().GetVisible() || prop.GetSetMethod().GetVisible()
+                   //where prop.GetGetMethod().GetVisible() || prop.GetSetMethod().GetVisible()
                    select new PropertyMetadata(prop.Name, TypeMetadata.EmitReference(prop.PropertyType),
                    TypeMetadata.EmitAttributes(prop.GetCustomAttributes()));
         }

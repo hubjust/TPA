@@ -41,7 +41,7 @@ namespace Model
         internal static ICollection<FieldMetadata> EmitFields(IEnumerable<FieldInfo> fields)
         {
             return (from field in fields
-                    where field.GetVisible()
+                    //where field.GetVisible()
                     select new FieldMetadata(field)).ToList();
         }
 

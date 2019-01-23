@@ -194,7 +194,7 @@ namespace Model
             }
 
             return from _type in nestedTypes
-                   where _type.GetVisible()
+                   //where _type.GetVisible()
                    select new TypeMetadata(_type);
         }
 
