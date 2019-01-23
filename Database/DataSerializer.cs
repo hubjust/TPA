@@ -18,6 +18,7 @@ namespace Database
             using (var ctx = new DatabaseContext())
             {
                 ctx.AssemblyModel.Load();
+                ctx.FieldModel.Load();
                 ctx.NamespaceModel.Load();
                 ctx.TypeModel.Load();
                 ctx.MethodModel.Load();

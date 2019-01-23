@@ -54,7 +54,7 @@ namespace ViewModel
         private void Load()
         {
             PathVariable = fileSelector.GetImport().FileToOpen("Dynamic Library File(*.dll) | *.dll");
-            if (PathVariable != null)
+            if (PathVariable != null && !PathVariable.Equals(""))
             {
                 Repo.CreateFromFile(PathVariable);
                 assemblyMetadata = new VMAssemblyMetadata(Repo.Metadata);
@@ -63,9 +63,9 @@ namespace ViewModel
             OnPropertyChanged(nameof(PathVariable));
         }
 
-        private async void Open()
+        private void Open()
         {
-            await Task.Run(() =>
+            Task.Run(() =>
             {
                 try
                 {
@@ -75,7 +75,7 @@ namespace ViewModel
                 }
                 catch (Exception e)
                 {
-                    tracer.GetImport().TracerLog(TraceLevel.Error, "File must be selected in case of load.");
+                    tracer.GetImport().TracerLog(TraceLevel.Error, "File must be selected in case of load: " + e.Message);
                 }
             });
             LoadTreeView();
@@ -85,8 +85,16 @@ namespace ViewModel
         {
             Task.Run(() =>
             {
-                tracer.GetImport().TracerLog(TraceLevel.Verbose, "Saving assembly");
-                Repo.Save(fileSelector.GetImport());
+                try
+                {
+                    tracer.GetImport().TracerLog(TraceLevel.Verbose, "Saving assembly.");
+                    Repo.Save(fileSelector.GetImport());
+                    tracer.GetImport().TracerLog(TraceLevel.Verbose, "Saving succesfull.");
+                }
+                catch (Exception e)
+                {
+                    tracer.GetImport().TracerLog(TraceLevel.Error, "Error while saving: " + e.Message);
+                }
             });
         }
 

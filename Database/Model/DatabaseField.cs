@@ -11,8 +11,8 @@ namespace Database.Model
     [Table("Field")]
     public class DatabaseField
     {
-        public int ID { get; set; }
         [Key]
+        public int ID { get; set; }
         public string Name { get; set; }
         public ICollection<DatabaseType> AttributesMetadata { get; set; }
         public AccessLevel AccessLevel { get; set; }
