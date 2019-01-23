@@ -15,7 +15,7 @@ namespace ViewModelTest
         [TestInitialize]
         public void Init()
         {
-            string str = @"Model.dll";
+            string str = @"..\..\ExampleDll\TPAApplicationArchitecture.dll";
             assembly = Assembly.LoadFrom(str);
         }
 
@@ -40,7 +40,39 @@ namespace ViewModelTest
             List<string> namespaceNames = new List<string>(from Namespaces in assemblyMetadata.Namespaces
                                                            select Namespaces.Name);
 
-            Assert.IsTrue(namespaceNames.Contains("Model"));
+            Assert.IsTrue(namespaceNames.Contains("TPA.ApplicationArchitecture.Data.CircularReference"));
+            Assert.IsTrue(namespaceNames.Contains("TPA.ApplicationArchitecture.BusinessLogic"));
+            Assert.IsTrue(namespaceNames.Contains("TPA.ApplicationArchitecture.Data"));
+            Assert.IsTrue(namespaceNames.Contains("TPA.ApplicationArchitecture.Presentation"));
+        }
+
+        [TestMethod]
+        public void CountNamespacesInMetadata()
+        {
+            AssemblyMetadata assemblyMeta = new AssemblyMetadata(assembly);
+
+            List<NamespaceMetadata> namespaceMetadata = assemblyMeta.Namespaces.ToList<NamespaceMetadata>();
+
+            Assert.AreEqual(4, namespaceMetadata.Count);
+        }
+
+        [TestMethod]
+        public void TypesInMetadata()
+        {
+            AssemblyMetadata assemblyMeta = new AssemblyMetadata(assembly);
+
+            List<NamespaceMetadata> namespaceMetadata = assemblyMeta.Namespaces.ToList<NamespaceMetadata>();
+
+            NamespaceMetadata name = namespaceMetadata[0];
+
+            List<string> list = new List<string>(from Type in name.Types
+                                                 select Type.Name);
+
+            Assert.IsTrue(list.Contains("Model"));
+            Assert.IsTrue(list.Contains("ServiceA"));
+            Assert.IsTrue(list.Contains("ServiceB"));
+            Assert.IsTrue(list.Contains("ServiceC"));
+            Assert.IsTrue(list.Contains("ViewModel"));
         }
 
         #region TestClass
@@ -100,27 +132,6 @@ namespace ViewModelTest
 
             Assert.AreEqual(1, typeMetadatas.Count);
             Assert.AreEqual("Double", typeMetadatas[0].Name);
-        }
-
-        [TestMethod]
-        public void TypesInMetadata() 
-        {
-            AssemblyMetadata assemblyMeta = new AssemblyMetadata(assembly);
-
-            List<NamespaceMetadata> namespaceMetadata = assemblyMeta.Namespaces.ToList<NamespaceMetadata>();
-
-            Assert.AreEqual(1, namespaceMetadata.Count);
-
-            NamespaceMetadata name = namespaceMetadata[0];
-
-            List<string> list = new List<string>(from Type in name.Types
-                                                    select Type.Name);
-
-            Assert.IsTrue(list.Contains("AbstractEnum"));
-            Assert.IsTrue(list.Contains("AccessLevel"));
-            Assert.IsTrue(list.Contains("SealedEnum"));
-            Assert.IsTrue(list.Contains("StaticEnum"));
-            Assert.IsTrue(list.Contains("VirtualEnum"));
         }
     }
 }

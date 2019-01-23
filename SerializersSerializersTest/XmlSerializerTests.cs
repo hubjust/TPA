@@ -5,11 +5,12 @@ using System.IO;
 
 using DBCore.Model;
 using Interfaces;
+using Serializers;
 
 namespace Serializers.Tests
 {
     [TestClass()]
-    public class XMLSerializerTests
+    public class XmlSerializerTests
     {
         [TestMethod]
         public void SerializationTest()
