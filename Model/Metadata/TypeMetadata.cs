@@ -130,10 +130,11 @@ namespace Model
 
         public static TypeMetadata EmitReference(Type type)
         {
-            if (!type.IsGenericType)
-                return new TypeMetadata(type.Name, type.GetNamespace());
-            else
-                return new TypeMetadata(type.Name, type.GetNamespace(), EmitGenericArguments(type.GetGenericArguments()));
+            if (!DictionaryType.ContainsKey(type.Name))
+            {
+                StoreType(type);
+            }
+            return DictionaryType[type.Name];
         }
 
         public static IEnumerable<TypeMetadata> EmitGenericArguments(IEnumerable<Type> arguments)
