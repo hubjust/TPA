@@ -9,14 +9,13 @@
 
 
     <Border Padding="10">
-        <StackPanel>
-            <Grid Height="52">
-                <Button x:Name="Load" Content="DLL" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="52" Command="{Binding LoadButton}"/>
-                <TextBox x:Name="PathToDll" Height="52" TextWrapping="Wrap" VerticalAlignment="Top" Margin="57,0,113.6,0" Text="{Binding Path=PathVariable, UpdateSourceTrigger=PropertyChanged}"/>
-                <Button x:Name="Open" Content="Open" HorizontalAlignment="Right" VerticalAlignment="Top" Width="52" Height="52" Command="{Binding OpenButton}" Margin="0,0,56.6,0"/>
-                <Button x:Name="Save" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Top" Width="52" Height="52" Command="{Binding SaveButton}" />
-            </Grid>
-            <TreeView x:Name="TreeView" Margin="0 5 0 0" Height="392" ItemsSource="{Binding HierarchicalAreas}">
+        <Grid>
+            <Button x:Name="Load" Content="DLL" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="50" Command="{Binding LoadButton}"/>
+            <TextBox x:Name="PathToDll" Height="50" TextWrapping="Wrap" VerticalAlignment="Top" Margin="57,0,113.6,0" Text="{Binding Path=PathVariable, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button x:Name="Save" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Top" Width="52" Height="50" Command="{Binding SaveButton}" Margin="0,0,56.6,0" />
+            <Button x:Name="Open" Content="Open" HorizontalAlignment="Right" VerticalAlignment="Top" Width="52" Height="50" Command="{Binding OpenButton}" Margin="0,0,-0.4,0"/>
+
+            <TreeView x:Name="TreeView" Margin="0,55,0,0" ItemsSource="{Binding HierarchicalAreas}">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                         <TextBlock Text="{Binding Name}" Margin="0 0 4 0"/>
@@ -28,8 +27,6 @@
                     </Style>
                 </TreeView.ItemContainerStyle>
             </TreeView>
-
-
-        </StackPanel>
+        </Grid>
     </Border>
 </Window>
