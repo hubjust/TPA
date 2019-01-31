@@ -30,9 +30,9 @@ namespace ViewModel
         [ImportMany(typeof(ITracer))]
         private ImportSelector<ITracer> tracer;
 
-        public ICommand LoadButton { get; }
         public ICommand OpenButton { get; }
         public ICommand SaveButton { get; }
+        public ICommand LoadButton { get; }
 
         public string PathVariable { get; set; }
 
@@ -43,14 +43,14 @@ namespace ViewModel
 
             HierarchicalAreas = new ObservableCollection<TreeViewItem>();
             Repo = new Repository();
-            LoadButton = new RelayCommand(Load);
             OpenButton = new RelayCommand(Open);
             SaveButton = new RelayCommand(Save);
+            LoadButton = new RelayCommand(Load);
 
             tracer.GetImport().TracerLog(TraceLevel.Verbose, "ViewModel initialization finished");
         }
 
-        private void Load()
+        private void Open()
         {
             PathVariable = fileSelector.GetImport().FileToOpen("Dynamic Library File(*.dll) | *.dll");
             if (PathVariable != null && !PathVariable.Equals(""))
@@ -60,9 +60,26 @@ namespace ViewModel
                 LoadTreeView();
             }
             OnPropertyChanged(nameof(PathVariable));
+        } 
+
+        private async void Save()
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    tracer.GetImport().TracerLog(TraceLevel.Info, "Saving assembly.");
+                    Repo.Save(fileSelector.GetImport());                
+                    tracer.GetImport().TracerLog(TraceLevel.Info, "Saving succesfull.");
+                }
+                catch (Exception e)
+                {
+                    tracer.GetImport().TracerLog(TraceLevel.Error, "Error while saving: " + e.Message);
+                }
+            });
         }
 
-        private async void Open()
+        private async void Load()
         {
             await Task.Run(() =>
             {
@@ -78,24 +95,6 @@ namespace ViewModel
                 }
             });
             LoadTreeView();
-            
-        }  
-
-        private void Save()
-        {
-            Task.Run(() =>
-            {
-                try
-                {
-                    tracer.GetImport().TracerLog(TraceLevel.Info, "Saving assembly.");
-                    Repo.Save(fileSelector.GetImport());                
-                    tracer.GetImport().TracerLog(TraceLevel.Info, "Saving succesfull.");
-                }
-                catch (Exception e)
-                {
-                    tracer.GetImport().TracerLog(TraceLevel.Error, "Error while saving: " + e.Message);
-                }
-            });
         }
 
         private void LoadTreeView()
