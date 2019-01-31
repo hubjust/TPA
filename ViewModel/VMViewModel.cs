@@ -9,7 +9,7 @@ using Model;
 using ViewModel.ViewModelMetadata;
 using Interfaces;
 using MEF;
-using DBCore.Model;
+using Core.Model;
 
 namespace ViewModel
 {

@@ -1,4 +1,4 @@
-﻿namespace DBCore.Model
+﻿namespace Core.Model
 {
     public class PropertyBase
     {

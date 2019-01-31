@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using DBCore.Model;
+using Core.Model;
 
 namespace Serializers.Model
 {
@@ -21,19 +21,19 @@ namespace Serializers.Model
         public List<TypeModel> GenericArguments { get; set; }
 
         [DataMember]
-        public DBCore.Enum.AccessLevel AccessLevel { get; set; }
+        public Core.Enum.AccessLevel AccessLevel { get; set; }
 
         [DataMember]
-        public DBCore.Enum.AbstractEnum AbstractEnum { get; set; }
+        public Core.Enum.AbstractEnum AbstractEnum { get; set; }
 
         [DataMember]
-        public DBCore.Enum.SealedEnum SealedEnum { get; set; }
+        public Core.Enum.SealedEnum SealedEnum { get; set; }
 
         [DataMember]
-        public DBCore.Enum.StaticEnum StaticEnum { get; set; }
+        public Core.Enum.StaticEnum StaticEnum { get; set; }
 
         [DataMember]
-        public DBCore.Enum.TypeKind Type { get; set; }
+        public Core.Enum.TypeKind Type { get; set; }
 
         [DataMember]
         public List<TypeModel> ImplementedInterfaces { get; set; }

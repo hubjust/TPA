@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DBCore.Model;
+using Core.Model;
 using Database.Model;
 
 public static class DataTransferGraph

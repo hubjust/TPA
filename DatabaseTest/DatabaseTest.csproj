@@ -81,9 +81,9 @@
       <Project>{70461d13-a324-4f13-9874-ac1c8bdacabb}</Project>
       <Name>Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DBCore\DBCore.csproj">
+    <ProjectReference Include="..\DBCore\Core.csproj">
       <Project>{689b4455-ec85-4640-a6ce-69cf38de4fc2}</Project>
-      <Name>DBCore</Name>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

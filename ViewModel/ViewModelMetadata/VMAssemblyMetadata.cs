@@ -2,7 +2,7 @@
 using System.Linq;
 
 using Model;
-using DBCore.Model;
+using Core.Model;
 
 namespace ViewModel.ViewModelMetadata
 {

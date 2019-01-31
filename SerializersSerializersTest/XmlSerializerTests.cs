@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-using DBCore.Model;
+using Core.Model;
 using Interfaces;
 using Serializers;
 

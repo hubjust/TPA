@@ -1,4 +1,4 @@
-﻿namespace DBCore.Enum
+﻿namespace Core.Enum
 {
     public enum SealedEnum
     {

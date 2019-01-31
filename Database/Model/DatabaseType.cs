@@ -1,5 +1,5 @@
-﻿using DBCore.Model;
-using DBCore.Enum;
+﻿using Core.Model;
+using Core.Enum;
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

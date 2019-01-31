@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DBCore.Enum;
+using Core.Enum;
 
-namespace DBCore.Model
+namespace Core.Model
 {
     public class FieldBase
     {

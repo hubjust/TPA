@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using DBCore.Model;
+using Core.Model;
 
 namespace Serializers.Model
 {

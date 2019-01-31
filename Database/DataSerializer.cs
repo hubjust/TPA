@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Data.Entity;
 using System.Linq;
-using DBCore.Model;
+using Core.Model;
 
 using Interfaces;
 

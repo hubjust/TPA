@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DBCore.Model
+namespace Core.Model
 {
     public class  AssemblyBase
     {   

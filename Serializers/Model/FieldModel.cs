@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using DBCore.Enum;
-using DBCore.Model;
+﻿using System.Runtime.Serialization;
+using Core.Enum;
+using Core.Model;
 
 namespace Serializers.Model
 {

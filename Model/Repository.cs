@@ -2,7 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Reflection;
 
-using DBCore.Model;
+using Core.Model;
 using MEF;
 using Interfaces;
 

@@ -4,7 +4,7 @@ using System.IO;
 
 using Interfaces;
 using Serializers.Model;
-using DBCore.Model;
+using Core.Model;
 
 namespace Serializers
 {

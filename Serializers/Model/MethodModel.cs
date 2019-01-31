@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using DBCore.Model;
+using Core.Model;
 
 namespace Serializers.Model
 {
@@ -32,16 +32,16 @@ namespace Serializers.Model
         public List<TypeModel> GenericArguments { get; set; }
 
         [DataMember]
-        public DBCore.Enum.AccessLevel AccessLevel { get; set; }
+        public Core.Enum.AccessLevel AccessLevel { get; set; }
 
         [DataMember]
-        public DBCore.Enum.AbstractEnum AbstractEnum { get; set; }
+        public Core.Enum.AbstractEnum AbstractEnum { get; set; }
 
         [DataMember]
-        public DBCore.Enum.StaticEnum StaticEnum { get; set; }
+        public Core.Enum.StaticEnum StaticEnum { get; set; }
 
         [DataMember]
-        public DBCore.Enum.VirtualEnum VirtualEnum { get; set; }
+        public Core.Enum.VirtualEnum VirtualEnum { get; set; }
 
         [DataMember]
         public TypeModel ReturnType { get; set; }

@@ -38,7 +38,7 @@ namespace Model
             Extension = EmitExtension(method);
         }
 
-        public MethodMetadata(DBCore.Model.MethodBase baseMethod)
+        public MethodMetadata(Core.Model.MethodBase baseMethod)
         {
             this.Name = baseMethod.Name;
             this.AbstractEnum = baseMethod.AbstractEnum.ToLogicEnum();

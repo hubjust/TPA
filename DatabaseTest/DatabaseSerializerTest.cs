@@ -5,7 +5,7 @@ using System.Data.Entity;
 using Database;
 using Database.Model;
 using System.Collections.Generic;
-using DBCore.Enum;
+using Core.Enum;
 using System.Linq;
 
 namespace DatabaseTest

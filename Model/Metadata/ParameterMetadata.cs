@@ -1,4 +1,4 @@
-﻿using DBCore.Model;
+﻿using Core.Model;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
